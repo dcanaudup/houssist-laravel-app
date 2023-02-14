@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'layout' => 'shared.layout-registration',
+    'layout' => 'components.layout-private',
 
     /*
     |--------------------------------------------------------------------------
