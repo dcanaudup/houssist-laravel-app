@@ -11,7 +11,7 @@ class Registration extends Component
     public UserData $user;
 
     protected $rules = [
-        'user.email' => ['required', 'email', 'unique:users'],
+        'user.email' => ['required', 'email', 'unique:users,email'],
         'user.password' => ['required', 'min:8'],
     ];
 

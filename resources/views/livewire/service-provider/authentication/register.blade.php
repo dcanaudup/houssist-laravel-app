@@ -14,31 +14,8 @@
         <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
             <form class="space-y-6" wire:submit.prevent="submit" method="POST">
                 @csrf
-                <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700">Email address</label>
-                    <div class="mt-1">
-                        <input id="email" name="email" type="email" autocomplete="email"
-                               required class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                               placeholder="Enter your email"
-                               wire:model.lazy="user.email"
-                        >
-                        @error('user.email')<span class="mt-1 text-sm text-red-700">{{ $message }}</span>@enderror
-                    </div>
-                </div>
-
-                <div>
-                    <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-                    <div class="mt-1">
-                        <input id="password" name="password" type="password"
-                               autocomplete="current-password" required
-                               class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                               placeholder="Enter your password"
-                               wire:model.lazy="user.password"
-                        >
-                        @error('user.password')<span class="mt-1 text-sm text-red-700">{{ $message }}</span>@enderror
-                    </div>
-                </div>
-
+                <x-input name="user.email" id="user.email" label="Email" type="text" placeHolder="Enter email" model="user.email"/>
+                <x-input name="user.password" id="user.password" label="Password" type="password" placeHolder="Enter password" model="user.password"/>
                 <div>
                     <button type="submit" class="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Create Account</button>
                 </div>

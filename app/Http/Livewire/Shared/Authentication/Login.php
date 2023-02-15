@@ -16,6 +16,11 @@ class Login extends Component
             ->layout('components.layout-authentication');
     }
 
+    public function updated($attributeName)
+    {
+        $this->validateOnly($attributeName);
+    }
+
     public function rules()
     {
         return [
@@ -33,5 +38,7 @@ class Login extends Component
 
             return redirect()->intended('/home-owner/dashboard');
         }
+
+        $this->addError('email', 'These credentials do not match any of our records.');
     }
 }
