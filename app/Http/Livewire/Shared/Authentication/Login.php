@@ -7,8 +7,9 @@ use Livewire\Component;
 
 class Login extends Component
 {
-    public $email;
-    public $password;
+    public string $email;
+    public string $password;
+    public bool $remember = false;
 
     public function render()
     {
@@ -33,7 +34,7 @@ class Login extends Component
     {
         $credentials = $this->validate();
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials, $this->remember)) {
             request()->session()->regenerate();
 
             return redirect()->intended('/home-owner/dashboard');
