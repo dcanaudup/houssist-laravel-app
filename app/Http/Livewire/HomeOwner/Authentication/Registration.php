@@ -10,6 +10,11 @@ class Registration extends Component
 {
     public UserData $user;
 
+    protected $rules = [
+        'user.email' => ['required', 'email', 'unique:users,email'],
+        'user.password' => ['required', 'min:8'],
+    ];
+
     public function mount()
     {
         $this->user = new UserData(null, '', '');
@@ -23,6 +28,8 @@ class Registration extends Component
 
     public function submit(CreateHomeOwner $createHomeOwner)
     {
+        $this->validate();
+
         $createHomeOwner->execute($this->user);
 
         return redirect('/');

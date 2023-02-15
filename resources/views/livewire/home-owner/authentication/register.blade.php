@@ -22,6 +22,7 @@
                                placeholder="Enter your email"
                                wire:model.lazy="user.email"
                         >
+                        @error('user.email')<span class="mt-1 text-sm text-red-700">{{ $message }}</span>@enderror
                     </div>
                 </div>
 
@@ -34,6 +35,7 @@
                                placeholder="Enter your password"
                                wire:model.lazy="user.password"
                         >
+                        @error('user.password')<span class="mt-1 text-sm text-red-700">{{ $message }}</span>@enderror
                     </div>
                 </div>
 
