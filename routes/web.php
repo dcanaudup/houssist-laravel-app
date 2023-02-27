@@ -17,26 +17,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
-
 Route::get('/', Home::class)
     ->name('home.index');
-Route::get('/home-owner/register', HomeOwnerRegistration::class)
-    ->name('home-owner.registration.create');
-Route::get('/service-provider/register', ServiceProviderRegistration::class)
-    ->name('service-provider.registration.create');
-Route::get('/login', Login::class)
-    ->name('login');
-Route::get('/registration-successful', \App\Http\Livewire\Shared\Authentication\RegistrationSuccessful::class)
-    ->name('registration-successful');
+
+Route::group(['middleware' => ['guest']], function () {
+    Route::get('/home-owner/register', HomeOwnerRegistration::class)
+        ->name('home-owner.registration.create');
+    Route::get('/service-provider/register', ServiceProviderRegistration::class)
+        ->name('service-provider.registration.create');
+    Route::get('/login', Login::class)
+        ->name('login');
+    Route::get('/registration-successful', \App\Http\Livewire\Shared\Authentication\RegistrationSuccessful::class)
+        ->name('registration-successful');
+});
 
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'home-owner'], function () {
     Route::get('/dashboard', \App\Http\Livewire\HomeOwner\General\Dashboard::class)
