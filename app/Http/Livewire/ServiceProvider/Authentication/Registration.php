@@ -23,7 +23,7 @@ class Registration extends Component
     public function render()
     {
         return view('livewire.service-provider.authentication.register')
-            ->layout('components.layout-authentication');
+            ->layout('components.layouts.auth');
     }
 
     public function submit(CreateServiceProvider $createServiceProvider)

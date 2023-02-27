@@ -4,6 +4,7 @@ namespace App\Http\Livewire\HomeOwner\Authentication;
 
 use App\Modules\HomeOwner\Actions\CreateHomeOwner;
 use App\Modules\Shared\DataTransferObjects\UserData;
+use App\Modules\Shared\Models\User;
 use Livewire\Component;
 
 class Registration extends Component
@@ -23,15 +24,18 @@ class Registration extends Component
     public function render()
     {
         return view('livewire.home-owner.authentication.register')
-            ->layout('components.layout-authentication');
+            ->layout('components.layouts.auth');
     }
 
     public function submit(CreateHomeOwner $createHomeOwner)
     {
         $this->validate();
 
-        $createHomeOwner->execute($this->user);
+        $homeOwner = $createHomeOwner->execute($this->user);
 
-        return redirect('/');
+        /** @var User */
+        $homeOwner->user->sendEmailVerificationNotification();
+
+        return redirect()->route('registration-successful');
     }
 }

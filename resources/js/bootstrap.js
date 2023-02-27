@@ -1,6 +1,5 @@
 import _ from 'lodash';
 window._ = _;
-import Alpine from "alpinejs";
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -34,6 +33,17 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     forceTLS: (import.meta.env.VITE_PUSHER_SCHEME ?? 'https') === 'https',
 //     enabledTransports: ['ws', 'wss'],
 // });
+import * as FilePond from 'filepond';
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
+
+import 'filepond/dist/filepond.min.css';
+import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
+
+window.FilePond = FilePond;
+window.FilePondPluginImagePreview = FilePondPluginImagePreview;
+
+import Alpine from "alpinejs";
+import focus from "@alpinejs/focus";
 
 window.Alpine = Alpine;
 

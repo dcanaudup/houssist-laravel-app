@@ -14,7 +14,7 @@ class Login extends Component
     public function render()
     {
         return view('livewire.shared.authentication.login')
-            ->layout('components.layout-authentication');
+            ->layout('components.layouts.auth');
     }
 
     public function updated($attributeName)

@@ -35,7 +35,15 @@ Route::get('/service-provider/register', ServiceProviderRegistration::class)
     ->name('service-provider.registration.create');
 Route::get('/login', Login::class)
     ->name('login');
-Route::get('/registration-successful', \App\Http\Livewire\Shared\Authentication\RegistrationSuccessful::class);
+Route::get('/registration-successful', \App\Http\Livewire\Shared\Authentication\RegistrationSuccessful::class)
+    ->name('registration-successful');
+
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'home-owner'], function () {
-    Route::get('/dashboard', \App\Http\Livewire\HomeOwner\General\Dashboard::class);
+    Route::get('/dashboard', \App\Http\Livewire\HomeOwner\General\Dashboard::class)
+        ->name('home-owner.dashboard');
+});
+
+Route::group(['middleware' => ['auth', 'verified']], function () {
+    Route::get('/deposits', \App\Http\Livewire\Shared\Deposits\DepositPage::class)
+        ->name('shared.deposits');
 });

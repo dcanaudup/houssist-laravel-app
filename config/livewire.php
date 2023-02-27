@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'layout' => 'components.layout-private',
+    'layout' => 'components.layouts.app',
 
     /*
     |--------------------------------------------------------------------------

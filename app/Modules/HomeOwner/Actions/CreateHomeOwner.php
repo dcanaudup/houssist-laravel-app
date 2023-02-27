@@ -7,10 +7,12 @@ use App\Modules\Shared\DataTransferObjects\UserData;
 
 class CreateHomeOwner
 {
-    public function execute(UserData $userData)
+    public function execute(UserData $userData): HomeOwner
     {
         $homeOwner = new HomeOwner();
         $homeOwner->save();
         $homeOwner->user()->create($userData->all());
+
+        return $homeOwner;
     }
 }

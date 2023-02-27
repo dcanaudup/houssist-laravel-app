@@ -9,6 +9,6 @@ class RegistrationSuccessful extends Component
     public function render()
     {
         return view('livewire.shared.authentication.registration-successful')
-            ->layout('components.layout-authentication');
+            ->layout('components.layouts.public');
     }
 }
