@@ -4,8 +4,6 @@ namespace App\Modules\Shared\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Activitylog\LogOptions;
-use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * App\Modules\Shared\Models\WalletTransaction
@@ -18,6 +16,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property string $reference_number
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|WalletTransaction newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|WalletTransaction newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|WalletTransaction query()
@@ -29,6 +28,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static \Illuminate\Database\Eloquent\Builder|WalletTransaction whereTransactionableType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WalletTransaction whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WalletTransaction whereWalletId($value)
+ *
  * @mixin \Eloquent
  */
 class WalletTransaction extends Model

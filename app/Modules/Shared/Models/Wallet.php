@@ -5,8 +5,6 @@ namespace App\Modules\Shared\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Activitylog\LogOptions;
-use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * App\Modules\Shared\Models\Wallet
@@ -18,6 +16,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Modules\Shared\Models\User $user
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Wallet newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Wallet newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Wallet query()
@@ -27,6 +26,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static \Illuminate\Database\Eloquent\Builder|Wallet whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Wallet whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Wallet whereUserId($value)
+ *
  * @mixin \Eloquent
  */
 class Wallet extends Model
@@ -45,8 +45,8 @@ class Wallet extends Model
     public function balance(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => number_format($value / 100, 2),
-            set: fn($value) => $value * 100,
+            get: fn ($value) => number_format($value / 100, 2),
+            set: fn ($value) => $value * 100,
         );
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace Deployer;
 
 require 'recipe/laravel.php';
@@ -39,7 +40,7 @@ task(
 task(
     'deploy:assets',
     function () {
-        run("cd {{release_path}} && yarn && yarn run build");
+        run('cd {{release_path}} && yarn && yarn run build');
     }
 );
 

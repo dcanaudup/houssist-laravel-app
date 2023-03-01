@@ -22,6 +22,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Spatie\MediaLibrary\MediaCollections\Models\Media> $media
  * @property-read int|null $media_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Deposit newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Deposit newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Deposit query()
@@ -34,6 +35,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @method static \Illuminate\Database\Eloquent\Builder|Deposit whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Deposit whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Deposit whereUserRemarks($value)
+ *
  * @mixin \Eloquent
  */
 class Deposit extends Model implements HasMedia
@@ -61,6 +63,7 @@ class Deposit extends Model implements HasMedia
     {
         static::saving(function (Deposit $deposit) {
             $deposit->user_remarks = $deposit->user_remarks ?? '';
+            $deposit->admin_remarks = $deposit->admin_remarks ?? '';
         });
     }
 }
