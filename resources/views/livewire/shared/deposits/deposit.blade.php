@@ -56,7 +56,7 @@
                     <x-input.text wire:model="newDeposit.amount" id="amount" placeholder="Amount" type="number"/>
                 </x-input.group>
 
-                <x-input.group for="deposit_type" label="Status" :error="$errors->first('newDeposit.deposit_type')">
+                <x-input.group for="deposit_type" label="Deposit Type" :error="$errors->first('newDeposit.deposit_type')">
                     <x-input.select wire:model="newDeposit.deposit_type" id="deposit_type" placeholder="Select an option...">
                         @foreach (\Spatie\LaravelOptions\Options::forEnum(\App\Modules\Shared\Enums\DepositType::class)->toArray() as $option)
                             <option value="{{ $option['value'] }}">{{ $option['label'] }}</option>

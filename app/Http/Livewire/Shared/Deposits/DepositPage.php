@@ -2,9 +2,10 @@
 
 namespace App\Http\Livewire\Shared\Deposits;
 
+use App\Modules\Shared\Actions\CreateDeposit;
+use App\Modules\Shared\DataTransferObjects\DepositData;
 use App\Modules\Shared\Models\Deposit;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -13,9 +14,13 @@ class DepositPage extends Component
     use WithFileUploads;
 
     public $filter = [];
+
     protected $queryString = ['filter'];
+
     public $showCreateModal = false;
-    public Deposit $newDeposit;
+
+    public DepositData $newDeposit;
+
     public $attachments;
 
     protected function rules(): array
@@ -38,17 +43,11 @@ class DepositPage extends Component
         $this->showCreateModal = true;
     }
 
-    public function save()
+    public function save(CreateDeposit $createDeposit)
     {
         $this->validate();
-        DB::beginTransaction();
-        $this->newDeposit->user_id = Auth::id();
-        $this->newDeposit->save();
 
-        $this->newDeposit->addMedia($this->attachments)
-            ->toMediaCollection('deposits');
-
-        DB::commit();
+        $createDeposit->execute($this->newDeposit, $this->attachments);
 
         $this->initializeDeposit();
         $this->showCreateModal = false;
@@ -66,9 +65,10 @@ class DepositPage extends Component
 
     protected function initializeDeposit()
     {
-        $this->newDeposit = new Deposit(['deposit_type' => 'cash']);
+        $this->newDeposit = new DepositData(null, null, 'cash', 'pending', null, null);
         if ($this->attachments) {
             $this->removeUpload('attachments', $this->attachments);
+            $this->attachments = null;
         }
     }
 }
