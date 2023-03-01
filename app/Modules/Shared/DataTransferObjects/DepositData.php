@@ -7,6 +7,8 @@ use App\Modules\Shared\Enums\DepositType;
 use App\Modules\Shared\Models\Deposit;
 use Carbon\Carbon;
 use Livewire\Wireable;
+use Spatie\LaravelData\Attributes\WithCast;
+use Spatie\LaravelData\Casts\EnumCast;
 use Spatie\LaravelData\Concerns\WireableData;
 use Spatie\LaravelData\Data;
 
@@ -17,7 +19,9 @@ class DepositData extends Data implements Wireable
     public function __construct(
         public ?int $id,
         public ?float $amount,
+        #[WithCast(EnumCast::class)]
         public ?DepositType $deposit_type,
+        #[WithCast(EnumCast::class)]
         public DepositStatus $status,
         public ?string $user_remarks,
         public ?string $admin_remarks,

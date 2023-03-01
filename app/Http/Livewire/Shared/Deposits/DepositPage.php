@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Shared\Deposits;
 
 use App\Modules\Shared\Actions\CreateDeposit;
 use App\Modules\Shared\DataTransferObjects\DepositData;
+use App\Modules\Shared\Enums\DepositType;
 use App\Modules\Shared\Models\Deposit;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -40,6 +41,11 @@ class DepositPage extends Component
     public function mount()
     {
         $this->initializeDeposit();
+    }
+
+    public function updatingNewDepositDepositType(&$value)
+    {
+        $value = DepositType::from($value);
     }
 
     public function create()
