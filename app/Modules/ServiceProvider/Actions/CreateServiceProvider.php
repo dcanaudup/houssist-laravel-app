@@ -12,5 +12,7 @@ class CreateServiceProvider
         $serviceProvider = new ServiceProvider();
         $serviceProvider->save();
         $serviceProvider->user()->create($userData->all());
+
+        return $serviceProvider;
     }
 }

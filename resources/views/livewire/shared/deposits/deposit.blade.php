@@ -44,7 +44,7 @@
                         </x-table.row>
                     @empty
                         <x-table.row>
-                            <x-table.cell colspan="4" class="text-center">
+                            <x-table.cell colspan="5" class="text-center">
                                 <p class="text-gray-500">No deposits found.</p>
                             </x-table.cell>
                         </x-table.row>
@@ -106,7 +106,7 @@
                 </x-label.group>
 
                 <x-label.group label="Proof of deposit">
-                    {{$deposit->media[0]}}
+                    {{$viewDeposit?->media[0]}}
                 </x-label.group>
 
                 <x-label.group label="Remarks">

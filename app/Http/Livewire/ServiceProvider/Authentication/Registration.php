@@ -4,6 +4,7 @@ namespace App\Http\Livewire\ServiceProvider\Authentication;
 
 use App\Modules\ServiceProvider\Actions\CreateServiceProvider;
 use App\Modules\Shared\DataTransferObjects\UserData;
+use App\Modules\Shared\Models\User;
 use Livewire\Component;
 
 class Registration extends Component
@@ -30,8 +31,11 @@ class Registration extends Component
     {
         $this->validate();
 
-        $createServiceProvider->execute($this->user);
+        $serviceProvider = $createServiceProvider->execute($this->user);
 
-        return redirect('/');
+        /** @var User */
+        $serviceProvider->user->sendEmailVerificationNotification();
+
+        return redirect()->route('registration-successful');
     }
 }

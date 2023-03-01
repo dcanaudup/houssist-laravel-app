@@ -36,6 +36,18 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'home-owner'], f
         ->name('home-owner.dashboard');
 });
 
+Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'service-provider'], function () {
+    Route::group(['middleware' => 'check_kyc'], function () {
+        Route::get('/dashboard', \App\Http\Livewire\ServiceProvider\General\Dashboard::class)
+            ->name('service-provider.dashboard');
+    });
+
+    Route::get('/kyc', \App\Http\Livewire\ServiceProvider\Kyc\UploadPage::class)
+        ->name('service-provider.kyc.create');
+    Route::get('/kyc/waiting', \App\Http\Livewire\ServiceProvider\Kyc\WaitingPage::class)
+        ->name('service-provider.kyc.waiting');
+});
+
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/deposits', \App\Http\Livewire\Shared\Deposits\DepositPage::class)
         ->name('shared.deposits');

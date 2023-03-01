@@ -4,7 +4,6 @@ namespace App\Modules\Shared\DataTransferObjects;
 
 use App\Modules\Shared\Enums\DepositStatus;
 use App\Modules\Shared\Enums\DepositType;
-use App\Modules\Shared\Models\Deposit;
 use Carbon\Carbon;
 use Livewire\Wireable;
 use Spatie\LaravelData\Attributes\WithCast;

@@ -6,7 +6,7 @@
     </p>
 </x-slot:header>
 
-<div>
+<div class="bg-indigo-50 py-8 px-4 shadow sm:rounded-lg sm:px-10">
     <form class="space-y-6" wire:submit.prevent="submit" method="POST">
         @csrf
         <x-input name="user.email" id="user.email" label="Email" type="text" placeHolder="Enter email" model="user.email"/>
@@ -25,7 +25,7 @@
                 <div class="w-full border-t border-gray-300"></div>
             </div>
             <div class="relative flex justify-center text-sm">
-                <span class="bg-white px-2 text-gray-500">Want to register as a Service Provider?</span>
+                <span class="bg-indigo-50 px-2 text-gray-500">Want to register as a Service Provider?</span>
             </div>
         </div>
         <div class="mt-6">

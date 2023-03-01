@@ -5,7 +5,7 @@
         <a href="{{route('login')}}" class="font-medium text-indigo-600 hover:text-indigo-500">sign in</a>
     </p>
 </x-slot:header>
-<div>
+<div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
     <form class="space-y-6" wire:submit.prevent="submit" method="POST">
         @csrf
         <x-input name="user.email" id="user.email" label="Email" type="text" placeHolder="Enter email" model="user.email"/>

@@ -34,7 +34,7 @@
                             <img class="h-8 w-auto" src="/img/logos/workflow-logo-on-brand.svg" alt="Workflow">
                         </div>
                         <nav class="mt-5 px-2 space-y-1">
-                            <a href="/dashboard"
+                            <a href="{{ route(auth()->user()->userable->dashboard_link) }}"
                                class="group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md text-white bg-indigo-900 focus:outline-none focus:bg-indigo-700 transition ease-in-out duration-150">
                                 <svg
                                     class="mr-4 h-6 w-6 text-indigo-400 group-hover:text-indigo-300 group-focus:text-indigo-300 transition ease-in-out duration-150"
@@ -84,7 +84,7 @@
                     </div>
                     <!-- Sidebar component, swap this element with another sidebar if you like -->
                     <nav class="mt-5 space-y-1 flex-1 px-2 bg-indigo-800">
-                        <a href="{{route('home-owner.dashboard')}}"
+                        <a href="{{route(auth()->user()->userable->dashboard_link)}}"
                            @class([
                                 'group flex items-center px-2 py-2 text-base leading-5 font-medium text-white rounded-md focus:outline-none focus:bg-indigo-700 bg-indigo-900 transition ease-in-out duration-150' => request()->is('*dashboard*'),
                                 'text-indigo-100 hover:bg-indigo-600 group flex items-center px-2 py-2 text-base font-medium rounded-md' => !request()->is('*dashboard*'),

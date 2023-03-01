@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('service_providers', function (Blueprint $table) {
             $table->id();
+            $table->boolean('kyc_approved')
+                ->default(false);
             $table->timestamps();
         });
     }
