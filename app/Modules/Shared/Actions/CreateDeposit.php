@@ -20,6 +20,7 @@ class CreateDeposit
                 ...$depositData->all(),
                 'user_id' => Auth::id(),
                 'status' => 'pending',
+                'latest_transaction_date' => now(),
             ]);
 
         $deposit->addMedia($attachments)

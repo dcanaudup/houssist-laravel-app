@@ -2,9 +2,13 @@
 
 namespace App\Modules\Shared\Models;
 
+use App\Modules\Shared\Enums\DepositStatus;
+use App\Modules\Shared\Enums\DepositType;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
@@ -40,9 +44,18 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  */
 class Deposit extends Model implements HasMedia
 {
-    use HasFactory, InteractsWithMedia;
+    use HasFactory, InteractsWithMedia, LogsActivity;
 
     protected $guarded = [];
+
+    protected $casts = [
+        'amount' => 'integer',
+        'user_remarks' => 'string',
+        'admin_remarks' => 'string',
+        'latest_transaction_date' => 'datetime',
+        'status' => DepositStatus::class,
+        'deposit_type' => DepositType::class,
+    ];
 
     public function amount(): Attribute
     {
@@ -59,11 +72,24 @@ class Deposit extends Model implements HasMedia
         );
     }
 
+    public function latestTransactionDatetimeForHumans(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->latest_transaction_date->toDayDateTimeString(),
+        );
+    }
+
     protected static function booted(): void
     {
         static::saving(function (Deposit $deposit) {
             $deposit->user_remarks = $deposit->user_remarks ?? '';
             $deposit->admin_remarks = $deposit->admin_remarks ?? '';
         });
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly(['status', 'user_remarks', 'admin_remarks']);
     }
 }

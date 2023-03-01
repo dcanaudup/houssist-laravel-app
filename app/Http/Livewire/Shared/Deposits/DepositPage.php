@@ -19,7 +19,11 @@ class DepositPage extends Component
 
     public $showCreateModal = false;
 
+    public $showViewModal = false;
+
     public DepositData $newDeposit;
+
+    public Deposit $viewDeposit;
 
     public $attachments;
 
@@ -43,6 +47,12 @@ class DepositPage extends Component
         $this->showCreateModal = true;
     }
 
+    public function view(Deposit $deposit)
+    {
+        $this->viewDeposit = $deposit;
+        $this->showViewModal = true;
+    }
+
     public function save(CreateDeposit $createDeposit)
     {
         $this->validate();
@@ -59,13 +69,15 @@ class DepositPage extends Component
     public function render()
     {
         return view('livewire.shared.deposits.deposit', [
-            'deposits' => Deposit::query()->where('user_id', Auth::id())->paginate(10),
+            'deposits' => Deposit::query()
+                ->where('user_id', Auth::id())
+                ->with('media')->paginate(10),
         ]);
     }
 
     protected function initializeDeposit()
     {
-        $this->newDeposit = new DepositData(null, null, 'cash', 'pending', null, null);
+        $this->newDeposit = DepositData::initialize();
         if ($this->attachments) {
             $this->removeUpload('attachments', $this->attachments);
             $this->attachments = null;

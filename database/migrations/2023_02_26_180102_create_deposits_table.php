@@ -22,6 +22,8 @@ return new class extends Migration
                 ->default('');
             $table->string('admin_remarks')
                 ->default('');
+            $table->dateTime('latest_transaction_date')
+                ->nullable();
             $table->timestamps();
         });
     }
