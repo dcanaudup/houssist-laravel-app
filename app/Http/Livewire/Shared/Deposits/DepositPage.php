@@ -2,8 +2,10 @@
 
 namespace App\Http\Livewire\Shared\Deposits;
 
+use App\Modules\Shared\Actions\CancelDeposit;
 use App\Modules\Shared\Actions\CreateDeposit;
 use App\Modules\Shared\DataTransferObjects\DepositData;
+use App\Modules\Shared\Enums\DepositStatus;
 use App\Modules\Shared\Enums\DepositType;
 use App\Modules\Shared\Models\Deposit;
 use Illuminate\Support\Facades\Auth;
@@ -21,6 +23,8 @@ class DepositPage extends Component
     public $showCreateModal = false;
 
     public $showViewModal = false;
+
+    public $showConfirmCancelModal = false;
 
     public DepositData $newDeposit;
 
@@ -43,9 +47,27 @@ class DepositPage extends Component
         $this->initializeDeposit();
     }
 
+    public function render()
+    {
+        return view('livewire.shared.deposits.deposit', [
+            'deposits' => Deposit::query()
+                ->where('user_id', Auth::id())
+                ->with('media')->paginate(10),
+        ]);
+    }
+
     public function updatingNewDepositDepositType(&$value)
     {
         $value = DepositType::from($value);
+    }
+
+    protected function initializeDeposit()
+    {
+        $this->newDeposit = DepositData::initialize();
+        if ($this->attachments) {
+            $this->removeUpload('attachments', $this->attachments);
+            $this->attachments = null;
+        }
     }
 
     public function create()
@@ -72,21 +94,20 @@ class DepositPage extends Component
         $this->dispatchBrowserEvent('notify', ['message' => 'Deposit saved!']);
     }
 
-    public function render()
+    public function cancel(Deposit $deposit, CancelDeposit $cancelDeposit)
     {
-        return view('livewire.shared.deposits.deposit', [
-            'deposits' => Deposit::query()
-                ->where('user_id', Auth::id())
-                ->with('media')->paginate(10),
-        ]);
-    }
+        if ($deposit->status != DepositStatus::Pending) {
+            $this->showConfirmCancelModal = false;
+            $this->dispatchBrowserEvent('notify', ['message' => 'Unable to cancel this deposit!']);
 
-    protected function initializeDeposit()
-    {
-        $this->newDeposit = DepositData::initialize();
-        if ($this->attachments) {
-            $this->removeUpload('attachments', $this->attachments);
-            $this->attachments = null;
+            return;
         }
+
+        $cancelDeposit->execute($deposit);
+
+        $this->showConfirmCancelModal = false;
+        $this->showViewModal = false;
+
+        $this->dispatchBrowserEvent('notify', ['message' => 'Deposit cancelled!']);
     }
 }

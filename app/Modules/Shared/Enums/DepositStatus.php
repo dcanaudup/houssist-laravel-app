@@ -8,4 +8,5 @@ enum DepositStatus: string
     case Processing = 'processing';
     case Approved = 'approved';
     case Rejected = 'rejected';
+    case Cancelled = 'cancelled';
 }

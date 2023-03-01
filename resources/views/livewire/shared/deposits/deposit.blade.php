@@ -89,7 +89,6 @@
     </form>
 
     <!-- View Deposit Modal -->
-    <form wire:submit.prevent="cancel">
         <x-modal.dialog wire:model.defer="showViewModal" max-width="4xl">
             <x-slot name="title">View Deposit</x-slot>
 
@@ -124,10 +123,26 @@
             </x-slot>
 
             <x-slot name="footer">
-                <x-button.secondary wire:click="$set('showViewModal', false)">Cancel</x-button.secondary>
-
-                <x-button.primary type="submit">Save</x-button.primary>
+                <x-button.secondary wire:click="$set('showViewModal', false)">Close</x-button.secondary>
+                @if($viewDeposit?->status == \App\Modules\Shared\Enums\DepositStatus::Pending)
+                <x-button.danger wire:click="$set('showConfirmCancelModal', true)">Cancel Deposit</x-button.danger>
+                @endif
             </x-slot>
         </x-modal.dialog>
-    </form>
+
+        <!-- Confirm Cancel Modal -->
+        <form wire:submit.prevent="cancel">
+            <x-modal.confirmation wire:model.defer="showConfirmCancelModal" max-width="4xl">
+                <x-slot name="title">Confirm Cancellation</x-slot>
+
+                <x-slot name="content">
+                    <p>Are you sure you want to cancel this deposit?</p>
+                </x-slot>
+
+                <x-slot name="footer">
+                    <x-button.secondary wire:click="$set('showConfirmCancelModal', false)">Cancel</x-button.secondary>
+                    <x-button.danger wire:click="cancel({{$viewDeposit}})">Confirm</x-button.danger>
+                </x-slot>
+            </x-modal.confirmation>
+        </form>
 </div>
