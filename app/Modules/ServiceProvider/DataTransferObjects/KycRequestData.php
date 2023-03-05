@@ -16,7 +16,11 @@ class KycRequestData extends Data implements Wireable
 
     public function __construct(
         public ?int $id,
+        public string $name,
+        public string $mobile_number,
+        public string $address,
         public ?UploadedFile $valid_id,
+        public string $valid_id_number,
         public ?UploadedFile $selfie,
         public ?UploadedFile $nbi_clearance,
         public ?UploadedFile $supporting_documents,
@@ -32,7 +36,11 @@ class KycRequestData extends Data implements Wireable
     {
         return new self(
             id: null,
+            name: '',
+            mobile_number: '',
+            address: '',
             valid_id: null,
+            valid_id_number: '',
             selfie: null,
             nbi_clearance: null,
             supporting_documents: null,

@@ -12,8 +12,8 @@ class WaitingPage extends Component
     {
         return view('livewire.service-provider.kyc.waiting-page', [
             'kycRequest' => KycRequest::where('user_id', Auth::id())
-                ->with('media')
-                ->first(),
+                ->with(['media', 'user'])
+                ->firstOrFail(),
         ]);
     }
 }

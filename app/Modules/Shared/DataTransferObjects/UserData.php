@@ -17,7 +17,8 @@ class UserData extends Data implements Wireable
         public string $password,
         public string $name = '',
         public string $address = '',
-        public ?Carbon $birth_date = null,
+        public ?Carbon $birthday = null,
+        public string $mobile_number = '',
         public ?Carbon $email_verified_at = null,
         public ?string $remember_token = null
     ) {

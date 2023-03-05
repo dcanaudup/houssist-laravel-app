@@ -4,6 +4,7 @@ namespace App\Modules\ServiceProvider\Enums;
 
 enum KycStatus: string
 {
+    case Pending = 'pending';
     case Submitted = 'submitted';
     case Processing = 'processing';
     case Approved = 'approved';

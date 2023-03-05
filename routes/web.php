@@ -48,6 +48,11 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'service-provide
         ->name('service-provider.kyc.waiting');
 });
 
+Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'admin'], function () {
+    Route::get('/kyc/approvals', \App\Http\Livewire\Admin\Kyc\ApprovalPage::class)
+        ->name('admin.kyc.approvals');
+});
+
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/deposits', \App\Http\Livewire\Shared\Deposits\DepositPage::class)
         ->name('shared.deposits');

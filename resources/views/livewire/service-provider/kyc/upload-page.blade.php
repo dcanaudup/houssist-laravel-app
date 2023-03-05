@@ -3,8 +3,24 @@
     <!-- Create Deposit Modal -->
     <form wire:submit.prevent="save">
         <x-input.panel>
+            <x-input.group for="name" label="Name" :error="$errors->first('name')">
+                <x-input.text wire:model="name" id="name" placeholder="Full Name" />
+            </x-input.group>
+
+            <x-input.group for="mobile_number" label="Mobile Number" :error="$errors->first('mobile_number')">
+                <x-input.text wire:model="mobile_number" id="mobile_number" placeholder="Mobile Number" />
+            </x-input.group>
+
+            <x-input.group for="address" label="Address" :error="$errors->first('address')">
+                <x-input.textarea wire:model="address" id="address" placeholder="Address" />
+            </x-input.group>
+
             <x-input.group for="deposit_type" label="Valid ID" :error="$errors->first('valid_id')">
                 <x-input.filepond wire:model="valid_id" ref="valid_id"></x-input.filepond>
+            </x-input.group>
+
+            <x-input.group for="valid_id_number" label="Valid ID Number" :error="$errors->first('valid_id_number')">
+                <x-input.text wire:model="valid_id_number" id="valid_id_number" placeholder="Valid ID Number" />
             </x-input.group>
 
             <x-input.group for="deposit_type" label="Selfie w/ Valid ID" :error="$errors->first('selfie')">
