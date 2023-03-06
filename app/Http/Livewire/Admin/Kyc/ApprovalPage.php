@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Admin\Kyc;
 
+use App\Http\Livewire\Traits\WithCachedRows;
+use App\Http\Livewire\Traits\WithPerPagination;
 use App\Modules\Admin\Actions\UpdateKycRequestStatus;
 use App\Modules\Admin\DataTransferObjects\UpdateKycRequestData;
 use App\Modules\ServiceProvider\Enums\KycStatus;
@@ -11,18 +13,31 @@ use Livewire\Component;
 
 class ApprovalPage extends Component
 {
+    use WithCachedRows, WithPerPagination;
+
     public $showViewModal = false;
 
     public KycRequest $viewKycRequest;
 
     public UpdateKycRequestData $updateKycRequestData;
 
+    public function getRowsQueryProperty()
+    {
+        return KycRequest::query()
+            ->with(['media', 'user']);
+    }
+
+    public function getRowsProperty()
+    {
+        return $this->cache(function () {
+            return $this->applyPagination($this->rowsQuery);
+        });
+    }
+
     public function render()
     {
         return view('livewire.admin.kyc.approval-page', [
-            'kycRequests' => KycRequest::query()
-            ->with(['media', 'user'])
-            ->paginate(10)
+            'kycRequests' => $this->rows,
         ]);
     }
 
@@ -41,6 +56,8 @@ class ApprovalPage extends Component
 
     public function view(KycRequest $kycRequest)
     {
+        $this->useCachedRows();
+
         $this->viewKycRequest = $kycRequest;
         $this->updateKycRequestData = new UpdateKycRequestData($kycRequest->admin_remarks, $kycRequest->status);
         $this->showViewModal = true;
