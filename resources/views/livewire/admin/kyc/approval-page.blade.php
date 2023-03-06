@@ -39,7 +39,7 @@
                                 {{ diff_for_humans($kycRequest->created_at) }}
                             </x-table.cell>
                             <x-table.cell>
-                                <x-button.link wire:click="view({{$kycRequest}})">View</x-button.link>
+                                <x-button.link wire:click="view({{$kycRequest->id}})">View</x-button.link>
                             </x-table.cell>
                         </x-table.row>
                     @empty
@@ -52,5 +52,76 @@
                 </x-slot:body>
             </x-table>
         </div>
+
+        <!-- View Modal -->
+        <x-modal.dialog wire:model.defer="showViewModal" max-width="4xl">
+            <x-slot name="title">View KYC Request</x-slot>
+
+            <x-slot name="content">
+                <x-label.group label="Name">
+                    <dd class="mt-1 text-sm text-gray-900">{{ $viewKycRequest?->user->name }}</dd>
+                </x-label.group>
+
+                <x-label.group label="Email">
+                    <dd class="mt-1 text-sm text-gray-900">{{ $viewKycRequest?->user->email }}</dd>
+                </x-label.group>
+
+                <x-label.group label="Mobile Number">
+                    <dd class="mt-1 text-sm text-gray-900">{{ $viewKycRequest?->user->mobile_number }}</dd>
+                </x-label.group>
+
+                <x-label.group label="Address">
+                    <dd class="mt-1 text-sm text-gray-900">{{ $viewKycRequest?->user->address }}</dd>
+                </x-label.group>
+
+                <x-label.group label="Valid ID" :borderless="true">
+                    {{$viewKycRequest?->getMedia('kyc.valid_id')[0]}}
+                </x-label.group>
+
+                <x-label.group label="Valid ID Number">
+                    <dd class="mt-1 text-sm text-gray-900">{{ $viewKycRequest?->valid_id_number }}</dd>
+                </x-label.group>
+
+                <x-label.group label="Selfie w/ Valid ID" :borderless="true">
+                    {{$viewKycRequest?->getMedia('kyc.selfie')[0]}}
+                </x-label.group>
+
+                <x-label.group label="NBI Clearance" :borderless="true">
+                    {{$viewKycRequest?->getMedia('kyc.nbi_clearance')[0]}}
+                </x-label.group>
+
+                <x-label.group label="Other Supporting Documents" :borderless="true">
+                    @if($supportingDocuments = $viewKycRequest?->getMedia('kyc.supporting_documents'))
+                        @foreach($supportingDocuments as $supportingDocument)
+                            {{$supportingDocument}}
+                        @endforeach
+                    @endif
+                </x-label.group>
+
+                <x-label.group label="User Remarks">
+                    <dd class="mt-1 text-sm text-gray-900">{{ $viewKycRequest?->user_remarks }}</dd>
+                </x-label.group>
+
+                <form wire:submit.prevent="submit" id="kyc-form">
+                    <x-input.group for="updateKycRequestData.admin_remarks" label="My Remarks" :error="$errors->first('updateKycRequestData.admin_remarks')">
+                        <x-input.textarea wire:model="updateKycRequestData.admin_remarks" id="updateKycRequestData.admin_remarks" placeholder="Remarks" />
+                    </x-input.group>
+
+                    <x-input.group for="updateKycRequestData.status" label="Status" :error="$errors->first('updateKycRequestData.status')">
+                        <x-input.select wire:model="updateKycRequestData.status" id="updateKycRequestData.status" placeholder="Select an option...">
+                            @foreach (\Spatie\LaravelOptions\Options::forEnum(\App\Modules\ServiceProvider\Enums\KycStatus::class)->toArray() as $option)
+                                <option value="{{ $option['value'] }}">{{ $option['label'] }}</option>
+                            @endforeach
+                        </x-input.select>
+                    </x-input.group>
+                </form>
+            </x-slot>
+
+            <x-slot name="footer">
+                <x-button.secondary wire:click="$set('showViewModal', false)">Cancel</x-button.secondary>
+
+                <x-button.primary type="submit" form="kyc-form">Save</x-button.primary>
+            </x-slot>
+        </x-modal.dialog>
     </div>
 </div>
