@@ -8,7 +8,7 @@
     <title>Houssist</title>
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     @livewireStyles
-    @vite('resources/css/app.css')
+    @vite('resources/sass/app.scss')
 </head>
 <body class="antialiased font-sans bg-gray-200">
 {{ $slot }}

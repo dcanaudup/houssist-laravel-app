@@ -16,7 +16,7 @@ class DepositData extends Data implements Wireable
     use WireableData;
 
     public function __construct(
-        public ?int $id,
+        public ?int $deposit_id,
         public ?float $amount,
         #[WithCast(EnumCast::class)]
         public ?DepositType $deposit_type,
@@ -31,7 +31,7 @@ class DepositData extends Data implements Wireable
     public static function initialize()
     {
         return new self(
-            id: null,
+            deposit_id: null,
             amount: null,
             deposit_type: null,
             status: DepositStatus::Pending,

@@ -50,3 +50,5 @@ window.Alpine = Alpine;
 /** Launched Alpine when applciation starts */
 Alpine.plugin(focus);
 Alpine.start();
+
+import flatpickr from "flatpickr";

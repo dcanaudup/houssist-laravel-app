@@ -46,6 +46,8 @@ class Deposit extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia, LogsActivity;
 
+    protected $primaryKey = 'deposit_id';
+
     protected $guarded = [];
 
     protected $casts = [

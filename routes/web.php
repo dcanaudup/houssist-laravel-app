@@ -34,6 +34,12 @@ Route::group(['middleware' => ['guest']], function () {
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'home-owner'], function () {
     Route::get('/dashboard', \App\Http\Livewire\HomeOwner\General\Dashboard::class)
         ->name('home-owner.dashboard');
+    Route::get('/advertisements', \App\Http\Livewire\HomeOwner\Advertisement\AdvertisementIndex::class)
+        ->name('home-owner.advertisements');
+    Route::get('/advertisements/{advertisement}', \App\Http\Livewire\HomeOwner\Advertisement\AdvertisementShow::class)
+        ->name('home-owner.advertisements.show');
+    Route::get('/advertisements/{advertisement}/offers/{offer:advertisement_id}', \App\Http\Livewire\HomeOwner\Advertisement\AdvertisementOffers::class)
+        ->name('home-owner.advertisements.offer');
 });
 
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'service-provider'], function () {

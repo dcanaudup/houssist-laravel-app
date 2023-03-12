@@ -7,11 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Houssist</title>
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-    @vite('resources/css/app.css')
+    @vite('resources/sass/app.scss')
 </head>
 <body lass="h-full">
 <div class="relative isolate bg-white">
     {{$slot}}
 </div>
+@vite('resources/js/app.js')
 </body>
 </html>

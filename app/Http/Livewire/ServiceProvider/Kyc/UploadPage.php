@@ -4,7 +4,6 @@ namespace App\Http\Livewire\ServiceProvider\Kyc;
 
 use App\Modules\ServiceProvider\Actions\CreateKycRequest;
 use App\Modules\ServiceProvider\DataTransferObjects\KycRequestData;
-use App\Modules\Shared\DataTransferObjects\UserData;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 

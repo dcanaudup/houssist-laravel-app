@@ -14,7 +14,7 @@ class CreateDeposit
     {
         DB::beginTransaction();
         $deposit = Deposit::updateOrCreate([
-            'id' => $depositData->id,
+            'deposit_id' => $depositData->deposit_id,
         ],
             [
                 ...$depositData->all(),
