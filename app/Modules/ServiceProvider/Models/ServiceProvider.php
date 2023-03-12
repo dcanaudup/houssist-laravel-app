@@ -22,6 +22,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|ServiceProvider whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ServiceProvider whereUpdatedAt($value)
  *
+ * @property int $kyc_approved
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|ServiceProvider whereKycApproved($value)
+ *
  * @mixin \Eloquent
  */
 class ServiceProvider extends Model

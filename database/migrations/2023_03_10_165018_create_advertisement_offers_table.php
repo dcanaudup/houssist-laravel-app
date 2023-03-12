@@ -17,6 +17,8 @@ return new class extends Migration
             $table->foreignId('advertisement_id')->constrained('advertisements', 'advertisement_id');
             $table->unsignedInteger('payment_rate')
                 ->nullable();
+            $table->dateTime('offer_date')
+                ->nullable();
             $table->string('status');
             $table->timestamps();
         });

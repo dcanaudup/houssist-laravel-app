@@ -4,20 +4,22 @@ namespace App\Modules\HomeOwner\Actions;
 
 use App\Modules\HomeOwner\DataTransferObjects\NewAdvertisementData;
 use App\Modules\Shared\Models\Advertisement;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 
 class CreateAdvertisement
 {
-    public function execute(NewAdvertisementData $newAdvertisement, ?UploadedFile $attachments): Advertisement
+    public function execute(NewAdvertisementData $newAdvertisement): Advertisement
     {
         DB::beginTransaction();
         $advertisement = new Advertisement($newAdvertisement->toArray());
         $advertisement->save();
 
-        if ($attachments) {
-            $advertisement->addMedia($attachments)
-                ->toMediaCollection('advertisement');
+        $advertisement->addMedia($newAdvertisement->featured)
+            ->toMediaCollection('advertisement-featured');
+
+        foreach ($newAdvertisement->attachments as $attachment) {
+            $advertisement->addMedia($attachment)
+                ->toMediaCollection('advertisement-attachments');
         }
 
         DB::commit();

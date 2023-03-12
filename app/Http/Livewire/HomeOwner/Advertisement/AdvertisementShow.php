@@ -17,6 +17,10 @@ class AdvertisementShow extends Component
 
     public $advertisement_id;
 
+    public $featured;
+
+    public $attachments;
+
     public function getRowsQueryProperty()
     {
         return AdvertisementOffer::query()
@@ -32,6 +36,10 @@ class AdvertisementShow extends Component
 
     public function mount(Advertisement $advertisement)
     {
+        $advertisement->load('media');
+        $this->featured = $advertisement->getMedia('advertisement-featured');
+        $this->attachments = $advertisement->getMedia('advertisement-attachments');
+
         $this->advertisementData = ViewAdvertisementData::from($advertisement);
         $this->advertisement_id = $advertisement->advertisement_id;
     }

@@ -17,8 +17,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', Home::class)
-    ->name('home.index');
+Route::get('/', function () {
+    return redirect()->route('login');
+})->name('home.index');
 
 Route::group(['middleware' => ['guest']], function () {
     Route::get('/home-owner/register', HomeOwnerRegistration::class)
@@ -38,7 +39,7 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'home-owner'], f
         ->name('home-owner.advertisements');
     Route::get('/advertisements/{advertisement}', \App\Http\Livewire\HomeOwner\Advertisement\AdvertisementShow::class)
         ->name('home-owner.advertisements.show');
-    Route::get('/advertisements/{advertisement}/offers/{offer:advertisement_id}', \App\Http\Livewire\HomeOwner\Advertisement\AdvertisementOffers::class)
+    Route::get('/advertisements/{advertisement}/offers/{offer:advertisement_offer_id}', \App\Http\Livewire\HomeOwner\Advertisement\AdvertisementOffers::class)
         ->name('home-owner.advertisements.offer');
 });
 
@@ -46,6 +47,10 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'service-provide
     Route::group(['middleware' => 'check_kyc'], function () {
         Route::get('/dashboard', \App\Http\Livewire\ServiceProvider\General\Dashboard::class)
             ->name('service-provider.dashboard');
+        Route::get('/advertisements', \App\Http\Livewire\ServiceProvider\Advertisement\AdvertisementIndex::class)
+            ->name('service-provider.advertisements');
+        Route::get('/advertisements/{advertisement}', \App\Http\Livewire\ServiceProvider\Advertisement\AdvertisementShow::class)
+            ->name('service-provider.advertisements.show');
     });
 
     Route::get('/kyc', \App\Http\Livewire\ServiceProvider\Kyc\UploadPage::class)

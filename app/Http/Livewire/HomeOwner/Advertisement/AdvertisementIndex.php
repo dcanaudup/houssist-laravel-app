@@ -21,7 +21,9 @@ class AdvertisementIndex extends Component
 
     public NewAdvertisementData $newAdvertisement;
 
-    public $attachments = null;
+    public $featured = null;
+
+    public $attachments = [];
 
     public function getRowsQueryProperty()
     {
@@ -63,7 +65,13 @@ class AdvertisementIndex extends Component
         $this->validate();
         $this->newAdvertisement->user_id = auth()->id();
         $this->newAdvertisement->status = AdvertisementStatus::PENDING;
-        $createAdvertisement->execute($this->newAdvertisement, $this->attachments);
+        $this->newAdvertisement->featured = $this->featured;
+
+        foreach ($this->attachments as $attachment) {
+            $this->newAdvertisement->attachments[] = $attachment;
+        }
+
+        $createAdvertisement->execute($this->newAdvertisement);
 
         $this->dispatchBrowserEvent('notify', ['message' => 'Advertisement successfully created!']);
         $this->newAdvertisement = NewAdvertisementData::initialize();
@@ -80,7 +88,9 @@ class AdvertisementIndex extends Component
             'newAdvertisement.end_date_time' => 'required|date|after_or_equal:newAdvertisement.start_date_time',
             'newAdvertisement.job_payment_type' => ['required', new Enum(JobPaymentType::class)],
             'newAdvertisement.payment_rate' => 'required|numeric|min:0',
-            'attachments' => 'nullable|file|mimes:jpeg,png,jpg,pdf|max:2048',
+            'featured' => 'required|file|mimes:jpeg,png,jpg,pdf|max:2048',
+            'attachments' => 'nullable',
+            'attachments.*' => 'file|mimes:jpeg,png,jpg,pdf|max:2048',
         ];
     }
 }

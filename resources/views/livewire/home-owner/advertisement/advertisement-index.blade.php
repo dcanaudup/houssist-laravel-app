@@ -125,6 +125,10 @@
                         <x-input.text wire:model="newAdvertisement.payment_rate" id="payment_rate" placeholder="Payment Rate" type="number"/>
                     </x-input.group>
 
+                    <x-input.group for="featured" label="Featured Image" :error="$errors->first('featured')">
+                        <x-input.filepond wire:model="featured"></x-input.filepond>
+                    </x-input.group>
+
                     <x-input.group for="attachments" label="Attachments" :error="$errors->first('attachments')">
                         <x-input.filepond wire:model="attachments" multiple></x-input.filepond>
                     </x-input.group>

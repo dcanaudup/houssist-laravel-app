@@ -44,11 +44,13 @@ window.FilePondPluginImagePreview = FilePondPluginImagePreview;
 
 import Alpine from "alpinejs";
 import focus from "@alpinejs/focus";
+import intersect from "@alpinejs/intersect";
 
 window.Alpine = Alpine;
 
 /** Launched Alpine when applciation starts */
 Alpine.plugin(focus);
+Alpine.plugin(intersect);
 Alpine.start();
 
 import flatpickr from "flatpickr";

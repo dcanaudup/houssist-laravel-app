@@ -44,6 +44,19 @@
                 <dd class="mt-1 text-sm text-gray-900">{{ $advertisementData->status }}</dd>
             </x-label.group>
 
+            <x-label.group label="Images">
+                <div class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+                    @foreach($featured as $featuredImage)
+                        {{$featuredImage->img()->attributes(['class' => 'group object-contain h-48 w-48'])
+    ->conversion('thumb')}}
+                    @endforeach
+                    @foreach($attachments as $attachment)
+                        {{$attachment->img()->attributes(['class' => 'object-contain h-48 w-48'])
+    ->conversion('thumb')}}
+                    @endforeach
+                </div>
+            </x-label.group>
+
             <h2 class="text-2xl font-semibold text-gray-900 py-4">Offers</h2>
 
             <x-table>

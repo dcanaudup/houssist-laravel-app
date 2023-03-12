@@ -5,6 +5,7 @@ namespace App\Modules\HomeOwner\DataTransferObjects;
 use App\Modules\HomeOwner\Enums\AdvertisementStatus;
 use App\Modules\HomeOwner\Enums\JobPaymentType;
 use Carbon\Carbon;
+use Illuminate\Http\UploadedFile;
 use Livewire\Wireable;
 use Spatie\LaravelData\Concerns\WireableData;
 use Spatie\LaravelData\Data;
@@ -22,7 +23,9 @@ class NewAdvertisementData extends Data implements Wireable
         public string $end_date_time,
         public JobPaymentType $job_payment_type,
         public float $payment_rate,
-        public ?AdvertisementStatus $status
+        public ?AdvertisementStatus $status,
+        public ?UploadedFile $featured,
+        public array $attachments
     ) {
     }
 
@@ -38,6 +41,8 @@ class NewAdvertisementData extends Data implements Wireable
             job_payment_type: JobPaymentType::MONTHLY,
             payment_rate: 0.0,
             status: AdvertisementStatus::PENDING,
+            featured: null,
+            attachments: [],
         );
     }
 }

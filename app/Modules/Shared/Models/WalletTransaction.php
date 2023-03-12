@@ -29,6 +29,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|WalletTransaction whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WalletTransaction whereWalletId($value)
  *
+ * @property int $wallet_transaction_id
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|WalletTransaction whereWalletTransactionId($value)
+ *
  * @mixin \Eloquent
  */
 class WalletTransaction extends Model
