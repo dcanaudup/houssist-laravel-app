@@ -10,7 +10,7 @@ class StartChat
     public function execute(ChatData $chatData): Chat
     {
         $chat = Chat::create([
-            'advertisement_id' => $chatData->advertisement_id,
+            ...$chatData->all()
         ]);
 
         return $chat->refresh();

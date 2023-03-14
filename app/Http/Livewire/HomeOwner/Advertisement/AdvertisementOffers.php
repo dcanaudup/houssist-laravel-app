@@ -57,6 +57,7 @@ class AdvertisementOffers extends Component
     public function updateChat(): ?Chat
     {
         if ($chat = Chat::where('advertisement_id', $this->view_advertisement_offer_data->advertisement_id)
+            ->where('advertisement_offer_id', $this->view_advertisement_offer_data->advertisement_offer_id)
             ->with('messages')
             ->first()) {
             $this->viewChatData = ViewChatData::from($chat);

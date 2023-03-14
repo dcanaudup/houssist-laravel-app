@@ -12,7 +12,8 @@ class ChatData extends Data implements Wireable
 
     public function __construct(
         public ?int $advertisement_id,
-        public ?int $chat_id
+        public ?int $chat_id,
+        public ?int $advertisement_offer_id
     ) {
     }
 
@@ -20,7 +21,8 @@ class ChatData extends Data implements Wireable
     {
         return new self(
             advertisement_id: null,
-            chat_id: null
+            chat_id: null,
+            advertisement_offer_id: null
         );
     }
 }

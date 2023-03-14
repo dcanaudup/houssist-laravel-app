@@ -17,9 +17,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return redirect()->route('login');
-})->name('home.index');
+Route::get('/', Home::class)
+    ->name('home.index');
 
 Route::group(['middleware' => ['guest']], function () {
     Route::get('/home-owner/register', HomeOwnerRegistration::class)

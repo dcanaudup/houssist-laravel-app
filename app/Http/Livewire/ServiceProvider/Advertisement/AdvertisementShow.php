@@ -75,6 +75,7 @@ class AdvertisementShow extends Component
         $this->advertisementOfferData->status = AdvertisementOfferStatus::PENDING;
         $offer = $makeOffer->execute($this->advertisementOfferData);
         $this->chatData->advertisement_id = $this->advertisementData->advertisement_id;
+        $this->chatData->advertisement_offer_id = $offer->advertisement_offer_id;
         $chat = $startChat->execute($this->chatData);
         $this->advertisementOfferData = AdvertisementOfferData::initialize();
         $this->chatData = ChatData::initialize();
@@ -115,6 +116,7 @@ class AdvertisementShow extends Component
     public function updateChat(): ?Chat
     {
         if ($chat = Chat::where('advertisement_id', $this->advertisementData->advertisement_id)
+            ->where('advertisement_offer_id', $this->viewAdvertisementOfferData?->advertisement_offer_id)
             ->with('messages')
             ->first()) {
             $this->viewChatData = ViewChatData::from($chat);

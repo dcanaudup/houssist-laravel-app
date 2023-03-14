@@ -15,6 +15,8 @@ return new class extends Migration
             $table->foreignId('advertisement_id')
                 ->constrained('advertisements', 'advertisement_id');
             $table->bigIncrements('chat_id');
+            $table->foreignId('advertisement_offer_id')
+                ->constrained('advertisement_offers', 'advertisement_offer_id');
         });
 
         Schema::table('chats', function (Blueprint $table) {
