@@ -2,8 +2,8 @@
 
 namespace App\Modules\Shared\Actions;
 
-use App\Models\Message;
 use App\Modules\Shared\DataTransferObjects\MessageData;
+use App\Modules\Shared\Models\Message;
 
 class SendMessage
 {

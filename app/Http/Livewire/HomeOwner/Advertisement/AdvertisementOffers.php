@@ -2,8 +2,10 @@
 
 namespace App\Http\Livewire\HomeOwner\Advertisement;
 
-use App\Models\AdvertisementOffer;
+use App\Modules\HomeOwner\Actions\AcceptOffer;
+use App\Modules\HomeOwner\Actions\RejectOffer;
 use App\Modules\HomeOwner\DataTransferObjects\ViewAdvertisementOfferData;
+use App\Modules\ServiceProvider\Models\AdvertisementOffer;
 use App\Modules\Shared\Actions\SendMessage;
 use App\Modules\Shared\DataTransferObjects\MessageData;
 use App\Modules\Shared\DataTransferObjects\ViewChatData;
@@ -65,5 +67,26 @@ class AdvertisementOffers extends Component
         }
 
         return null;
+    }
+
+    public function acceptOffer(AcceptOffer $acceptOffer)
+    {
+        $acceptOffer->execute(
+            $this->view_advertisement_offer_data->advertisement_id,
+            $this->view_advertisement_offer_data->advertisement_offer_id
+        );
+
+        $this->dispatchBrowserEvent('notify', ['message' => 'Offer accepted successfully']);
+
+        return redirect()->route('home-owner.advertisements');
+    }
+
+    public function rejectOffer(RejectOffer $rejectOffer)
+    {
+        $rejectOffer->execute($this->view_advertisement_offer_data->advertisement_offer_id);
+
+        $this->dispatchBrowserEvent('notify', ['message' => 'Offer rejected successfully']);
+
+        return redirect()->route('home-owner.advertisements');
     }
 }

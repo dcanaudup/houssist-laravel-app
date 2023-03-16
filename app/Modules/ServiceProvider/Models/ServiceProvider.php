@@ -14,18 +14,14 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read User|null $user
- *
  * @method static \Illuminate\Database\Eloquent\Builder|ServiceProvider newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ServiceProvider newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ServiceProvider query()
  * @method static \Illuminate\Database\Eloquent\Builder|ServiceProvider whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ServiceProvider whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ServiceProvider whereUpdatedAt($value)
- *
  * @property int $kyc_approved
- *
  * @method static \Illuminate\Database\Eloquent\Builder|ServiceProvider whereKycApproved($value)
- *
  * @mixin \Eloquent
  */
 class ServiceProvider extends Model

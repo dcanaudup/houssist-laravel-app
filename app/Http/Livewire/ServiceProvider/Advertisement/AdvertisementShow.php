@@ -4,13 +4,13 @@ namespace App\Http\Livewire\ServiceProvider\Advertisement;
 
 use App\Http\Livewire\Traits\WithCachedRows;
 use App\Http\Livewire\Traits\WithPerPagination;
-use App\Models\AdvertisementOffer;
 use App\Modules\HomeOwner\DataTransferObjects\ViewAdvertisementData;
 use App\Modules\HomeOwner\DataTransferObjects\ViewAdvertisementOfferData;
 use App\Modules\HomeOwner\Enums\AdvertisementOfferStatus;
 use App\Modules\ServiceProvider\Actions\MakeOffer;
 use App\Modules\ServiceProvider\Actions\StartChat;
 use App\Modules\ServiceProvider\DataTransferObjects\AdvertisementOfferData;
+use App\Modules\ServiceProvider\Models\AdvertisementOffer;
 use App\Modules\Shared\Actions\SendMessage;
 use App\Modules\Shared\DataTransferObjects\ChatData;
 use App\Modules\Shared\DataTransferObjects\MessageData;

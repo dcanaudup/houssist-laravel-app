@@ -2,8 +2,8 @@
 
 namespace App\Modules\ServiceProvider\Actions;
 
-use App\Models\AdvertisementOffer;
 use App\Modules\ServiceProvider\DataTransferObjects\AdvertisementOfferData;
+use App\Modules\ServiceProvider\Models\AdvertisementOffer;
 use Illuminate\Support\Facades\DB;
 
 class MakeOffer

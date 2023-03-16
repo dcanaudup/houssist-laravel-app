@@ -19,6 +19,8 @@ return new class extends Migration
                 ->nullable();
             $table->dateTime('offer_date')
                 ->nullable();
+            $table->dateTime('accceptance_date')
+                ->nullable();
             $table->string('status');
             $table->timestamps();
         });

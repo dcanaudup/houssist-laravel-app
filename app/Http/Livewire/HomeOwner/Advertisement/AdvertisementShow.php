@@ -4,8 +4,8 @@ namespace App\Http\Livewire\HomeOwner\Advertisement;
 
 use App\Http\Livewire\Traits\WithCachedRows;
 use App\Http\Livewire\Traits\WithPerPagination;
-use App\Models\AdvertisementOffer;
 use App\Modules\HomeOwner\DataTransferObjects\ViewAdvertisementData;
+use App\Modules\ServiceProvider\Models\AdvertisementOffer;
 use App\Modules\Shared\Models\Advertisement;
 use Livewire\Component;
 

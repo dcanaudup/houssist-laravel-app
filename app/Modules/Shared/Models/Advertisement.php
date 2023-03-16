@@ -29,7 +29,6 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property-read \App\Modules\Shared\Models\User $home_owner
  * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, Media> $media
  * @property-read int|null $media_count
- *
  * @method static \Illuminate\Database\Eloquent\Builder|Advertisement newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Advertisement newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Advertisement query()
@@ -45,7 +44,9 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @method static \Illuminate\Database\Eloquent\Builder|Advertisement whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Advertisement whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Advertisement whereUserId($value)
- *
+ * @property int $accepted_offer_id
+ * @method static \Illuminate\Database\Eloquent\Builder|Advertisement whereAcceptedOfferId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Advertisement whereServiceProviderId($value)
  * @mixin \Eloquent
  */
 class Advertisement extends Model implements HasMedia

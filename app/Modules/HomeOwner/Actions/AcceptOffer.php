@@ -1,0 +1,50 @@
+<?php
+
+namespace App\Modules\HomeOwner\Actions;
+
+use App\Modules\HomeOwner\Enums\AdvertisementOfferStatus;
+use App\Modules\HomeOwner\Enums\AdvertisementStatus;
+use App\Modules\ServiceProvider\Models\AdvertisementOffer;
+use App\Modules\Shared\Models\Advertisement;
+use Illuminate\Support\Facades\DB;
+
+class AcceptOffer
+{
+
+    public function execute(
+        int $advertisement_id,
+        int $advertisement_offer_id
+    ) {
+        DB::beginTransaction();
+        $advertisement = Advertisement::findOrFail($advertisement_id);
+        $advertisementOffer = AdvertisementOffer::findOrFail($advertisement_offer_id);
+
+        $this->updateAdvertisement($advertisement, $advertisementOffer);
+
+        $this->updateAdvertisementOffer($advertisementOffer);
+
+        $this->rejectOtherOffers($advertisementOffer);
+        DB::commit();
+    }
+
+    private function updateAdvertisement(Advertisement $advertisement, AdvertisementOffer $advertisementOffer)
+    {
+        $advertisement->status = AdvertisementStatus::ACCEPTED;
+        $advertisement->accepted_offer_id = $advertisementOffer->advertisement_offer_id;
+        $advertisement->save();
+    }
+
+    private function updateAdvertisementOffer(AdvertisementOffer $advertisementOffer)
+    {
+        $advertisementOffer->acceptance_date = now();
+        $advertisementOffer->status = AdvertisementStatus::ACCEPTED;
+        $advertisementOffer->save();
+    }
+
+    private function rejectOtherOffers(AdvertisementOffer $advertisementOffer)
+    {
+        AdvertisementOffer::where('advertisement_id', $advertisementOffer->advertisement_id)
+            ->where('advertisement_offer_id', '!=', $advertisementOffer->advertisement_offer_id)
+            ->update(['status' => AdvertisementOfferStatus::ACCEPTED_OTHER_OFFER]);
+    }
+}

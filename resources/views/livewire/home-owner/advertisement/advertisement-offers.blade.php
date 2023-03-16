@@ -25,8 +25,8 @@
             </x-label.group>
 
             <x-label.group label="Actions">
-                    <x-button.primary wire:click="accept">Accept</x-button.primary>
-                    <x-button.danger wire:click="reject">Reject</x-button.danger>
+                    <x-button.primary onclick="confirm('Are you sure you want to accept this offer?') || event.stopImmediatePropagation()" wire:click="acceptOffer">Accept</x-button.primary>
+                    <x-button.danger onclick="confirm('Are you sure you want to reject this offer?') || event.stopImmediatePropagation()" wire:click="rejectOffer">Reject</x-button.danger>
             </x-label.group>
         </div>
         <div class="bg-white py-6 px-4 sm:p-6 rounded-lg">
@@ -69,6 +69,6 @@
     <script>
         window.addEventListener('chat', event => {
             document.getElementById('messages').scrollTo(0, document.getElementById('messages').scrollHeight);
-        })
+        });
     </script>
 @endpush

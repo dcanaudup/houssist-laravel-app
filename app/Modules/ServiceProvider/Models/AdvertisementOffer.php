@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace App\Modules\ServiceProvider\Models;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -20,7 +21,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\User $service_provider
- *
  * @method static \Illuminate\Database\Eloquent\Builder|AdvertisementOffer newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|AdvertisementOffer newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|AdvertisementOffer query()
@@ -34,7 +34,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|AdvertisementOffer whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AdvertisementOffer whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AdvertisementOffer whereUserId($value)
- *
+ * @property string|null $acceptance_date
+ * @method static \Illuminate\Database\Eloquent\Builder|AdvertisementOffer whereAcceptanceDate($value)
  * @mixin \Eloquent
  */
 class AdvertisementOffer extends Model
