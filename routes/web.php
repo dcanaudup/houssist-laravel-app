@@ -50,6 +50,8 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'service-provide
             ->name('service-provider.advertisements');
         Route::get('/advertisements/{advertisement}', \App\Http\Livewire\ServiceProvider\Advertisement\AdvertisementShow::class)
             ->name('service-provider.advertisements.show');
+        Route::get('/tasks', \App\Http\Livewire\ServiceProvider\Task\TaskIndex::class)
+            ->name('service-provider.tasks');
     });
 
     Route::get('/kyc', \App\Http\Livewire\ServiceProvider\Kyc\UploadPage::class)

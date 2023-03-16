@@ -4,6 +4,7 @@ namespace App\Modules\Shared\Models;
 
 use App\Modules\HomeOwner\Enums\AdvertisementStatus;
 use App\Modules\HomeOwner\Enums\JobPaymentType;
+use App\Modules\ServiceProvider\Models\AdvertisementOffer;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -47,6 +48,9 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property int $accepted_offer_id
  * @method static \Illuminate\Database\Eloquent\Builder|Advertisement whereAcceptedOfferId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Advertisement whereServiceProviderId($value)
+ * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, Media> $media
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, AdvertisementOffer> $offers
+ * @property-read int|null $offers_count
  * @mixin \Eloquent
  */
 class Advertisement extends Model implements HasMedia
@@ -93,5 +97,10 @@ class Advertisement extends Model implements HasMedia
     public function home_owner()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function offers()
+    {
+        return $this->hasMany(AdvertisementOffer::class, 'advertisement_id', 'advertisement_id');
     }
 }

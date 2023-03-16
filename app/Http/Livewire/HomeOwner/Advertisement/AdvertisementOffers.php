@@ -48,7 +48,7 @@ class AdvertisementOffers extends Component
 
     public function initializeChat()
     {
-        if($this->updateChat()) {
+        if ($this->updateChat()) {
             $this->messageData = MessageData::initialize();
             $this->messageData->chat_id = $this->viewChatData->chat_id;
             $this->messageData->user_id = auth()->id();
@@ -63,6 +63,7 @@ class AdvertisementOffers extends Component
             ->with('messages')
             ->first()) {
             $this->viewChatData = ViewChatData::from($chat);
+
             return $chat;
         }
 

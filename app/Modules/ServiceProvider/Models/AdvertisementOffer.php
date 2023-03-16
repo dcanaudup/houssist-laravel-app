@@ -3,6 +3,7 @@
 namespace App\Modules\ServiceProvider\Models;
 
 use App\Models\User;
+use App\Modules\Shared\Models\Advertisement;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -36,6 +37,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|AdvertisementOffer whereUserId($value)
  * @property string|null $acceptance_date
  * @method static \Illuminate\Database\Eloquent\Builder|AdvertisementOffer whereAcceptanceDate($value)
+ * @property-read Advertisement $advertisement
  * @mixin \Eloquent
  */
 class AdvertisementOffer extends Model
@@ -51,11 +53,19 @@ class AdvertisementOffer extends Model
         'offer_date' => 'datetime',
     ];
 
+    /** Relationships */
     public function service_provider()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
+    public function advertisement()
+    {
+        return $this->belongsTo(Advertisement::class, 'advertisement_id', 'advertisement_id');
+    }
+    /** End Relationships */
+
+    /** Attributes */
     public function paymentRate(): Attribute
     {
         return Attribute::make(
@@ -63,4 +73,5 @@ class AdvertisementOffer extends Model
             set: fn ($value) => is_numeric($value) ? $value * 100 : $value,
         );
     }
+    /** End Attributes */
 }

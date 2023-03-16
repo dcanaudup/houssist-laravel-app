@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Chat whereAdvertisementOfferId($value)
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Modules\Shared\Models\Message> $messages
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Modules\Shared\Models\Message> $messages
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Modules\Shared\Models\Message> $messages
  * @mixin \Eloquent
  */
 class Chat extends Model
