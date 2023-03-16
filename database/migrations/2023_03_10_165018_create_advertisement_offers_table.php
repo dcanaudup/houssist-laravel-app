@@ -33,6 +33,12 @@ return new class extends Migration
         Schema::table('advertisement_offers', function (Blueprint $table) {
             $table->primary(['user_id', 'advertisement_offer_id']);
         });
+
+        Schema::table('advertisements', function (Blueprint $table) {
+            $table->foreignId('accepted_offer_id')
+                ->nullable()
+                ->constrained('advertisement_offers', 'advertisement_offer_id');
+        });
     }
 
     /**

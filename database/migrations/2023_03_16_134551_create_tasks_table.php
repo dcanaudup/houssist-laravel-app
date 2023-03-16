@@ -23,7 +23,7 @@ return new class extends Migration
                 ->constrained('advertisement_offers', 'advertisement_offer_id');
             $table->string('status');
             $table->timestamps();
-            $table->unique(['service_provider_id', 'advertisement_id', 'advertisement_offer_id']);
+            $table->unique(['service_provider_id', 'advertisement_id', 'advertisement_offer_id'], 'unique_task');
         });
 
         Schema::table('tasks', function (Blueprint $table) {

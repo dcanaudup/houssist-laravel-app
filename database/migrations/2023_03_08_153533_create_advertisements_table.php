@@ -21,9 +21,6 @@ return new class extends Migration
             $table->dateTime('end_date_time');
             $table->string('job_payment_type');
             $table->unsignedInteger('payment_rate');
-            $table->foreignId('accepted_offer_id')
-                ->nullable()
-                ->constrained('advertisement_offers', 'advertisement_offer_id');
             $table->string('status');
             $table->timestamps();
         });
