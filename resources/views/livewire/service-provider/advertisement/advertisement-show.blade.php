@@ -21,7 +21,7 @@
             </x-label.group>
 
             <x-label.group label="By">
-                <dd class="mt-1 text-sm text-gray-900">{{ $advertisementData->home_owner->name }} ({{ $advertisementData->home_owner->email  }})</dd>
+                <dd class="mt-1 text-sm text-gray-900">{{ $advertisementData->home_owner->username }}</dd>
             </x-label.group>
 
             <x-label.group label="Address">

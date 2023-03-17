@@ -12,13 +12,14 @@ class Registration extends Component
     public UserData $user;
 
     protected $rules = [
+        'user.username' => ['required', 'min:6', 'unique:users,username'],
         'user.email' => ['required', 'email', 'unique:users,email'],
         'user.password' => ['required', 'min:8'],
     ];
 
     public function mount()
     {
-        $this->user = new UserData(null, '', '');
+        $this->user = new UserData(null, '', '', '');
     }
 
     public function render()

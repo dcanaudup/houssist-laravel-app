@@ -30,7 +30,7 @@
                             </x-table.cell>
 
                             <x-table.cell>
-                                {{ $task->home_owner->email }}
+                                {{ $task->home_owner->username }}
                             </x-table.cell>
 
                             <x-table.cell>
@@ -46,7 +46,7 @@
                             </x-table.cell>
 
                             <x-table.cell>
-                                {{ $task->advertisement->payment_rate }}
+                                {{ $task->advertisement_offer->payment_rate }}
                             </x-table.cell>
 
                             <x-table.cell>

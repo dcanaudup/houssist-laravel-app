@@ -8,6 +8,7 @@
 <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
     <form class="space-y-6" wire:submit.prevent="submit" method="POST">
         @csrf
+        <x-input name="user.username" id="user.username" label="Username" type="text" placeHolder="Enter username" model="user.username"/>
         <x-input name="user.email" id="user.email" label="Email" type="text" placeHolder="Enter email" model="user.email"/>
         <x-input name="user.password" id="user.password" label="Password" type="password" placeHolder="Enter password" model="user.password"/>
         <div>

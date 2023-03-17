@@ -18,7 +18,7 @@ class Registration extends Component
 
     public function mount()
     {
-        $this->user = new UserData(null, '', '');
+        $this->user = new UserData(null, '', '', '');
     }
 
     public function render()
