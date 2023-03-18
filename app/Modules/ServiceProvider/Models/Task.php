@@ -50,5 +50,10 @@ class Task extends Model
     {
         return $this->belongsTo(User::class, 'home_owner_id', 'id');
     }
+
+    public function service_provider()
+    {
+        return $this->belongsTo(User::class, 'service_provider_id', 'id');
+    }
     /** End Relationships */
 }

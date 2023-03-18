@@ -40,6 +40,8 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'home-owner'], f
         ->name('home-owner.advertisements.show');
     Route::get('/advertisements/{advertisement}/offers/{offer:advertisement_offer_id}', \App\Http\Livewire\HomeOwner\Advertisement\AdvertisementOffers::class)
         ->name('home-owner.advertisements.offer');
+    Route::get('/tasks', \App\Http\Livewire\HomeOwner\Task\TaskIndex::class)
+        ->name('home-owner.tasks');
 });
 
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'service-provider'], function () {
