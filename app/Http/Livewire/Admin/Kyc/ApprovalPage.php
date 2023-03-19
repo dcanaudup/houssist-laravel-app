@@ -57,7 +57,6 @@ class ApprovalPage extends Component
     public function view(KycRequest $kycRequest)
     {
         $this->useCachedRows();
-
         $this->viewKycRequest = $kycRequest;
         $this->updateKycRequestData = new UpdateKycRequestData($kycRequest->admin_remarks, $kycRequest->status);
         $this->showViewModal = true;

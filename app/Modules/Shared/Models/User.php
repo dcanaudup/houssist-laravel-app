@@ -3,6 +3,7 @@
 namespace App\Modules\Shared\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Modules\ServiceProvider\Models\KycRequest;
 use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -37,6 +38,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
  * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $userable
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User query()
@@ -58,6 +60,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUserableId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUserableType($value)
+ *
  * @mixin \Eloquent
  */
 class User extends Authenticatable implements MustVerifyEmailContract
@@ -109,4 +112,16 @@ class User extends Authenticatable implements MustVerifyEmailContract
             set: fn ($value) => bcrypt($value),
         );
     }
+
+    /** Relationships */
+    public function advertisements()
+    {
+        return $this->hasMany(Advertisement::class);
+    }
+
+    public function kyc_request()
+    {
+        return $this->hasOne(KycRequest::class);
+    }
+    /** End Relationships */
 }

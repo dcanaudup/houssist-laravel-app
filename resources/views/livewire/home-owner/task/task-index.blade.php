@@ -54,7 +54,7 @@
                             </x-table.cell>
 
                             <x-table.cell>
-                                <x-button.link wire:click="view({{$task}})">View</x-button.link>
+                                <x-button.link wire:click="view({{$task->task_id}})">View</x-button.link>
                             </x-table.cell>
                         </x-table.row>
                     @empty
@@ -66,6 +66,57 @@
                     @endforelse
                 </x-slot:body>
             </x-table>
+
+            <!-- View Task Modal -->
+            <x-modal.dialog wire:model.defer="showTaskModal" max-width="4xl">
+                <x-slot name="title">View Task</x-slot>
+
+                <x-slot name="content">
+                    <x-label.group label="Title">
+                        <dd class="mt-1 text-sm text-gray-900">{{ $viewTask?->advertisement->title }}</dd>
+                    </x-label.group>
+
+                    <x-label.group label="Home Owner">
+                        <dd class="mt-1 text-sm text-gray-900">{{ $viewTask?->service_provider->username }}</dd>
+                    </x-label.group>
+
+                    <x-label.group label="Status">
+                        <dd class="mt-1 text-sm text-gray-900">{{ $viewTask?->status }}</dd>
+                    </x-label.group>
+                </x-slot>
+
+                <x-slot name="footer">
+                    <x-button.secondary wire:click="closeView">Close</x-button.secondary>
+                    @if($viewTask?->status === \App\Modules\ServiceProvider\Enums\TaskStatus::COMPLETED)
+                        <x-button.primary onclick="confirm('Are you sure you want to release payment for this task?') || event.stopImmediatePropagation()" wire:click="releasePayment({{$viewTask->task_id}})">Release Payment</x-button.primary>
+                        <x-button.danger wire:click="openDispute">File Dispute</x-button.danger>
+                    @endif
+                </x-slot>
+            </x-modal.dialog>
+
+            <!-- File Dispute Modal -->
+            <form wire:submit.prevent="fileDispute">
+                <x-modal.dialog wire:model.defer="showDisputeModal" max-width="4xl">
+                    <x-slot name="title">File Dispute</x-slot>
+
+                    <x-slot name="content">
+                        <input type="hidden" value="{{$viewTask?->task_id}}" name="task_id"/>
+
+                        <x-input.group for="message" label="Message" :error="$errors->first('newSupportTicketData.message.message')">
+                            <x-input.textarea wire:model="newSupportTicketData.message.message" id="message" placeholder="Message" />
+                        </x-input.group>
+
+                        <x-input.group for="attachments" label="Attachments" :error="$errors->first('attachments')">
+                            <x-input.filepond wire:model="attachments" id="attachments" multiple></x-input.filepond>
+                        </x-input.group>
+                    </x-slot>
+
+                    <x-slot name="footer">
+                        <x-button.secondary wire:click="$set('showDisputeModal', false)">Close</x-button.secondary>
+                        <x-button.primary onclick="confirm('Are you sure you want to submit a dispute for this task?') || event.stopImmediatePropagation()" type="submit">Submit</x-button.primary>
+                    </x-slot>
+                </x-modal.dialog>
+            </form>
         </div>
     </div>
 </div>

@@ -2,6 +2,7 @@
 
 namespace App\Modules\ServiceProvider\Models;
 
+use App\Modules\ServiceProvider\Enums\TaskStatus;
 use App\Modules\Shared\Models\Advertisement;
 use App\Modules\Shared\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,6 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $status
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Task newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Task newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Task query()
@@ -29,11 +31,20 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Task whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Task whereTaskId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Task whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class Task extends Model
 {
+    public const CACHE_KEY = 'task.';
+
     use HasFactory;
+
+    protected $primaryKey = 'task_id';
+
+    protected $casts = [
+        'status' => TaskStatus::class,
+    ];
 
     /** Relationships */
     public function advertisement()

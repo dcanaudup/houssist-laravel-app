@@ -3,6 +3,7 @@
 namespace App\Modules\ServiceProvider\Models;
 
 use App\Models\User;
+use App\Modules\HomeOwner\Enums\AdvertisementOfferStatus;
 use App\Modules\Shared\Models\Advertisement;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -22,6 +23,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\User $service_provider
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|AdvertisementOffer newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|AdvertisementOffer newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|AdvertisementOffer query()
@@ -35,9 +37,13 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|AdvertisementOffer whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AdvertisementOffer whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AdvertisementOffer whereUserId($value)
+ *
  * @property string|null $acceptance_date
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|AdvertisementOffer whereAcceptanceDate($value)
+ *
  * @property-read Advertisement $advertisement
+ *
  * @mixin \Eloquent
  */
 class AdvertisementOffer extends Model
@@ -51,6 +57,7 @@ class AdvertisementOffer extends Model
     protected $casts = [
         'payment_rate' => 'float',
         'offer_date' => 'datetime',
+        'status' => AdvertisementOfferStatus::class,
     ];
 
     /** Relationships */

@@ -11,4 +11,12 @@ enum TaskStatus: string
     case DISPUTE = 'dispute';
     case REFUNDED = 'refunded';
     case PAID_DISPUTE = 'paid_dispute';
+
+    public function canBeCompleted(): bool
+    {
+        return in_array($this, [
+            self::WAITING,
+            self::IN_PROGRESS,
+        ]);
+    }
 }

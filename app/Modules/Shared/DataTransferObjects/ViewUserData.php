@@ -2,6 +2,7 @@
 
 namespace App\Modules\Shared\DataTransferObjects;
 
+use App\Modules\Shared\Models\User;
 use Illuminate\Support\Carbon;
 use Livewire\Wireable;
 use Spatie\LaravelData\Concerns\WireableData;
@@ -22,5 +23,20 @@ class ViewUserData extends Data implements Wireable
         public readonly ?Carbon $birthday,
         public readonly string $mobile_number
     ) {
+    }
+
+    public static function fromModel(User $user): ViewUserData
+    {
+        return new self(
+            $user->id,
+            $user->username,
+            $user->name,
+            $user->email,
+            $user->userable_id,
+            $user->userable_type,
+            $user->address,
+            $user->birthday,
+            $user->mobile_number
+        );
     }
 }

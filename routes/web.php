@@ -70,4 +70,8 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'admin'], functi
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/deposits', \App\Http\Livewire\Shared\Deposits\DepositPage::class)
         ->name('shared.deposits');
+    Route::get('/support-tickets', \App\Http\Livewire\Shared\SupportTicket\SupportTicketIndex::class)
+        ->name('shared.support-tickets');
+    Route::get('/support-tickets/{supportTicket:support_ticket_id}', \App\Http\Livewire\Shared\SupportTicket\SupportTicketShow::class)
+        ->name('shared.support-tickets.show');
 });

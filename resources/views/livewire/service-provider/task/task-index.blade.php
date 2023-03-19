@@ -54,7 +54,7 @@
                             </x-table.cell>
 
                             <x-table.cell>
-                                <x-button.link wire:click="view({{$task}})">View</x-button.link>
+                                <x-button.link wire:click="view({{$task->task_id}})">View</x-button.link>
                             </x-table.cell>
                         </x-table.row>
                     @empty
@@ -67,5 +67,31 @@
                 </x-slot:body>
             </x-table>
         </div>
+
+        <!-- View Task Modal -->
+        <x-modal.dialog wire:model.defer="showTaskModal" max-width="4xl">
+            <x-slot name="title">View Task</x-slot>
+
+            <x-slot name="content">
+                <x-label.group label="Title">
+                    <dd class="mt-1 text-sm text-gray-900">{{ $viewTask?->advertisement->title }}</dd>
+                </x-label.group>
+
+                <x-label.group label="Home Owner">
+                    <dd class="mt-1 text-sm text-gray-900">{{ $viewTask?->home_owner->username }}</dd>
+                </x-label.group>
+
+                <x-label.group label="Status">
+                    <dd class="mt-1 text-sm text-gray-900">{{ $viewTask?->status }}</dd>
+                </x-label.group>
+            </x-slot>
+
+            <x-slot name="footer">
+                <x-button.secondary wire:click="closeView">Close</x-button.secondary>
+                @if($viewTask?->status->canBeCompleted())
+                    <x-button.primary onclick="confirm('Are you sure you want to complete this task?') || event.stopImmediatePropagation()" wire:click="completeTask({{$viewTask->task_id}})">Complete Task</x-button.primary>
+                @endif
+            </x-slot>
+        </x-modal.dialog>
     </div>
 </div>
