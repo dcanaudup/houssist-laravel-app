@@ -33,7 +33,7 @@ class DepositData extends Data implements Wireable
         return new self(
             deposit_id: null,
             amount: null,
-            deposit_type: null,
+            deposit_type: DepositType::Cash,
             status: DepositStatus::Pending,
             user_remarks: '',
             admin_remarks: '',

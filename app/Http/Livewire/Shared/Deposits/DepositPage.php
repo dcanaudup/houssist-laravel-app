@@ -2,13 +2,15 @@
 
 namespace App\Http\Livewire\Shared\Deposits;
 
-use App\Modules\Shared\Actions\CancelDeposit;
-use App\Modules\Shared\Actions\CreateDeposit;
+use App\Aggregates\DepositAggregateRoot;
+use App\Aggregates\WalletAggregateRoot;
+use App\Models\TempUpload;
 use App\Modules\Shared\DataTransferObjects\DepositData;
 use App\Modules\Shared\Enums\DepositStatus;
 use App\Modules\Shared\Enums\DepositType;
 use App\Modules\Shared\Models\Deposit;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -56,6 +58,11 @@ class DepositPage extends Component
         ]);
     }
 
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
+    }
+
     public function updatingNewDepositDepositType(&$value)
     {
         $value = DepositType::from($value);
@@ -75,17 +82,21 @@ class DepositPage extends Component
         $this->showCreateModal = true;
     }
 
-    public function view(Deposit $deposit)
+    public function view(int $depositId)
     {
-        $this->viewDeposit = $deposit;
+        $this->viewDeposit = Deposit::findOrFail($depositId);
         $this->showViewModal = true;
     }
 
-    public function save(CreateDeposit $createDeposit)
+    public function save()
     {
         $this->validate();
+        $newUuid = Str::uuid()->toString();
+        $attachments = TempUpload::first()->addMedia($this->attachments)->toMediaCollection('deposits');
 
-        $createDeposit->execute($this->newDeposit, $this->attachments);
+        DepositAggregateRoot::retrieve($newUuid)
+            ->createDeposit(Auth::id(), $this->newDeposit, [$attachments->uuid])
+            ->persist();
 
         $this->initializeDeposit();
         $this->showCreateModal = false;
@@ -94,8 +105,10 @@ class DepositPage extends Component
         $this->dispatchBrowserEvent('notify', ['message' => 'Deposit saved!']);
     }
 
-    public function cancel(Deposit $deposit, CancelDeposit $cancelDeposit)
+    public function cancel(int $deposit_id)
     {
+        $deposit = Deposit::findOrFail($deposit_id);
+
         if ($deposit->status != DepositStatus::Pending) {
             $this->showConfirmCancelModal = false;
             $this->dispatchBrowserEvent('notify', ['message' => 'Unable to cancel this deposit!']);
@@ -103,7 +116,9 @@ class DepositPage extends Component
             return;
         }
 
-        $cancelDeposit->execute($deposit);
+        DepositAggregateRoot::retrieve($deposit->uuid)
+            ->cancelDeposit($deposit->deposit_id)
+            ->persist();
 
         $this->showConfirmCancelModal = false;
         $this->showViewModal = false;

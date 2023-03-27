@@ -11,15 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('wallets', function (Blueprint $table) {
+        Schema::create('temp_uploads', function (Blueprint $table) {
             $table->id();
-            $table->uuid();
-            $table->foreignId('user_id')
-                ->constrained('users');
-            $table->bigInteger('balance')
-                ->default(0);
-            $table->string('description')
-                ->default('');
             $table->timestamps();
         });
     }
@@ -29,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('wallets');
+        Schema::dropIfExists('temp_uploads');
     }
 };

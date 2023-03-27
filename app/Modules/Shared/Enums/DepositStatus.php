@@ -9,4 +9,9 @@ enum DepositStatus: string
     case Approved = 'approved';
     case Rejected = 'rejected';
     case Cancelled = 'cancelled';
+
+    public static function canBeCancelled(string $status): bool
+    {
+        return $status == self::Pending->value;
+    }
 }

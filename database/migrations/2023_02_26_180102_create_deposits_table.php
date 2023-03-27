@@ -15,6 +15,7 @@ return new class extends Migration
             $table->foreignId('user_id')
                 ->constrained('users');
             $table->bigIncrements('deposit_id');
+            $table->uuid()->unique();
             $table->string('deposit_type');
             $table->bigInteger('amount');
             $table->string('status')->default('pending');

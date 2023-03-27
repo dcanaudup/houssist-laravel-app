@@ -39,7 +39,7 @@
                                 {{ $deposit->status }}
                             </x-table.cell>
                             <x-table.cell>
-                                <x-button.link wire:click="view({{$deposit}})">View</x-button.link>
+                                <x-button.link wire:click="view({{$deposit->deposit_id}})">View</x-button.link>
                             </x-table.cell>
                         </x-table.row>
                     @empty
@@ -141,7 +141,7 @@
 
                 <x-slot name="footer">
                     <x-button.secondary wire:click="$set('showConfirmCancelModal', false)">Cancel</x-button.secondary>
-                    <x-button.danger wire:click="cancel({{$viewDeposit}})">Confirm</x-button.danger>
+                    <x-button.danger wire:click="cancel({{$viewDeposit?->deposit_id}})">Confirm</x-button.danger>
                 </x-slot>
             </x-modal.confirmation>
         </form>

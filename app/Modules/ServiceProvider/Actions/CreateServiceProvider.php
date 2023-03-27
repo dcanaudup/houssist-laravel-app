@@ -2,8 +2,10 @@
 
 namespace App\Modules\ServiceProvider\Actions;
 
+use App\Aggregates\WalletAggregateRoot;
 use App\Modules\ServiceProvider\Models\ServiceProvider;
 use App\Modules\Shared\DataTransferObjects\UserData;
+use Illuminate\Support\Str;
 
 class CreateServiceProvider
 {
@@ -11,7 +13,13 @@ class CreateServiceProvider
     {
         $serviceProvider = new ServiceProvider();
         $serviceProvider->save();
-        $serviceProvider->user()->create($userData->all());
+        $user = $serviceProvider->user()->create($userData->all());
+
+        $newUuid = Str::uuid()->toString();
+
+        WalletAggregateRoot::retrieve($newUuid)
+            ->createWallet($user->id)
+            ->persist();
 
         return $serviceProvider;
     }
