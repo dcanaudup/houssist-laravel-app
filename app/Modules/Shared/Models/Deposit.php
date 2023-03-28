@@ -98,4 +98,11 @@ class Deposit extends Model implements HasMedia
         return LogOptions::defaults()
             ->logOnly(['status', 'user_remarks', 'admin_remarks']);
     }
+
+    /** Relationships */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    /** End Relationships */
 }

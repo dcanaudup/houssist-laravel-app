@@ -65,6 +65,8 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'service-provide
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'admin'], function () {
     Route::get('/kyc/approvals', \App\Http\Livewire\Admin\Kyc\ApprovalPage::class)
         ->name('admin.kyc.approvals');
+    Route::get('/deposits', \App\Http\Livewire\Admin\Deposits\DepositIndex::class)
+        ->name('admin.deposits');
 });
 
 Route::group(['middleware' => ['auth', 'verified']], function () {

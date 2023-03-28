@@ -20,9 +20,9 @@ class WalletAggregateRoot extends AggregateRoot
         return $this;
     }
 
-    public function addMoney(int $amount)
+    public function addMoney(float $amount, string $transactionType, string $referenceNumber, string $remarks = '')
     {
-        $this->recordThat(new MoneyAdded($amount));
+        $this->recordThat(new MoneyAdded($amount, $transactionType, $referenceNumber, $remarks));
 
         return $this;
     }

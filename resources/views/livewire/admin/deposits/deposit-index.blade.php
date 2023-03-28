@@ -61,7 +61,7 @@
 
             <x-slot name="content">
                 <x-input.group for="amount" label="Amount" :error="$errors->first('newDeposit.amount')">
-                    <x-input.text wire:model="newDeposit.amount" id="amount" placeholder="Amount" type="number" step="0.01"/>
+                    <x-input.text wire:model="newDeposit.amount" id="amount" placeholder="Amount" type="number"/>
                 </x-input.group>
 
                 <x-input.group for="deposit_type" label="Deposit Type" :error="$errors->first('newDeposit.deposit_type')">
@@ -89,44 +89,64 @@
     </form>
 
     <!-- View Deposit Modal -->
-        <x-modal.dialog wire:model.defer="showViewModal" max-width="4xl">
-            <x-slot name="title">View Deposit</x-slot>
+    <x-modal.dialog wire:model.defer="showViewModal" max-width="4xl">
+        <x-slot name="title">View Deposit</x-slot>
+
+        <x-slot name="content">
+            <x-label.group label="User">
+                <dd class="mt-1 text-sm text-gray-900">{{ $viewDeposit?->user->username }}</dd>
+            </x-label.group>
+            <x-label.group label="Amount">
+                <dd class="mt-1 text-sm text-gray-900">{{ $viewDeposit?->amount }}</dd>
+            </x-label.group>
+
+            <x-label.group label="Deposit Type">
+                <dd class="mt-1 text-sm text-gray-900">{{ $viewDeposit?->deposit_type }}</dd>
+            </x-label.group>
+
+            <x-label.group label="Status">
+                <dd class="mt-1 text-sm text-gray-900">{{ $viewDeposit?->status }}</dd>
+            </x-label.group>
+
+            <x-label.group label="Proof of deposit">
+                {{$viewDeposit?->media[0]}}
+            </x-label.group>
+
+            <x-label.group label="Remarks">
+                <dd class="mt-1 text-sm text-gray-900">{{ $viewDeposit?->user_remarks }}</dd>
+            </x-label.group>
+
+            <x-label.group label="Admin Remarks">
+                <dd class="mt-1 text-sm text-gray-900">{{ $viewDeposit?->admin_remarks }}</dd>
+            </x-label.group>
+
+            <x-label.group label="Latest Transaction Date">
+                <dd class="mt-1 text-sm text-gray-900">{{ $viewDeposit?->latest_transaction_date_time_for_humans }}</dd>
+            </x-label.group>
+        </x-slot>
+
+        <x-slot name="footer">
+            <x-button.secondary wire:click="$set('showViewModal', false)">Close</x-button.secondary>
+            @if($viewDeposit?->status == \App\Modules\Shared\Enums\DepositStatus::Pending)
+                <x-button.danger onclick="confirm('Are you sure you want to reject this deposit?') || event.stopImmediatePropagation()" wire:click="reject({{$viewDeposit?->deposit_id}})">Reject</x-button.danger>
+                <x-button.primary onclick="confirm('Are you sure you want to approve this deposit?') || event.stopImmediatePropagation()" wire:click="approve({{$viewDeposit?->deposit_id}})">Approve</x-button.primary>
+            @endif
+        </x-slot>
+    </x-modal.dialog>
+
+    <!-- Confirm Cancel Modal -->
+    <form wire:submit.prevent="cancel">
+        <x-modal.confirmation wire:model.defer="showConfirmCancelModal" max-width="4xl">
+            <x-slot name="title">Confirm Cancellation</x-slot>
 
             <x-slot name="content">
-                <x-label.group label="Amount">
-                    <dd class="mt-1 text-sm text-gray-900">{{ $viewDeposit?->amount }}</dd>
-                </x-label.group>
-
-                <x-label.group label="Deposit Type">
-                    <dd class="mt-1 text-sm text-gray-900">{{ $viewDeposit?->deposit_type }}</dd>
-                </x-label.group>
-
-                <x-label.group label="Status">
-                    <dd class="mt-1 text-sm text-gray-900">{{ $viewDeposit?->status }}</dd>
-                </x-label.group>
-
-                <x-label.group label="Proof of deposit">
-                    {{$viewDeposit?->media[0]}}
-                </x-label.group>
-
-                <x-label.group label="Remarks">
-                    <dd class="mt-1 text-sm text-gray-900">{{ $viewDeposit?->user_remarks }}</dd>
-                </x-label.group>
-
-                <x-label.group label="Admin Remarks">
-                    <dd class="mt-1 text-sm text-gray-900">{{ $viewDeposit?->admin_remarks }}</dd>
-                </x-label.group>
-
-                <x-label.group label="Latest Transaction Date">
-                    <dd class="mt-1 text-sm text-gray-900">{{ $viewDeposit?->latest_transaction_date_time_for_humans }}</dd>
-                </x-label.group>
+                <p>Are you sure you want to cancel this deposit?</p>
             </x-slot>
 
             <x-slot name="footer">
-                <x-button.secondary wire:click="$set('showViewModal', false)">Close</x-button.secondary>
-                @if($viewDeposit?->status == \App\Modules\Shared\Enums\DepositStatus::Pending)
-                <x-button.danger onclick="confirm('Are you sure you want to cancel this deposit?') || event.stopImmediatePropagation()" wire:click="cancel({{$viewDeposit?->deposit_id}})">Cancel Deposit</x-button.danger>
-                @endif
+                <x-button.secondary wire:click="$set('showConfirmCancelModal', false)">Cancel</x-button.secondary>
+                <x-button.danger wire:click="cancel({{$viewDeposit?->deposit_id}})">Confirm</x-button.danger>
             </x-slot>
-        </x-modal.dialog>
+        </x-modal.confirmation>
+    </form>
 </div>

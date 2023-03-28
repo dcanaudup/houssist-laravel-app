@@ -25,6 +25,8 @@ return new class extends Migration
                 ->default('');
             $table->dateTime('latest_transaction_date')
                 ->nullable();
+            $table->string('reference_number')
+                ->default('');
             $table->timestamps();
         });
 

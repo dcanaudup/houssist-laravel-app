@@ -26,8 +26,6 @@ class DepositPage extends Component
 
     public $showViewModal = false;
 
-    public $showConfirmCancelModal = false;
-
     public DepositData $newDeposit;
 
     public Deposit $viewDeposit;

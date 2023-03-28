@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fa8537301e110d3a2bf0462192de30d3",
+    "content-hash": "5e99d997b21f9bb918ed083fae19ec1a",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -115,6 +115,58 @@
                 }
             ],
             "time": "2022-08-10T22:54:19+00:00"
+        },
+        {
+            "name": "codepluswander/laravel-database-seed-version",
+            "version": "v0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/codepluswander/laravel-database-seed-version.git",
+                "reference": "78c5fad5a7ed55890e74740f1d618952ab8fd9d1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/codepluswander/laravel-database-seed-version/zipball/78c5fad5a7ed55890e74740f1d618952ab8fd9d1",
+                "reference": "78c5fad5a7ed55890e74740f1d618952ab8fd9d1",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.0",
+                "orchestra/testbench": "^7.0|^8.0",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Codepluswander\\LaravelDatabaseSeedVersion\\DatabaseSeedVersionServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Codepluswander\\LaravelDatabaseSeedVersion\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "codepluswander",
+                    "email": "hey@codepluswander.com"
+                }
+            ],
+            "description": "Run database seeders with history tracking like migrations",
+            "support": {
+                "issues": "https://github.com/codepluswander/laravel-database-seed-version/issues",
+                "source": "https://github.com/codepluswander/laravel-database-seed-version/tree/v0.3.0"
+            },
+            "time": "2023-02-05T11:54:01+00:00"
         },
         {
             "name": "dasprid/enum",

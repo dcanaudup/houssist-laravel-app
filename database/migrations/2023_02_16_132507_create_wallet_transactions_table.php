@@ -16,12 +16,11 @@ return new class extends Migration
                 ->constrained('wallets');
             $table->bigIncrements('wallet_transaction_id');
             $table->bigInteger('amount');
-            $table->foreignId('transactionable_id');
-            $table->string('transactionable_type');
+            $table->string('transaction_type');
             $table->string('reference_number');
+            $table->text('remarks')
+                ->nullable();
             $table->timestamps();
-
-            $table->index(['transactionable_id', 'transactionable_type'], 'transactionable_index');
         });
 
         Schema::table('wallet_transactions', function (Blueprint $table) {

@@ -14,4 +14,14 @@ enum DepositStatus: string
     {
         return $status == self::Pending->value;
     }
+
+    public static function canBeApproved(string $status): bool
+    {
+        return self::canBeCancelled($status);
+    }
+
+    public static function canBeRejected(string $status): bool
+    {
+        return self::canBeCancelled($status);
+    }
 }

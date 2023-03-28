@@ -4,8 +4,10 @@ namespace App\Projectors;
 
 use App\Modules\Shared\Enums\DepositStatus;
 use App\Modules\Shared\Models\Deposit;
+use App\StorableEvents\DepositApproved;
 use App\StorableEvents\DepositCancelled;
 use App\StorableEvents\DepositCreated;
+use App\StorableEvents\DepositRejected;
 use Spatie\EventSourcing\EventHandlers\Projectors\Projector;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
@@ -22,6 +24,7 @@ class DepositProjector extends Projector
             'user_remarks' => $event->user_remarks,
             'admin_remarks' => $event->admin_remarks,
             'latest_transaction_date' => now(),
+            'reference_number' => $event->reference_number,
         ]);
         Media::whereIn('uuid', $event->attachments)
             ->update([
@@ -32,9 +35,25 @@ class DepositProjector extends Projector
 
     public function onDepositCancelled(DepositCancelled $event)
     {
-        Deposit::where('deposit_id', $event->deposit_id)
+        Deposit::where('uuid', $event->aggregateRootUuid())
             ->update([
                 'status' => DepositStatus::Cancelled,
+            ]);
+    }
+
+    public function onDepositApproved(DepositApproved $event)
+    {
+        Deposit::where('uuid', $event->aggregateRootUuid())
+            ->update([
+                'status' => DepositStatus::Approved,
+            ]);
+    }
+
+    public function onDepositRejected(DepositRejected $event)
+    {
+        Deposit::where('uuid', $event->aggregateRootUuid())
+            ->update([
+                'status' => DepositStatus::Rejected,
             ]);
     }
 }

@@ -14,7 +14,8 @@ class DepositCreated extends ShouldBeStored
         public string $status,
         public string $user_remarks,
         public string $admin_remarks,
-        public array $attachments
+        public array $attachments,
+        public string $reference_number
     ) {
     }
 }
