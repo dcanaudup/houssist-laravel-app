@@ -26,6 +26,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Spatie\MediaLibrary\MediaCollections\Models\Media> $media
  * @property-read int|null $media_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Deposit newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Deposit newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Deposit query()
@@ -38,12 +39,15 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @method static \Illuminate\Database\Eloquent\Builder|Deposit whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Deposit whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Deposit whereUserRemarks($value)
+ *
  * @property int $deposit_id
  * @property \Illuminate\Support\Carbon|null $latest_transaction_date
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Deposit whereDepositId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Deposit whereLatestTransactionDate($value)
+ *
  * @mixin \Eloquent
  */
 class Deposit extends Model implements HasMedia

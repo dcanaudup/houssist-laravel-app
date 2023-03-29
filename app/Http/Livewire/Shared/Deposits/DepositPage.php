@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\Shared\Deposits;
 
 use App\Aggregates\DepositAggregateRoot;
-use App\Aggregates\WalletAggregateRoot;
 use App\Models\TempUpload;
 use App\Modules\Shared\DataTransferObjects\DepositData;
 use App\Modules\Shared\Enums\DepositStatus;

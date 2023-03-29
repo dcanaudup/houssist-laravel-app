@@ -10,19 +10,24 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property int $advertisement_id
  * @property int $chat_id
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Chat newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Chat newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Chat query()
  * @method static \Illuminate\Database\Eloquent\Builder|Chat whereAdvertisementId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Chat whereChatId($value)
+ *
  * @property int $advertisement_offer_id
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Modules\Shared\Models\Message> $messages
  * @property-read int|null $messages_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Chat whereAdvertisementOfferId($value)
+ *
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Modules\Shared\Models\Message> $messages
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Modules\Shared\Models\Message> $messages
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Modules\Shared\Models\Message> $messages
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Modules\Shared\Models\Message> $messages
+ *
  * @mixin \Eloquent
  */
 class Chat extends Model

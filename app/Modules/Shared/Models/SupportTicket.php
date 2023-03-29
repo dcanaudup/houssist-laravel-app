@@ -23,6 +23,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, SupportTicketMessage> $messages
  * @property-read int|null $messages_count
  * @property-read \App\Modules\Shared\Models\User $user
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|SupportTicket newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|SupportTicket newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|SupportTicket query()
@@ -35,6 +36,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|SupportTicket whereTaskId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|SupportTicket whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|SupportTicket whereUserId($value)
+ *
  * @mixin \Eloquent
  */
 class SupportTicket extends Model

@@ -2,7 +2,6 @@
 
 namespace App\StorableEvents;
 
-use App\Modules\Shared\DataTransferObjects\DepositData;
 use Spatie\EventSourcing\StoredEvents\ShouldBeStored;
 
 class DepositCreated extends ShouldBeStored

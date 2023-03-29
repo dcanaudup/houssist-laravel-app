@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $status
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Task newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Task newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Task query()
@@ -30,10 +31,12 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Task whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Task whereTaskId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Task whereUpdatedAt($value)
+ *
  * @property-read Advertisement $advertisement
  * @property-read \App\Modules\ServiceProvider\Models\AdvertisementOffer $advertisement_offer
  * @property-read User $home_owner
  * @property-read User $service_provider
+ *
  * @mixin \Eloquent
  */
 class Task extends Model

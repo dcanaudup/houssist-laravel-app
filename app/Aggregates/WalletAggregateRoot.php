@@ -2,9 +2,6 @@
 
 namespace App\Aggregates;
 
-use App\Modules\Shared\DataTransferObjects\DepositData;
-use App\StorableEvents\DepositCancelled;
-use App\StorableEvents\DepositCreated;
 use App\StorableEvents\MoneyAdded;
 use App\StorableEvents\WalletCreated;
 use Spatie\EventSourcing\AggregateRoots\AggregateRoot;

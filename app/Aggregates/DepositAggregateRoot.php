@@ -4,7 +4,6 @@ namespace App\Aggregates;
 
 use App\Modules\Shared\DataTransferObjects\DepositData;
 use App\Modules\Shared\Enums\DepositStatus;
-use App\Modules\Shared\Models\Deposit;
 use App\StorableEvents\DepositApproved;
 use App\StorableEvents\DepositCancelled;
 use App\StorableEvents\DepositCreated;
@@ -19,7 +18,7 @@ class DepositAggregateRoot extends AggregateRoot
 
     public function createDeposit(int $userId, DepositData $depositData, array $attachments)
     {
-        $depositCreated = $depositData->only( 'deposit_type', 'amount', 'status', 'user_remarks', 'admin_remarks')->toArray();
+        $depositCreated = $depositData->only('deposit_type', 'amount', 'status', 'user_remarks', 'admin_remarks')->toArray();
         $depositCreated['user_id'] = $userId;
         $depositCreated['attachments'] = $attachments;
         $depositCreated['reference_number'] = Str::random();
@@ -44,7 +43,7 @@ class DepositAggregateRoot extends AggregateRoot
 
     public function applyDepositCancelled(DepositCancelled $event)
     {
-        if (!DepositStatus::canBeCancelled($event->status)) {
+        if (! DepositStatus::canBeCancelled($event->status)) {
             throw new DomainException('Deposit cannot be cancelled.');
         }
 
@@ -60,7 +59,7 @@ class DepositAggregateRoot extends AggregateRoot
 
     public function applyDepositApproved(DepositApproved $event)
     {
-        if (!DepositStatus::canBeApproved($event->status)) {
+        if (! DepositStatus::canBeApproved($event->status)) {
             throw new DomainException('Deposit cannot be approved.');
         }
 
@@ -76,7 +75,7 @@ class DepositAggregateRoot extends AggregateRoot
 
     public function applyDepositRejected(DepositRejected $event)
     {
-        if (!DepositStatus::canBeApproved($event->status)) {
+        if (! DepositStatus::canBeApproved($event->status)) {
             throw new DomainException('Deposit cannot be rejected.');
         }
 
