@@ -50,9 +50,9 @@ class DepositAggregateRoot extends AggregateRoot
         $this->status = DepositStatus::Cancelled;
     }
 
-    public function approveDeposit()
+    public function approveDeposit(string $admin_remarks)
     {
-        $this->recordThat(new DepositApproved($this->status->value));
+        $this->recordThat(new DepositApproved($this->status->value, $admin_remarks));
 
         return $this;
     }
@@ -66,9 +66,9 @@ class DepositAggregateRoot extends AggregateRoot
         $this->status = DepositStatus::Approved;
     }
 
-    public function rejectDeposit()
+    public function rejectDeposit(string $admin_remarks)
     {
-        $this->recordThat(new DepositRejected($this->status->value));
+        $this->recordThat(new DepositRejected($this->status->value, $admin_remarks));
 
         return $this;
     }

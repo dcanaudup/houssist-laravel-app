@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Silber\Bouncer\Database\HasRolesAndAbilities;
 
 /**
  * App\Modules\Shared\Models\User
@@ -65,8 +66,6 @@ use Laravel\Sanctum\HasApiTokens;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Modules\Shared\Models\Advertisement> $advertisements
  * @property-read int|null $advertisements_count
  * @property-read KycRequest|null $kyc_request
- * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
  * @property-read \App\Modules\Shared\Models\Wallet|null $wallet
  *
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUsername($value)
@@ -75,7 +74,7 @@ use Laravel\Sanctum\HasApiTokens;
  */
 class User extends Authenticatable implements MustVerifyEmailContract
 {
-    use HasApiTokens, HasFactory, Notifiable, MustVerifyEmail;
+    use HasApiTokens, HasFactory, Notifiable, MustVerifyEmail, HasRolesAndAbilities;
 
     /**
      * The attributes that are mass assignable.

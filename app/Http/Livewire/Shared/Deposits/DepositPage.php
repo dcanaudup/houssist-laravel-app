@@ -3,6 +3,8 @@
 namespace App\Http\Livewire\Shared\Deposits;
 
 use App\Aggregates\DepositAggregateRoot;
+use App\Http\Livewire\Traits\WithCachedRows;
+use App\Http\Livewire\Traits\WithPerPagination;
 use App\Models\TempUpload;
 use App\Modules\Shared\DataTransferObjects\DepositData;
 use App\Modules\Shared\Enums\DepositStatus;
@@ -12,14 +14,22 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use App\Http\Livewire\Traits\WithSorting;
 
 class DepositPage extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, WithCachedRows, WithPerPagination, WithSorting;
 
-    public $filter = [];
+    public $showFilters = false;
 
-    protected $queryString = ['filter'];
+    public $filters = [
+        'deposit_type' => null,
+        'created_at' => null,
+    ];
+
+    protected $listeners = ['refreshComponent' => '$refresh'];
+
+    protected $queryString = ['filters', 'sorts'];
 
     public $showCreateModal = false;
 
@@ -46,12 +56,28 @@ class DepositPage extends Component
         $this->initializeDeposit();
     }
 
+    public function getRowsQueryProperty()
+    {
+        $query = Deposit::query()
+            ->when($this->filters['deposit_type'] ?? null, fn($query, $depositType) => $query->where('deposit_type', $depositType))
+            ->when($this->filters['created_at'] ?? null, fn($query, $createdAt) => $query->whereBetween('created_at', date_range_filter_transformer($createdAt)))
+            ->where('user_id', Auth::id())
+            ->with('media');
+
+        return $this->applySorting($query);
+    }
+
+    public function getRowsProperty()
+    {
+        return $this->cache(function () {
+            return $this->applyPagination($this->rowsQuery);
+        });
+    }
+
     public function render()
     {
         return view('livewire.shared.deposits.deposit', [
-            'deposits' => Deposit::query()
-                ->where('user_id', Auth::id())
-                ->with('media')->paginate(10),
+            'deposits' => $this->rows,
         ]);
     }
 
@@ -107,7 +133,6 @@ class DepositPage extends Component
         $deposit = Deposit::findOrFail($deposit_id);
 
         if ($deposit->status != DepositStatus::Pending) {
-            $this->showConfirmCancelModal = false;
             $this->dispatchBrowserEvent('notify', ['message' => 'Unable to cancel this deposit!']);
 
             return;
@@ -117,9 +142,17 @@ class DepositPage extends Component
             ->cancelDeposit($deposit->deposit_id)
             ->persist();
 
-        $this->showConfirmCancelModal = false;
         $this->showViewModal = false;
 
         $this->dispatchBrowserEvent('notify', ['message' => 'Deposit cancelled!']);
     }
+
+    public function toggleShowFilters()
+    {
+        $this->useCachedRows();
+
+        $this->showFilters = ! $this->showFilters;
+    }
+
+    public function resetFilters() { $this->reset('filters'); }
 }

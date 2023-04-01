@@ -4,7 +4,7 @@
         <!-- Top Bar -->
         <div class="flex justify-between">
             <div class="w-2/4 flex space-x-4">
-                <x-input.text wire:model="filter.search" placeholder="Search Deposits..." type="search"/>
+                <x-button.link wire:click="toggleShowFilters">@if ($showFilters) Hide @endif Advanced Search...</x-button.link>
             </div>
 
             <div class="space-x-2 flex items-center">
@@ -12,20 +12,46 @@
             </div>
         </div>
 
+        <!-- Advanced Search -->
+        <div>
+            @if ($showFilters)
+                <div class="bg-cool-gray-200 p-4 rounded shadow-inner flex relative">
+                    <div class="w-1/2 pr-2 space-y-4">
+                        <x-input.select wire:model.lazy="filters.deposit_type" id="filters.deposit_type" placeholder="Select an option...">
+                            @foreach (\Spatie\LaravelOptions\Options::forEnum(\App\Modules\Shared\Enums\DepositType::class)->toArray() as $option)
+                                <option value="{{ $option['value'] }}">{{ $option['label'] }}</option>
+                            @endforeach
+                        </x-input.select>
+                        <x-search.date
+                            id="filters.created_at"
+                            name="filters.created_at"
+                            placeholder="Transaction Date"
+                            ref="created_at"
+                            dateFormat="Y-m-d"
+                            mode="range"
+                        />
+                    </div>
+                    <div class="w-1/2 pl-2 space-y-4">
+                        <x-button.link wire:click="resetFilters" class="absolute right-0 bottom-0 p-4">Reset Filters</x-button.link>
+                    </div>
+                </div>
+            @endif
+        </div>
+
         <!-- Table -->
         <div class="flex-col space-y-4">
             <x-table>
                 <x-slot:head>
                     <x-table.header>Amount</x-table.header>
-                    <x-table.header>Deposit Type</x-table.header>
-                    <x-table.header>Transaction Date</x-table.header>
-                    <x-table.header>Status</x-table.header>
+                    <x-table.header sortable wire:click="sortBy('deposit_type')" :direction="$sorts['deposit_type'] ?? null">Deposit Type</x-table.header>
+                    <x-table.header sortable wire:click="sortBy('created_at')" :direction="$sorts['created_at'] ?? null">Transaction Date</x-table.header>
+                    <x-table.header sortable wire:click="sortBy('status')" :direction="$sorts['status'] ?? null">Status</x-table.header>
                     <x-table.header>Actions</x-table.header>
                 </x-slot:head>
 
                 <x-slot:body>
                     @forelse($deposits as $deposit)
-                        <x-table.row class="bg-cool-gray-200" wire:key="row-{{$deposit->id}}">
+                        <x-table.row wire:loading.class.delay="opacity-50" class="bg-cool-gray-200" wire:key="row-{{$deposit->deposit_id}}">
                             <x-table.cell>
                                 <span class="text-cool-gray-900 font-medium">{{ $deposit->amount }} </span>
                             </x-table.cell>
@@ -51,6 +77,10 @@
                     @endforelse
                 </x-slot:body>
             </x-table>
+
+            <div>
+                {{ $deposits->links() }}
+            </div>
         </div>
     </div>
 

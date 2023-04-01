@@ -6,6 +6,7 @@ use App\Aggregates\WalletAggregateRoot;
 use App\Modules\HomeOwner\Models\HomeOwner;
 use App\Modules\Shared\DataTransferObjects\UserData;
 use Illuminate\Support\Str;
+use Silber\Bouncer\BouncerFacade as Bouncer;
 
 class CreateHomeOwner
 {
@@ -20,6 +21,7 @@ class CreateHomeOwner
         WalletAggregateRoot::retrieve($newUuid)
             ->createWallet($user->id)
             ->persist();
+        Bouncer::assign('home-owner')->to($user);
 
         return $homeOwner;
     }

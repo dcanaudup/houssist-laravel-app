@@ -6,10 +6,6 @@
             <div class="w-2/4 flex space-x-4">
                 <x-input.text wire:model="filter.search" placeholder="Search Deposits..." type="search"/>
             </div>
-
-            <div class="space-x-2 flex items-center">
-                <x-button.primary wire:click="create"><x-icon.plus/> New</x-button.primary>
-            </div>
         </div>
 
         <!-- Table -->
@@ -54,40 +50,6 @@
         </div>
     </div>
 
-    <!-- Create Deposit Modal -->
-    <form wire:submit.prevent="save">
-        <x-modal.dialog wire:model.defer="showCreateModal" max-width="4xl">
-            <x-slot name="title">New Deposit</x-slot>
-
-            <x-slot name="content">
-                <x-input.group for="amount" label="Amount" :error="$errors->first('newDeposit.amount')">
-                    <x-input.text wire:model="newDeposit.amount" id="amount" placeholder="Amount" type="number"/>
-                </x-input.group>
-
-                <x-input.group for="deposit_type" label="Deposit Type" :error="$errors->first('newDeposit.deposit_type')">
-                    <x-input.select wire:model="newDeposit.deposit_type" id="deposit_type" placeholder="Select an option...">
-                        @foreach (\Spatie\LaravelOptions\Options::forEnum(\App\Modules\Shared\Enums\DepositType::class)->toArray() as $option)
-                            <option value="{{ $option['value'] }}">{{ $option['label'] }}</option>
-                        @endforeach
-                    </x-input.select>
-                </x-input.group>
-                <x-input.group for="deposit_type" label="Proof of deposit" :error="$errors->first('attachments')">
-                    <x-input.filepond wire:model="attachments"></x-input.filepond>
-                </x-input.group>
-
-                <x-input.group for="user_remarks" label="Remarks" :error="$errors->first('newDeposit.user_remarks')">
-                    <x-input.textarea wire:model="newDeposit.user_remarks" id="user_remarks" placeholder="Remarks" />
-                </x-input.group>
-            </x-slot>
-
-            <x-slot name="footer">
-                <x-button.secondary wire:click="$set('showCreateModal', false)">Cancel</x-button.secondary>
-
-                <x-button.primary type="submit">Save</x-button.primary>
-            </x-slot>
-        </x-modal.dialog>
-    </form>
-
     <!-- View Deposit Modal -->
     <x-modal.dialog wire:model.defer="showViewModal" max-width="4xl">
         <x-slot name="title">View Deposit</x-slot>
@@ -123,6 +85,12 @@
             <x-label.group label="Latest Transaction Date">
                 <dd class="mt-1 text-sm text-gray-900">{{ $viewDeposit?->latest_transaction_date_time_for_humans }}</dd>
             </x-label.group>
+
+            @if($viewDeposit?->status == \App\Modules\Shared\Enums\DepositStatus::Pending)
+            <x-input.group for="admin_remarks" label="Remarks" :error="$errors->first('admin_remarks')">
+                <x-input.textarea wire:model="admin_remarks" id="admin_remarks" placeholder="Remarks" />
+            </x-input.group>
+            @endif
         </x-slot>
 
         <x-slot name="footer">

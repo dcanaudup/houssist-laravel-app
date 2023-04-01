@@ -46,6 +46,7 @@ class DepositProjector extends Projector
         Deposit::where('uuid', $event->aggregateRootUuid())
             ->update([
                 'status' => DepositStatus::Approved,
+                'admin_remarks' => $event->admin_remarks,
             ]);
     }
 
@@ -54,6 +55,7 @@ class DepositProjector extends Projector
         Deposit::where('uuid', $event->aggregateRootUuid())
             ->update([
                 'status' => DepositStatus::Rejected,
+                'admin_remarks' => $event->admin_remarks,
             ]);
     }
 }

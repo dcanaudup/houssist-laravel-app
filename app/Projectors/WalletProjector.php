@@ -21,7 +21,7 @@ class WalletProjector extends Projector
     public function onMoneyAdded(MoneyAdded $event)
     {
         $wallet = Wallet::where('uuid', $event->aggregateRootUuid())->first();
-        $wallet->balance = $wallet->balance + $event->amount * 100;
+        $wallet->balance = $wallet->balance + $event->amount;
         $wallet->save();
 
         WalletTransaction::create([

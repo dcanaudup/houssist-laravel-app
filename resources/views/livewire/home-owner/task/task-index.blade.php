@@ -76,7 +76,7 @@
                         <dd class="mt-1 text-sm text-gray-900">{{ $viewTask?->advertisement->title }}</dd>
                     </x-label.group>
 
-                    <x-label.group label="Home Owner">
+                    <x-label.group label="Service Provider">
                         <dd class="mt-1 text-sm text-gray-900">{{ $viewTask?->service_provider->username }}</dd>
                     </x-label.group>
 

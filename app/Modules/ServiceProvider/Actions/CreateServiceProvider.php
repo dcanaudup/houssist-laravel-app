@@ -6,6 +6,7 @@ use App\Aggregates\WalletAggregateRoot;
 use App\Modules\ServiceProvider\Models\ServiceProvider;
 use App\Modules\Shared\DataTransferObjects\UserData;
 use Illuminate\Support\Str;
+use Silber\Bouncer\BouncerFacade as Bouncer;
 
 class CreateServiceProvider
 {
@@ -20,6 +21,7 @@ class CreateServiceProvider
         WalletAggregateRoot::retrieve($newUuid)
             ->createWallet($user->id)
             ->persist();
+        Bouncer::assign('service-provider')->to($user);
 
         return $serviceProvider;
     }

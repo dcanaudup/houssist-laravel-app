@@ -20,8 +20,7 @@ class NewSupportTicketData extends Data implements Wireable
         public ?string $reference_number,
         public SupportTicketType $support_ticket_type,
         public SupportTicketStatus $status,
-        public NewSupportTicketMessageData $message,
-        public array $attachments
+        public NewSupportTicketMessageData $message
     ) {
     }
 
@@ -35,8 +34,7 @@ class NewSupportTicketData extends Data implements Wireable
             reference_number: generate_reference_number('support_tickets'),
             support_ticket_type: SupportTicketType::GENERAL,
             status: SupportTicketStatus::Open,
-            message: NewSupportTicketMessageData::initialize(),
-            attachments: [],
+            message: NewSupportTicketMessageData::initialize()
         );
     }
 }

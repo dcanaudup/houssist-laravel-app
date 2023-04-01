@@ -7,11 +7,14 @@ use App\Modules\Shared\Models\SupportTicket;
 
 class CreateSupportTicket
 {
-    public function execute(NewSupportTicketData $data)
+    public function execute(NewSupportTicketData $data, array $attachments)
     {
         $supportTicket = SupportTicket::create([...$data->toArray()]);
         $data->message->user_id = $data->user_id;
 
-        $supportTicket->messages()->create([...$data->message->toArray()]);
+        $message = $supportTicket->messages()->create([...$data->message->toArray()]);
+        foreach ($attachments as $attachment) {
+            $message->addMedia($attachment)->toMediaCollection('support_ticket_attachments');
+        }
     }
 }

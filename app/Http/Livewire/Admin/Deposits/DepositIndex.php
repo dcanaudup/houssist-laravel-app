@@ -9,6 +9,7 @@ use App\Http\Livewire\Traits\WithLockedPublicPropertiesTrait;
 use App\Http\Livewire\Traits\WithPerPagination;
 use App\Modules\Shared\Enums\WalletTransactionType;
 use App\Modules\Shared\Models\Deposit;
+use App\Modules\Shared\Models\User;
 use Livewire\Component;
 
 class DepositIndex extends Component
@@ -16,6 +17,8 @@ class DepositIndex extends Component
     use WithPerPagination, WithCachedRows, WithLockedPublicPropertiesTrait;
 
     public $showViewModal = false;
+
+    public string $admin_remarks = '';
 
     /** @locked */
     public Deposit $viewDeposit;
@@ -56,13 +59,13 @@ class DepositIndex extends Component
             ->where('deposit_id', $depositId)
             ->first();
 
-        $wallet = auth()->user()->wallet;
+        $user = User::with('wallet')->findOrFail($deposit->user_id);
 
         DepositAggregateRoot::retrieve($deposit->uuid)
-            ->approveDeposit()
+            ->approveDeposit($this->admin_remarks)
             ->persist();
 
-        WalletAggregateRoot::retrieve($wallet->uuid)
+        WalletAggregateRoot::retrieve($user->wallet->uuid)
             ->addMoney($deposit->amount, WalletTransactionType::Deposit->value, $deposit->reference_number, 'Deposit Successful')
             ->persist();
 
@@ -78,7 +81,7 @@ class DepositIndex extends Component
             ->first();
 
         DepositAggregateRoot::retrieve($deposit->uuid)
-            ->rejectDeposit()
+            ->rejectDeposit($this->admin_remarks)
             ->persist();
 
         $this->showViewModal = false;

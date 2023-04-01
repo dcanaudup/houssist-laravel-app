@@ -97,6 +97,7 @@
                             </svg>
                             Dashboard
                         </a>
+                        @can('home-owner-tasks')
                         <a href="{{route('home-owner.tasks')}}"
                             @class([
                              'group flex items-center px-2 py-2 text-base leading-5 font-medium text-white rounded-md focus:outline-none focus:bg-indigo-700 bg-indigo-900 transition ease-in-out duration-150' => request()->is('*home-owner/tasks*'),
@@ -108,6 +109,8 @@
                             </svg>
                             Tasks
                         </a>
+                        @endcan
+                        @can('service-provider-tasks')
                         <a href="{{route('service-provider.tasks')}}"
                             @class([
                              'group flex items-center px-2 py-2 text-base leading-5 font-medium text-white rounded-md focus:outline-none focus:bg-indigo-700 bg-indigo-900 transition ease-in-out duration-150' => request()->is('*service-provider/tasks*'),
@@ -121,6 +124,8 @@
 
                             My Tasks
                         </a>
+                        @endcan
+                        @can('home-owner-advertisements')
                         <a href="{{route('home-owner.advertisements')}}"
                             @class([
                              'group flex items-center px-2 py-2 text-base leading-5 font-medium text-white rounded-md focus:outline-none focus:bg-indigo-700 bg-indigo-900 transition ease-in-out duration-150' => request()->is('*home-owner/advertisements*'),
@@ -133,6 +138,8 @@
 
                             My Ads
                         </a>
+                        @endcan
+                        @can('service-provider-advertisements')
                         <a href="{{route('service-provider.advertisements')}}"
                             @class([
                              'group flex items-center px-2 py-2 text-base leading-5 font-medium text-white rounded-md focus:outline-none focus:bg-indigo-700 bg-indigo-900 transition ease-in-out duration-150' => request()->is('*service-provider/advertisements*'),
@@ -145,6 +152,8 @@
 
                             Available Ads
                         </a>
+                        @endcan
+                        @can('deposits')
                         <a href="{{route('shared.deposits')}}"
                            @class([
                             'group flex items-center px-2 py-2 text-base leading-5 font-medium text-white rounded-md focus:outline-none focus:bg-indigo-700 bg-indigo-900 transition ease-in-out duration-150' => request()->is('*deposits*'),
@@ -156,6 +165,8 @@
                             </svg>
                             Deposits
                         </a>
+                        @endcan
+                        @can('company-deposits')
                         <a href="{{route('admin.deposits')}}"
                             @class([
                              'group flex items-center px-2 py-2 text-base leading-5 font-medium text-white rounded-md focus:outline-none focus:bg-indigo-700 bg-indigo-900 transition ease-in-out duration-150' => request()->is('*admin/deposits*'),
@@ -167,6 +178,8 @@
                             </svg>
                             Deposits
                         </a>
+                        @endcan
+                        @can('company-kyc')
                         <a href="{{route('admin.kyc.approvals')}}"
                             @class([
                              'group flex items-center px-2 py-2 text-base leading-5 font-medium text-white rounded-md focus:outline-none focus:bg-indigo-700 bg-indigo-900 transition ease-in-out duration-150' => request()->is('*kyc/approvals*'),
@@ -179,6 +192,8 @@
 
                             KYC Approvals
                         </a>
+                        @endcan
+                        @can('support-tickets')
                         <a href="{{route('shared.support-tickets')}}"
                             @class([
                              'group flex items-center px-2 py-2 text-base leading-5 font-medium text-white rounded-md focus:outline-none focus:bg-indigo-700 bg-indigo-900 transition ease-in-out duration-150' => request()->is('*support-tickets*'),
@@ -191,6 +206,7 @@
 
                             Support Tickets
                         </a>
+                        @endcan
                         <form method="POST" action="{{ route('logout') }}" x-data>
                             @csrf
                             <button type="submit"

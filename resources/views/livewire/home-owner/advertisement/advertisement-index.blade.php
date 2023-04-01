@@ -75,25 +75,25 @@
 
         <!-- Create Advertisment Modal -->
         <form wire:submit.prevent="save">
-            <x-modal.dialog wire:model.defer="showCreateModal" max-width="4xl">
+            <x-modal.dialog wire:model.lazy.defer="showCreateModal" max-width="4xl">
                 <x-slot name="title">New Advertisement</x-slot>
 
                 <x-slot name="content">
                     <x-input.group for="title" label="Title" :error="$errors->first('newAdvertisement.title')">
-                        <x-input.text wire:model="newAdvertisement.title" id="title" placeholder="Title" type="text"/>
+                        <x-input.text wire:model.lazy="newAdvertisement.title" id="title" placeholder="Title" type="text"/>
                     </x-input.group>
 
                     <x-input.group for="description" label="Description" :error="$errors->first('newAdvertisement.description')">
-                        <x-input.textarea wire:model="newAdvertisement.description" id="description" placeholder="Description" />
+                        <x-input.textarea wire:model.lazy="newAdvertisement.description" id="description" placeholder="Description" />
                     </x-input.group>
 
                     <x-input.group for="address" label="Address" :error="$errors->first('newAdvertisement.address')">
-                        <x-input.textarea wire:model="newAdvertisement.address" id="address" placeholder="Address" />
+                        <x-input.textarea wire:model.lazy="newAdvertisement.address" id="address" placeholder="Address" />
                     </x-input.group>
 
                     <x-input.group for="start_date_time" label="From" :error="$errors->first('newAdvertisement.start_date_time')">
                         <x-input.date
-                            wire:model="newAdvertisement.start_date_time"
+                            wire:model.lazy="newAdvertisement.start_date_time"
                             id="start_date_time"
                             placeholder="From"
                             ref="start_date_time"
@@ -104,7 +104,7 @@
 
                     <x-input.group for="end_date_time" label="To" :error="$errors->first('newAdvertisement.end_date_time')">
                         <x-input.date
-                            wire:model="newAdvertisement.end_date_time"
+                            wire:model.lazy="newAdvertisement.end_date_time"
                             id="end_date_time"
                             placeholder="To"
                             ref="end_date_time"
@@ -114,7 +114,7 @@
                     </x-input.group>
 
                     <x-input.group for="job_payment_type" label="Job Payment Type" :error="$errors->first('newAdvertisement.job_payment_type')">
-                        <x-input.select wire:model="newAdvertisement.job_payment_type" id="job_payment_type" placeholder="Select an option...">
+                        <x-input.select wire:model.lazy="newAdvertisement.job_payment_type" id="job_payment_type" placeholder="Select an option...">
                             @foreach (\Spatie\LaravelOptions\Options::forEnum(\App\Modules\HomeOwner\Enums\JobPaymentType::class)->toArray() as $option)
                                 <option value="{{ $option['value'] }}">{{ $option['label'] }}</option>
                             @endforeach
@@ -122,7 +122,7 @@
                     </x-input.group>
 
                     <x-input.group for="payment_rate" label="Payment Rate" :error="$errors->first('newAdvertisement.payment_rate')">
-                        <x-input.text wire:model="newAdvertisement.payment_rate" id="payment_rate" placeholder="Payment Rate" type="number"/>
+                        <x-input.text wire:model.lazy="newAdvertisement.payment_rate" id="payment_rate" placeholder="Payment Rate" type="number"/>
                     </x-input.group>
 
                     <x-input.group for="featured" label="Featured Image" :error="$errors->first('featured')">

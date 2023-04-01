@@ -105,11 +105,11 @@ class TaskIndex extends Component
         $this->newSupportTicketData->task_id = $this->task_id;
         $this->newSupportTicketData->subject = 'Task Dispute for task #'.$this->task_id;
         $this->newSupportTicketData->support_ticket_type = SupportTicketType::TASK_DISPUTE;
-        $this->newSupportTicketData->attachments = $this->attachments;
 
-        $createSupportTicket->execute($this->newSupportTicketData);
+        $createSupportTicket->execute($this->newSupportTicketData, $this->attachments);
         $fileDispute->execute($this->task_id);
         $this->showTaskModal = false;
+        $this->reset('attachments');
         $this->dispatchBrowserEvent('notify', ['message' => 'Task dispute filed successfully']);
     }
 }
