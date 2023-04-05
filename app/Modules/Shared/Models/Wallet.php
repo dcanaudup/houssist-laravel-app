@@ -55,7 +55,7 @@ class Wallet extends Model implements HasMedia
     public function balance(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => number_format($value / 100, 2),
+            get: fn ($value) => $value / 100,
             set: fn ($value) => $value * 100,
         );
     }

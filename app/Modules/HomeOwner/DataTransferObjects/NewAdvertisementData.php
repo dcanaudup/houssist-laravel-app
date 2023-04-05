@@ -4,6 +4,7 @@ namespace App\Modules\HomeOwner\DataTransferObjects;
 
 use App\Modules\HomeOwner\Enums\AdvertisementStatus;
 use App\Modules\HomeOwner\Enums\JobPaymentType;
+use App\Modules\HomeOwner\Enums\PaymentMethod;
 use Carbon\Carbon;
 use Illuminate\Http\UploadedFile;
 use Livewire\Wireable;
@@ -21,11 +22,13 @@ class NewAdvertisementData extends Data implements Wireable
         public string $address,
         public string $start_date_time,
         public string $end_date_time,
+        public PaymentMethod $payment_method,
         public JobPaymentType $job_payment_type,
         public float $payment_rate,
         public ?AdvertisementStatus $status,
         public ?UploadedFile $featured,
-        public array $attachments
+        public array $attachments,
+        public array $categories
     ) {
     }
 
@@ -38,11 +41,13 @@ class NewAdvertisementData extends Data implements Wireable
             address: '',
             start_date_time: Carbon::now()->startOfDay()->toDateTimeString(),
             end_date_time: Carbon::now()->endOfDay()->toDateTimeString(),
-            job_payment_type: JobPaymentType::MONTHLY,
+            payment_method: PaymentMethod::CASH,
+            job_payment_type: JobPaymentType::FIXED,
             payment_rate: 0.0,
             status: AdvertisementStatus::PENDING,
             featured: null,
             attachments: [],
+            categories: []
         );
     }
 }

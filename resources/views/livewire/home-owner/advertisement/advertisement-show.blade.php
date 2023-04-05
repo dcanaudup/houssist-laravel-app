@@ -32,6 +32,17 @@
                 <dd class="mt-1 text-sm text-gray-900">{{ date_for_humans($advertisementData->end_date_time) }}</dd>
             </x-label.group>
 
+            <x-label.group label="Payment Method">
+                <dd class="mt-1 text-sm text-gray-900">{{ $advertisementData->payment_method }}</dd>
+            </x-label.group>
+
+            <x-label.group label="Categories">
+                @foreach($tags as $tag)
+                    <span class="inline-flex items-center rounded-full bg-indigo-100 px-3 py-0.5 text-sm font-medium text-indigo-800">{{$tag->name}}</span>
+                @endforeach
+            </x-label.group>
+
+
             <x-label.group label="Payment Rate Type">
                 <dd class="mt-1 text-sm text-gray-900">{{ $advertisementData->job_payment_type }}</dd>
             </x-label.group>
@@ -63,7 +74,7 @@
                 <x-slot:head>
                     <x-table.header>Service Provider</x-table.header>
                     <x-table.header>Offer</x-table.header>
-                    <x-table.header>Offer Date</x-table.header>
+                    <x-table.header>Latest Offer Date</x-table.header>
                     <x-table.header>Contact Date</x-table.header>
                     <x-table.header>Status</x-table.header>
                     <x-table.header>Actions</x-table.header>
@@ -73,15 +84,21 @@
                     @forelse($advertisement_offers as $advertisement_offer)
                         <x-table.row class="bg-cool-gray-200" wire:key="row-{{$advertisement_offer->advertisement_offer_id}}">
                             <x-table.cell>
+                                {{ $advertisement_offer->service_provider->username }}
                             </x-table.cell>
+
                             <x-table.cell>
                                 {{ $advertisement_offer->payment_rate }}
                             </x-table.cell>
+
                             <x-table.cell>
+                                {{ diff_for_humans($advertisement_offer->offer_date) }}
                             </x-table.cell>
+
                             <x-table.cell>
                                 {{ diff_for_humans($advertisement_offer->created_at) }}
                             </x-table.cell>
+
                             <x-table.cell>
                                 {{ $advertisement_offer->status }}
                             </x-table.cell>

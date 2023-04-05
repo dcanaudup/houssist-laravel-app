@@ -13,7 +13,7 @@
 
         <div class="bg-white py-6 px-4 sm:p-6 rounded-lg">
             <x-label.group label="Service Provider">
-                <dd class="mt-1 text-sm text-gray-900">{{ $view_advertisement_offer_data->service_provider->name . "({$view_advertisement_offer_data->service_provider->email})" }}</dd>
+                <dd class="mt-1 text-sm text-gray-900">{{ $view_advertisement_offer_data->service_provider->username }}</dd>
             </x-label.group>
 
             <x-label.group label="Rate Offered">
@@ -23,10 +23,15 @@
             <x-label.group label="Offer Date">
                 <dd class="mt-1 text-sm text-gray-900">{{ date_for_humans($view_advertisement_offer_data->offer_date) }}</dd>
             </x-label.group>
+            @if($view_advertisement_offer_data->status === \App\Modules\HomeOwner\Enums\AdvertisementOfferStatus::PENDING)
+                <x-label.group label="Actions">
+                        <x-button.primary onclick="confirm('Are you sure you want to accept this offer?') || event.stopImmediatePropagation()" wire:click="acceptOffer">Accept</x-button.primary>
+                        <x-button.danger onclick="confirm('Are you sure you want to reject this offer?') || event.stopImmediatePropagation()" wire:click="rejectOffer">Reject</x-button.danger>
+                </x-label.group>
+            @endif
 
-            <x-label.group label="Actions">
-                    <x-button.primary onclick="confirm('Are you sure you want to accept this offer?') || event.stopImmediatePropagation()" wire:click="acceptOffer">Accept</x-button.primary>
-                    <x-button.danger onclick="confirm('Are you sure you want to reject this offer?') || event.stopImmediatePropagation()" wire:click="rejectOffer">Reject</x-button.danger>
+            <x-label.group label="Status">
+                <dd class="mt-1 text-sm text-gray-900">{{ $view_advertisement_offer_data->status }}</dd>
             </x-label.group>
         </div>
         <div class="bg-white py-6 px-4 sm:p-6 rounded-lg">

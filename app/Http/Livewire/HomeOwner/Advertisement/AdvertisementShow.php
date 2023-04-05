@@ -21,9 +21,12 @@ class AdvertisementShow extends Component
 
     public $attachments;
 
+    public $tags;
+
     public function getRowsQueryProperty()
     {
         return AdvertisementOffer::query()
+            ->with('service_provider')
             ->where('advertisement_id', $this->advertisement_id);
     }
 
@@ -36,9 +39,10 @@ class AdvertisementShow extends Component
 
     public function mount(Advertisement $advertisement)
     {
-        $advertisement->load('media');
+        $advertisement->load('media', 'tags');
         $this->featured = $advertisement->getMedia('advertisement-featured');
         $this->attachments = $advertisement->getMedia('advertisement-attachments');
+        $this->tags = $advertisement->tags;
 
         $this->advertisementData = ViewAdvertisementData::from($advertisement);
         $this->advertisement_id = $advertisement->advertisement_id;

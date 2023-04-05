@@ -36,6 +36,16 @@
                 <dd class="mt-1 text-sm text-gray-900">{{ date_for_humans($advertisementData->end_date_time) }}</dd>
             </x-label.group>
 
+            <x-label.group label="Payment Method">
+                <dd class="mt-1 text-sm text-gray-900">{{ $advertisementData->payment_method }}</dd>
+            </x-label.group>
+
+            <x-label.group label="Categories">
+                @foreach($tags as $tag)
+                    <span class="inline-flex items-center rounded-full bg-indigo-100 px-3 py-0.5 text-sm font-medium text-indigo-800">{{$tag->name}}</span>
+                @endforeach
+            </x-label.group>
+
             <x-label.group label="Payment Rate Type">
                 <dd class="mt-1 text-sm text-gray-900">{{ $advertisementData->job_payment_type }}</dd>
             </x-label.group>

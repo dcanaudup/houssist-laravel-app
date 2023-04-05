@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('address');
             $table->dateTime('start_date_time');
             $table->dateTime('end_date_time');
+            $table->string('payment_method');
             $table->string('job_payment_type');
             $table->unsignedInteger('payment_rate');
             $table->string('status');

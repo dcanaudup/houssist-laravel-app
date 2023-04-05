@@ -4,9 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\Admin;
 use App\Models\Company;
-use App\Modules\Shared\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Silber\Bouncer\BouncerFacade;
 
 class DefaultUserSeeder extends Seeder
 {
@@ -23,7 +22,7 @@ class DefaultUserSeeder extends Seeder
             'updated_at' => now(),
         ]);
 
-        $companyUser->user()->create([
+        $companyUserModel = $companyUser->user()->create([
             'username' => 'employee1',
             'email' => 'employee1@houssist.me',
             'email_verified_at' => now(),
@@ -40,7 +39,7 @@ class DefaultUserSeeder extends Seeder
             'updated_at' => now(),
         ]);
 
-        $adminUser->user()->create([
+        $adminUserModel = $adminUser->user()->create([
             'username' => 'admin',
             'email' => 'admin@houssist.me',
             'email_verified_at' => now(),
@@ -50,5 +49,8 @@ class DefaultUserSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
+        BouncerFacade::assign('admin')->to($adminUserModel);
+        BouncerFacade::assign('company')->to($companyUserModel);
     }
 }

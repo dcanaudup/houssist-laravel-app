@@ -39,14 +39,17 @@ class AdvertisementShow extends Component
 
     public $featured;
 
+    public $tags;
+
     public function mount(Advertisement $advertisement)
     {
-        $advertisement->load('media', 'home_owner');
+        $advertisement->load('media', 'home_owner', 'tags');
         $this->featured = $advertisement->getMedia('advertisement-featured');
         $this->attachments = $advertisement->getMedia('advertisement-attachments');
         $this->advertisementData = ViewAdvertisementData::from($advertisement);
         $this->advertisementOfferData = AdvertisementOfferData::initialize();
         $this->chatData = ChatData::initialize();
+        $this->tags = $advertisement->tags;
 
         if ($advertisementOffer = AdvertisementOffer::where('advertisement_id', $advertisement->advertisement_id)
             ->with('service_provider')
