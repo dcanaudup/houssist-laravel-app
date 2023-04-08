@@ -14,9 +14,6 @@ enum TaskStatus: string
 
     public function canBeCompleted(): bool
     {
-        return in_array($this, [
-            self::WAITING,
-            self::IN_PROGRESS,
-        ]);
+        return $this === self::IN_PROGRESS;
     }
 }
