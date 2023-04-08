@@ -5,7 +5,40 @@
         <div class="flex justify-between">
             <div class="w-2/4 flex space-x-4">
                 <x-input.text placeholder="Search Tickets..." type="search"/>
+                <x-button.link wire:click="toggleShowFilters">@if ($showFilters) Hide @endif Advanced Search...</x-button.link>
             </div>
+        </div>
+
+        <!-- Advanced Search -->
+        <div>
+            @if ($showFilters)
+                <div class="bg-cool-gray-200 p-4 rounded shadow-inner flex relative">
+                    <div class="w-1/2 pr-2 space-y-4">
+                        <x-input.group inline for="filters.status" label="Status">
+                            <x-input.select wire:model.lazy="filters.status" id="filters.status" placeholder="Select an option...">
+                                @foreach (\Spatie\LaravelOptions\Options::forEnum(\App\Modules\Shared\Enums\SupportTicketStatus::class)->toArray() as $option)
+                                    <option value="{{ $option['value'] }}">{{ $option['label'] }}</option>
+                                @endforeach
+                            </x-input.select>
+                        </x-input.group>
+                    </div>
+                    <div class="w-1/2 pl-2 space-y-4">
+                        <x-input.group inline for="filters.created_at" label="Created Date">
+                            <x-search.date
+                                id="filters.created_at"
+                                name="filters.created_at"
+                                placeholder="Task Date"
+                                ref="created_at"
+                                dateFormat="Y-m-d"
+                                mode="range"
+                            />
+                        </x-input.group>
+                        <div>
+                            <x-button.link wire:click="resetFilters" class="absolute right-0 bottom-0 p-4">Reset Filters</x-button.link>
+                        </div>
+                    </div>
+                </div>
+            @endif
         </div>
 
         <!-- Table -->
@@ -53,7 +86,7 @@
                     @empty
                         <x-table.row>
                             <x-table.cell colspan="10" class="text-center">
-                                <p class="text-gray-500">No Advertisements created yet.</p>
+                                <p class="text-gray-500">No Results Found.</p>
                             </x-table.cell>
                         </x-table.row>
                     @endforelse
