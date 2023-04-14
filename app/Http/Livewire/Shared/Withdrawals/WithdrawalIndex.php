@@ -25,7 +25,7 @@ class WithdrawalIndex extends Component
     public $showFilters = false;
 
     public $filters = [
-        'deposit_type' => null,
+        'withdrawal_type' => null,
         'created_at' => null,
     ];
 

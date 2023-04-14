@@ -4,8 +4,10 @@ namespace App\Projectors;
 
 use App\Models\Withdrawal;
 use App\Modules\Shared\Enums\WithdrawalStatus;
+use App\StorableEvents\WithdrawalApproved;
 use App\StorableEvents\WithdrawalCancelled;
 use App\StorableEvents\WithdrawalCreated;
+use App\StorableEvents\WithdrawalRejected;
 use Spatie\EventSourcing\EventHandlers\Projectors\Projector;
 
 class WithdrawalProjector extends Projector
@@ -30,6 +32,24 @@ class WithdrawalProjector extends Projector
     {
         Withdrawal::where('uuid', $event->aggregateRootUuid())->update([
             'status' => WithdrawalStatus::Cancelled,
+            'latest_transaction_date' => now(),
+        ]);
+    }
+
+    public function onWithdrawalApproved(WithdrawalApproved $event)
+    {
+        Withdrawal::where('uuid', $event->aggregateRootUuid())->update([
+            'status' => WithdrawalStatus::Approved,
+            'admin_remarks' => $event->admin_remarks,
+            'latest_transaction_date' => now(),
+        ]);
+    }
+
+    public function onWithdrawalRejected(WithdrawalRejected $event)
+    {
+        Withdrawal::where('uuid', $event->aggregateRootUuid())->update([
+            'status' => WithdrawalStatus::Rejected,
+            'admin_remarks' => $event->admin_remarks,
             'latest_transaction_date' => now(),
         ]);
     }

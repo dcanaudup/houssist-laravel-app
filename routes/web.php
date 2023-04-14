@@ -83,6 +83,9 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'admin'], functi
     Route::get('/deposits', \App\Http\Livewire\Admin\Deposits\DepositIndex::class)
         ->name('admin.deposits')
         ->middleware('permission:company-deposits');
+    Route::get('/withdrawals', \App\Http\Livewire\Admin\Withdrawals\WithdrawalIndex::class)
+        ->name('admin.withdrawals')
+        ->middleware('permission:company-withdrawals');
 });
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
