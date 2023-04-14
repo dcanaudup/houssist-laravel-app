@@ -13,6 +13,9 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Tags\HasTags;
 
+/**
+ * @mixin IdeHelperAdvertisement
+ */
 class Advertisement extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia, HasTags;

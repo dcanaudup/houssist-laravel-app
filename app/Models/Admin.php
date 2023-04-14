@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use App\Modules\Shared\Models\User;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Modules\Shared\Models\User;
 
+/**
+ * @mixin IdeHelperAdmin
+ */
 class Admin extends Model
 {
     use HasFactory;

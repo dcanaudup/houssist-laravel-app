@@ -89,6 +89,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/deposits', \App\Http\Livewire\Shared\Deposits\DepositPage::class)
         ->name('shared.deposits')
         ->middleware('permission:deposits');
+    Route::get('/withdrawals', \App\Http\Livewire\Shared\Withdrawals\WithdrawalIndex::class)
+        ->name('shared.withdrawals')
+        ->middleware('permission:withdrawals');
     Route::get('/support-tickets', \App\Http\Livewire\Shared\SupportTicket\SupportTicketIndex::class)
         ->name('shared.support-tickets')
         ->middleware('permission:support-tickets');

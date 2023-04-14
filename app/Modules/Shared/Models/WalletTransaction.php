@@ -16,7 +16,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $reference_number
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- *
  * @method static \Illuminate\Database\Eloquent\Builder|WalletTransaction newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|WalletTransaction newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|WalletTransaction query()
@@ -28,12 +27,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|WalletTransaction whereTransactionableType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WalletTransaction whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WalletTransaction whereWalletId($value)
- *
  * @property int $wallet_transaction_id
- *
  * @method static \Illuminate\Database\Eloquent\Builder|WalletTransaction whereWalletTransactionId($value)
- *
  * @mixin \Eloquent
+ * @mixin IdeHelperWalletTransaction
  */
 class WalletTransaction extends Model
 {

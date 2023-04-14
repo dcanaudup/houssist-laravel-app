@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Silber\Bouncer\BouncerFacade as Bouncer;
 use Silber\Bouncer\Database\Ability;
 use Silber\Bouncer\Database\Role;
@@ -16,6 +16,7 @@ class InitialPermissionSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->truncateTables();
         $this->addRoles();
         $this->addAbilities();
 
@@ -154,11 +155,17 @@ class InitialPermissionSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
+                'name' => 'withdrawals',
+                'title' => 'Withdrawals',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
                 'name' => 'support-tickets',
                 'title' => 'Support Tickets',
                 'created_at' => now(),
                 'updated_at' => now(),
-            ]
+            ],
         ];
 
         Ability::insert($homeOwnerAbilities);
@@ -191,5 +198,13 @@ class InitialPermissionSeeder extends Seeder
             Bouncer::allow($serviceProviderRole)->to($name);
             Bouncer::allow($adminRole)->to($name);
         }
+    }
+
+    private function truncateTables()
+    {
+        DB::statement('SET foreign_key_checks = 0;');
+        Role::truncate();
+        Ability::truncate();
+        DB::statement('SET foreign_key_checks = 1;');
     }
 }

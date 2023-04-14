@@ -39,7 +39,6 @@ use Silber\Bouncer\Database\HasRolesAndAbilities;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
  * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $userable
- *
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User query()
@@ -61,16 +60,14 @@ use Silber\Bouncer\Database\HasRolesAndAbilities;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUserableId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUserableType($value)
- *
  * @property string $username
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Modules\Shared\Models\Advertisement> $advertisements
  * @property-read int|null $advertisements_count
  * @property-read KycRequest|null $kyc_request
  * @property-read \App\Modules\Shared\Models\Wallet|null $wallet
- *
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUsername($value)
- *
  * @mixin \Eloquent
+ * @mixin IdeHelperUser
  */
 class User extends Authenticatable implements MustVerifyEmailContract
 {

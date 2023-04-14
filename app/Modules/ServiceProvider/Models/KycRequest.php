@@ -27,7 +27,6 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Spatie\MediaLibrary\MediaCollections\Models\Media> $media
  * @property-read int|null $media_count
  * @property-read User $user
- *
  * @method static \Illuminate\Database\Eloquent\Builder|KycRequest newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|KycRequest newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|KycRequest query()
@@ -39,7 +38,6 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @method static \Illuminate\Database\Eloquent\Builder|KycRequest whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|KycRequest whereUserRemarks($value)
  * @method static \Illuminate\Database\Eloquent\Builder|KycRequest whereValidIdNumber($value)
- *
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Spatie\MediaLibrary\MediaCollections\Models\Media> $media
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
@@ -50,8 +48,8 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Spatie\MediaLibrary\MediaCollections\Models\Media> $media
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Spatie\MediaLibrary\MediaCollections\Models\Media> $media
- *
  * @mixin \Eloquent
+ * @mixin IdeHelperKycRequest
  */
 class KycRequest extends Model implements HasMedia
 {

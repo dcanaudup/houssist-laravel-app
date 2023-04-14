@@ -12,6 +12,7 @@
         <div class="flex-col space-y-4">
             <x-table>
                 <x-slot:head>
+                    <x-table.header>Username</x-table.header>
                     <x-table.header>Amount</x-table.header>
                     <x-table.header>Deposit Type</x-table.header>
                     <x-table.header>Transaction Date</x-table.header>
@@ -23,7 +24,10 @@
                     @forelse($deposits as $deposit)
                         <x-table.row class="bg-cool-gray-200" wire:key="row-{{$deposit->id}}">
                             <x-table.cell>
-                                <span class="text-cool-gray-900 font-medium">{{ $deposit->amount }} </span>
+                                <span class="text-cool-gray-900 font-medium">{{ $deposit->user->username }} </span>
+                            </x-table.cell>
+                            <x-table.cell>
+                                {{ $deposit->amount }}
                             </x-table.cell>
                             <x-table.cell>
                                 {{ $deposit->deposit_type }}
