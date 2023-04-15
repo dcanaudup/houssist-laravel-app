@@ -98,6 +98,9 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'admin'], functi
     Route::get('/advertisements/{advertisement}', \App\Http\Livewire\Admin\Advertisement\AdvertisementShow::class)
         ->name('admin.advertisements.show')
         ->middleware('permission:company-advertisements');
+    Route::get('/tasks', \App\Http\Livewire\Admin\Task\TaskIndex::class)
+        ->name('admin.tasks')
+        ->middleware('permission:company-tasks');
 });
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
