@@ -180,6 +180,34 @@
                                 Withdrawals
                             </a>
                         @endcan
+                        @can('support-tickets')
+                            <a href="{{route('shared.support-tickets')}}"
+                                @class([
+                                 'group flex items-center px-2 py-2 text-base leading-5 font-medium text-white rounded-md focus:outline-none focus:bg-indigo-700 bg-indigo-900 transition ease-in-out duration-150' => request()->is('*support-tickets*'),
+                                 'text-indigo-100 hover:bg-indigo-600 group flex items-center px-2 py-2 text-base font-medium rounded-md' => !request()->is('*support-tickets*'),
+                                 ])
+                            >
+                                <svg class="mr-3 h-6 w-6 text-indigo-400 group-focus:text-indigo-300 transition ease-in-out duration-150" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
+                                </svg>
+
+                                Support Tickets
+                            </a>
+                        @endcan
+                        @can('company-kyc')
+                            <a href="{{route('admin.kyc.approvals')}}"
+                                @class([
+                                 'group flex items-center px-2 py-2 text-base leading-5 font-medium text-white rounded-md focus:outline-none focus:bg-indigo-700 bg-indigo-900 transition ease-in-out duration-150' => request()->is('*kyc/approvals*'),
+                                 'text-indigo-100 hover:bg-indigo-600 group flex items-center px-2 py-2 text-base font-medium rounded-md' => !request()->is('*kyc/approvals*'),
+                                 ])
+                            >
+                                <svg class="mr-3 h-6 w-6 text-indigo-400 group-focus:text-indigo-300 transition ease-in-out duration-150" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 00-1.883 2.542l.857 6a2.25 2.25 0 002.227 1.932H19.05a2.25 2.25 0 002.227-1.932l.857-6a2.25 2.25 0 00-1.883-2.542m-16.5 0V6A2.25 2.25 0 016 3.75h3.879a1.5 1.5 0 011.06.44l2.122 2.12a1.5 1.5 0 001.06.44H18A2.25 2.25 0 0120.25 9v.776" />
+                                </svg>
+
+                                KYC Approvals
+                            </a>
+                        @endcan
                         @can('company-deposits')
                         <a href="{{route('admin.deposits')}}"
                             @class([
@@ -207,19 +235,19 @@
                                 Withdrawals
                             </a>
                         @endcan
-                        @can('company-kyc')
-                        <a href="{{route('admin.kyc.approvals')}}"
-                            @class([
-                             'group flex items-center px-2 py-2 text-base leading-5 font-medium text-white rounded-md focus:outline-none focus:bg-indigo-700 bg-indigo-900 transition ease-in-out duration-150' => request()->is('*kyc/approvals*'),
-                             'text-indigo-100 hover:bg-indigo-600 group flex items-center px-2 py-2 text-base font-medium rounded-md' => !request()->is('*kyc/approvals*'),
-                             ])
-                        >
-                            <svg class="mr-3 h-6 w-6 text-indigo-400 group-focus:text-indigo-300 transition ease-in-out duration-150" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 00-1.883 2.542l.857 6a2.25 2.25 0 002.227 1.932H19.05a2.25 2.25 0 002.227-1.932l.857-6a2.25 2.25 0 00-1.883-2.542m-16.5 0V6A2.25 2.25 0 016 3.75h3.879a1.5 1.5 0 011.06.44l2.122 2.12a1.5 1.5 0 001.06.44H18A2.25 2.25 0 0120.25 9v.776" />
-                            </svg>
+                        @can('company-advertisements')
+                            <a href="{{route('admin.advertisements')}}"
+                                @class([
+                                 'group flex items-center px-2 py-2 text-base leading-5 font-medium text-white rounded-md focus:outline-none focus:bg-indigo-700 bg-indigo-900 transition ease-in-out duration-150' => request()->is('*admin/advertisements*'),
+                                 'text-indigo-100 hover:bg-indigo-600 group flex items-center px-2 py-2 text-base font-medium rounded-md' => !request()->is('*admin/advertisements*'),
+                                 ])
+                            >
+                                <svg class="mr-3 h-6 w-6 text-indigo-400 group-focus:text-indigo-300 transition ease-in-out duration-150" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z" />
+                                </svg>
 
-                            KYC Approvals
-                        </a>
+                                Ads
+                            </a>
                         @endcan
                         @can('company-support-tickets')
                             <a href="{{route('admin.support-tickets')}}"
@@ -234,20 +262,6 @@
 
                                 Support Tickets
                             </a>
-                        @endcan
-                        @can('support-tickets')
-                        <a href="{{route('shared.support-tickets')}}"
-                            @class([
-                             'group flex items-center px-2 py-2 text-base leading-5 font-medium text-white rounded-md focus:outline-none focus:bg-indigo-700 bg-indigo-900 transition ease-in-out duration-150' => request()->is('*support-tickets*'),
-                             'text-indigo-100 hover:bg-indigo-600 group flex items-center px-2 py-2 text-base font-medium rounded-md' => !request()->is('*support-tickets*'),
-                             ])
-                        >
-                            <svg class="mr-3 h-6 w-6 text-indigo-400 group-focus:text-indigo-300 transition ease-in-out duration-150" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
-                            </svg>
-
-                            Support Tickets
-                        </a>
                         @endcan
                         <form method="POST" action="{{ route('logout') }}" x-data>
                             @csrf

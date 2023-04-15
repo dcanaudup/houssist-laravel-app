@@ -92,6 +92,12 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'admin'], functi
     Route::get('/support-tickets/{supportTicket:support_ticket_id}', \App\Http\Livewire\Admin\SupportTicket\SupportTicketShow::class)
         ->name('admin.support-tickets.show')
         ->middleware('permission:company-support-tickets');
+    Route::get('/advertisements', \App\Http\Livewire\Admin\Advertisement\AdvertisementIndex::class)
+        ->name('admin.advertisements')
+        ->middleware('permission:company-advertisements');
+    Route::get('/advertisements/{advertisement}', \App\Http\Livewire\Admin\Advertisement\AdvertisementShow::class)
+        ->name('admin.advertisements.show')
+        ->middleware('permission:company-advertisements');
 });
 
 Route::group(['middleware' => ['auth', 'verified']], function () {

@@ -152,6 +152,12 @@ class InitialPermissionSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'name' => 'company-advertisements',
+                'title' => 'Company Advertisements',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ];
         $sharedAbilities = [
             [
