@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use App\Modules\Shared\Models\User;
 
 /**
  * App\Models\SupportTicketMessage
@@ -16,7 +17,6 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @property string $message
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|SupportTicketMessage newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|SupportTicketMessage newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|SupportTicketMessage query()

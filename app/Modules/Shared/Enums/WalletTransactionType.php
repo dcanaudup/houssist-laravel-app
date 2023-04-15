@@ -10,4 +10,6 @@ enum WalletTransactionType: string
     case Withdrawal_Rejected = 'withdrawal_rejected';
     case Payment = 'payment';
     case Manual = 'manual';
+    case Dispute_Refund = 'dispute_refund';
+    case Dispute_Payment = 'dispute_payment';
 }

@@ -138,7 +138,7 @@ class TaskIndex extends Component
 
         $createSupportTicket->execute($this->newSupportTicketData, $this->attachments);
         $fileDispute->execute($this->task_id);
-        $this->showTaskModal = false;
+        $this->showDisputeModal = false;
         $this->reset('attachments');
         $this->dispatchBrowserEvent('notify', ['message' => 'Task dispute filed successfully']);
     }

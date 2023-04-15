@@ -56,4 +56,9 @@ class Wallet extends Model implements HasMedia
             set: fn ($value) => $value * 100,
         );
     }
+
+    public function wallet_transactions()
+    {
+        return $this->hasMany(WalletTransaction::class);
+    }
 }

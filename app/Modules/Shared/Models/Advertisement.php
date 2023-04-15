@@ -67,4 +67,9 @@ class Advertisement extends Model implements HasMedia
     {
         return $this->hasMany(AdvertisementOffer::class, 'advertisement_id', 'advertisement_id');
     }
+
+    public function accepted_offer()
+    {
+        return $this->belongsTo(AdvertisementOffer::class, 'accepted_offer_id', 'advertisement_id');
+    }
 }

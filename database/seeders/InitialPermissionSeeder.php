@@ -40,7 +40,7 @@ class InitialPermissionSeeder extends Seeder
             ],
             [
                 'name' => 'company',
-                'Title' => 'Parent',
+                'Title' => 'Company Employee',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -146,6 +146,12 @@ class InitialPermissionSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'name' => 'company-support-tickets',
+                'title' => 'Company Support Tickets',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ];
         $sharedAbilities = [
             [
@@ -205,6 +211,7 @@ class InitialPermissionSeeder extends Seeder
         DB::statement('SET foreign_key_checks = 0;');
         Role::truncate();
         Ability::truncate();
+        DB::table('permissions')->truncate();
         DB::statement('SET foreign_key_checks = 1;');
     }
 }

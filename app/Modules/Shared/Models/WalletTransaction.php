@@ -37,4 +37,9 @@ class WalletTransaction extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function wallet()
+    {
+        return $this->belongsTo(Wallet::class);
+    }
 }

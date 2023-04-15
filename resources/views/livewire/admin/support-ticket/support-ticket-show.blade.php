@@ -4,10 +4,14 @@
         <!-- Top Bar -->
         <div class="flex justify-between">
             <div class="w-2/4 flex space-x-4">
+                @if($supportTicket->status === \App\Modules\Shared\Enums\SupportTicketStatus::Open)
+                <x-button.default onclick="confirm('Are you sure you want to close in favor of the home owner?') || event.stopImmediatePropagation()" wire:click="closeForHomeOwner({{$supportTicket->home_owner_id}})">Close and refund home owner</x-button.default>
+                <x-button.primary onclick="confirm('Are you sure you want to close in favor of the service provider?') || event.stopImmediatePropagation()" wire:click="closeForServiceProvider({{$supportTicket->service_provider_id}})">Close and release funds to service provider</x-button.primary>
+                @endif
             </div>
 
             <div class="space-x-2 flex items-center">
-                <x-label.button href="{{route('shared.support-tickets')}}">Back</x-label.button>
+                <x-label.button href="{{route('admin.support-tickets')}}">Back</x-label.button>
             </div>
         </div>
 
@@ -20,7 +24,8 @@
                                 @class([
                                     "px-4 py-2 rounded-lg shadow-md space-y-8",
                                     "bg-gray-50" => $message->user->id == auth()->user()->id,
-                                    "bg-indigo-50" => $message->user->id != auth()->user()->id,
+                                    "bg-indigo-50" => $message->user->id == $supportTicket->home_owner_id,
+                                    "bg-indigo-600" => $message->user->id == $supportTicket->service_provider_id,
                                 ])
                             >
                                 <div class="flex items-center">
@@ -28,11 +33,25 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
                                     </svg>
                                     <div class="ml-4">
-                                        <div class="text-sm font-medium text-gray-900">{{ $message->user->username }}</div>
-                                        <div class="text-sm text-gray-500">{{ date_for_humans($message->created_at) }}</div>
+                                        <div @class([
+                                            'text-sm font-medium',
+                                            "text-white" => $message->user->id == $supportTicket->service_provider_id,
+                                            "text-gray-700" => $message->user->id == auth()->user()->id || $message->user->id == $supportTicket->home_owner_id,
+                                        ])>{{ $message->user->username }}</div>
+                                        <div @class([
+                                            'text-sm',
+                                            "text-gray-50" => $message->user->id == $supportTicket->service_provider_id,
+                                            "text-gray-500" => $message->user->id == auth()->user()->id || $message->user->id == $supportTicket->home_owner_id,
+                                        ])>{{ date_for_humans($message->created_at) }}</div>
                                     </div>
                                 </div>
-                                <p class="text-sm text-gray-700">{{$message->message}}</p>
+                                <p
+                                    @class([
+                                        'text-sm',
+                                        "text-white" => $message->user->id == $supportTicket->service_provider_id,
+                                        "text-gray-700" => $message->user->id == auth()->user()->id || $message->user->id == $supportTicket->home_owner_id,
+                                    ])
+                                    class="">{{$message->message}}</p>
                             </div>
                         @endforeach
                     </div>
@@ -41,14 +60,14 @@
             <div class="flex-shrink-0">
                 <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
                     @if($supportTicket->status === \App\Modules\Shared\Enums\SupportTicketStatus::Open)
-                        <form wire:submit.prevent="save">
-                            <div class="flex">
+                    <form wire:submit.prevent="save">
+                        <div class="flex">
                             <textarea
                                 wire:model="newSupportTicketMessageData.message"
                                 class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" rows="3" placeholder="Enter your message"></textarea>
-                                <button type="submit" class="ml-4 px-4 py-2 rounded-md font-medium bg-indigo-600 text-white hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500">Send</button>
-                            </div>
-                        </form>
+                            <button type="submit" class="ml-4 px-4 py-2 rounded-md font-medium bg-indigo-600 text-white hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500">Send</button>
+                        </div>
+                    </form>
                     @else
                         <div class="rounded-md bg-indigo-50 p-4">
                             <div class="flex">

@@ -86,6 +86,12 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'admin'], functi
     Route::get('/withdrawals', \App\Http\Livewire\Admin\Withdrawals\WithdrawalIndex::class)
         ->name('admin.withdrawals')
         ->middleware('permission:company-withdrawals');
+    Route::get('/support-tickets', \App\Http\Livewire\Admin\SupportTicket\SupportTicketIndex::class)
+        ->name('admin.support-tickets')
+        ->middleware('permission:company-support-tickets');
+    Route::get('/support-tickets/{supportTicket:support_ticket_id}', \App\Http\Livewire\Admin\SupportTicket\SupportTicketShow::class)
+        ->name('admin.support-tickets.show')
+        ->middleware('permission:company-support-tickets');
 });
 
 Route::group(['middleware' => ['auth', 'verified']], function () {

@@ -3,6 +3,7 @@
 namespace App\Modules\Shared\Models;
 
 use App\Models\SupportTicketMessage;
+use App\Modules\ServiceProvider\Models\Task;
 use App\Modules\Shared\Enums\SupportTicketStatus;
 use App\Modules\Shared\Enums\SupportTicketType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -67,6 +68,11 @@ class SupportTicket extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function task()
+    {
+        return $this->belongsTo(Task::class, 'task_id', 'task_id');
     }
     /** End Relationships */
 }

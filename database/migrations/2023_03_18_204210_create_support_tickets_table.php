@@ -19,6 +19,10 @@ return new class extends Migration
             $table->string('reference_number')->unique();
             $table->string('support_ticket_type');
             $table->string('status');
+            $table->string('in_favor_of');
+            $table->foreignId('closed_by')
+                ->nullable()
+                ->constrained('users', 'id');
             $table->timestamps();
         });
 
