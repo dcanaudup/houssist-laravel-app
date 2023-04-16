@@ -14,7 +14,7 @@ class DefaultUserSeeder extends Seeder
      */
     public function run(): void
     {
-        $password = bcrypt('P@ssword!');
+        $password = 'P@ssword!';
 
         $companyUser = Company::create([
             'id' => null,

@@ -98,6 +98,9 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'admin'], functi
     Route::get('/advertisements/{advertisement}', \App\Http\Livewire\Admin\Advertisement\AdvertisementShow::class)
         ->name('admin.advertisements.show')
         ->middleware('permission:company-advertisements');
+    Route::get('/advertisements/{advertisement}/offers/{offer:advertisement_offer_id}', \App\Http\Livewire\Admin\Advertisement\AdvertisementOffer::class)
+        ->name('admin.advertisements.offer')
+        ->middleware('permission:company-advertisements');
     Route::get('/tasks', \App\Http\Livewire\Admin\Task\TaskIndex::class)
         ->name('admin.tasks')
         ->middleware('permission:company-tasks');
@@ -110,6 +113,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/withdrawals', \App\Http\Livewire\Shared\Withdrawals\WithdrawalIndex::class)
         ->name('shared.withdrawals')
         ->middleware('permission:withdrawals');
+    Route::get('/wallet-transactions', \App\Http\Livewire\Shared\Wallet\TransactionsIndex::class)
+        ->name('shared.wallet-transactions')
+        ->middleware('permission:wallet-transactions');
     Route::get('/support-tickets', \App\Http\Livewire\Shared\SupportTicket\SupportTicketIndex::class)
         ->name('shared.support-tickets')
         ->middleware('permission:support-tickets');

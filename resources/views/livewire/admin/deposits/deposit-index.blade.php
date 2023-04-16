@@ -44,7 +44,7 @@
                         </x-table.row>
                     @empty
                         <x-table.row>
-                            <x-table.cell colspan="5" class="text-center">
+                            <x-table.cell colspan="6" class="text-center">
                                 <p class="text-gray-500">No deposits found.</p>
                             </x-table.cell>
                         </x-table.row>

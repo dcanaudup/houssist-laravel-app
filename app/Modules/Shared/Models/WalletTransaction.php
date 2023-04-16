@@ -2,6 +2,7 @@
 
 namespace App\Modules\Shared\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -36,10 +37,21 @@ class WalletTransaction extends Model
 {
     use HasFactory;
 
+    const CACHE_KEY = 'wallet_transaction_';
+
+    protected $primaryKey = 'wallet_transaction_id';
+
     protected $guarded = [];
 
     public function wallet()
     {
         return $this->belongsTo(Wallet::class);
+    }
+
+    public function amount(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => is_numeric($value) ? $value / 100 : $value,
+        );
     }
 }

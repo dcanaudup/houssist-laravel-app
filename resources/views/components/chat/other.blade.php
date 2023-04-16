@@ -1,4 +1,7 @@
-@props(['message' => ''])
+@props([
+    'message' => '',
+    'hint' => null,
+    ])
 
 <div class="chat-message">
     <div class="flex items-end">
@@ -6,4 +9,7 @@
             <div><span class="px-4 py-2 rounded-lg inline-block bg-gray-300 text-gray-600">{{$message}}</span></div>
         </div>
     </div>
+    @if($hint)
+        <div class="mx-2 text-sm">{{$hint}}</div>
+    @endif
 </div>

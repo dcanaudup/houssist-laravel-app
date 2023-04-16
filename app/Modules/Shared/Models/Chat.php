@@ -16,6 +16,8 @@ class Chat extends Model
 {
     use HasFactory;
 
+    const CACHE_KEY = 'chat_';
+
     protected $primaryKey = 'chat_id';
 
     protected $guarded = [];

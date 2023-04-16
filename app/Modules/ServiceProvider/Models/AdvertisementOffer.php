@@ -19,6 +19,7 @@ class AdvertisementOffer extends Model
 {
     use HasFactory;
 
+    const CACHE_KEY = 'advertisement_offer_';
     protected $primaryKey = 'advertisement_offer_id';
 
     protected $guarded = [];

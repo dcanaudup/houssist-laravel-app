@@ -103,7 +103,7 @@
                                 {{ $advertisement_offer->status }}
                             </x-table.cell>
                             <x-table.cell>
-                                <x-label.link href="{{route('home-owner.advertisements.offer', [$advertisement->advertisement_id, $advertisement_offer->advertisement_offer_id])}}">View</x-label.link>
+                                <x-label.link href="{{route('admin.advertisements.offer', [$advertisement->advertisement_id, $advertisement_offer->advertisement_offer_id])}}">View</x-label.link>
                             </x-table.cell>
                         </x-table.row>
                     @empty

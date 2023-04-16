@@ -7,11 +7,13 @@ use App\Http\Livewire\Traits\WithPerPagination;
 use App\Modules\HomeOwner\DataTransferObjects\ViewAdvertisementData;
 use App\Modules\ServiceProvider\Models\AdvertisementOffer;
 use App\Modules\Shared\Models\Advertisement;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
+use Silber\Bouncer\BouncerFacade;
 
 class AdvertisementShow extends Component
 {
-    use WithCachedRows, WithPerPagination;
+    use WithCachedRows, WithPerPagination, AuthorizesRequests;
 
     public ViewAdvertisementData $advertisementData;
 
@@ -39,6 +41,7 @@ class AdvertisementShow extends Component
 
     public function mount(Advertisement $advertisement)
     {
+        $this->authorize('home-owner-advertisements', $advertisement);
         $advertisement->load('media', 'tags');
         $this->featured = $advertisement->getMedia('advertisement-featured');
         $this->attachments = $advertisement->getMedia('advertisement-attachments');

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Modules\Shared\Models\Advertisement;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -11,6 +12,11 @@ use Silber\Bouncer\Database\Role;
 
 class InitialPermissionSeeder extends Seeder
 {
+    private Role $homeOwnerRole;
+    private Role $serviceProviderRole;
+    private Role $companyRole;
+    private Role $adminRole;
+
     /**
      * Run the database seeds.
      */
@@ -19,6 +25,7 @@ class InitialPermissionSeeder extends Seeder
         $this->truncateTables();
         $this->addRoles();
         $this->addAbilities();
+        $this->ownedModels();
 
         Bouncer::refresh(null);
     }
@@ -179,6 +186,12 @@ class InitialPermissionSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
+                'name' => 'wallet-transactions',
+                'title' => 'Wallet Transactions',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
                 'name' => 'support-tickets',
                 'title' => 'Support Tickets',
                 'created_at' => now(),
@@ -191,30 +204,30 @@ class InitialPermissionSeeder extends Seeder
         Ability::insert($companyAbilities);
         Ability::insert($sharedAbilities);
 
-        $homeOwnerRole = Role::where('name', 'home-owner')->first();
-        $serviceProviderRole = Role::where('name', 'service-provider')->first();
-        $adminRole = Role::where('name', 'admin')->first();
-        $companyRole = Role::where('name', 'company')->first();
+        $this->homeOwnerRole = Role::where('name', 'home-owner')->first();
+        $this->serviceProviderRole = Role::where('name', 'service-provider')->first();
+        $this->adminRole = Role::where('name', 'admin')->first();
+        $this->companyRole = Role::where('name', 'company')->first();
 
         foreach (Arr::pluck($homeOwnerAbilities, 'name') as $name) {
-            Bouncer::allow($homeOwnerRole)->to($name);
-            Bouncer::allow($adminRole)->to($name);
+            Bouncer::allow($this->homeOwnerRole)->to($name);
+            Bouncer::allow($this->adminRole)->to($name);
         }
 
         foreach (Arr::pluck($serviceProviderAbilities, 'name') as $name) {
-            Bouncer::allow($serviceProviderRole)->to($name);
-            Bouncer::allow($adminRole)->to($name);
+            Bouncer::allow($this->serviceProviderRole)->to($name);
+            Bouncer::allow($this->adminRole)->to($name);
         }
 
         foreach (Arr::pluck($companyAbilities, 'name') as $name) {
-            Bouncer::allow($companyRole)->to($name);
-            Bouncer::allow($adminRole)->to($name);
+            Bouncer::allow($this->companyRole)->to($name);
+            Bouncer::allow($this->adminRole)->to($name);
         }
 
         foreach (Arr::pluck($sharedAbilities, 'name') as $name) {
-            Bouncer::allow($homeOwnerRole)->to($name);
-            Bouncer::allow($serviceProviderRole)->to($name);
-            Bouncer::allow($adminRole)->to($name);
+            Bouncer::allow($this->homeOwnerRole)->to($name);
+            Bouncer::allow($this->serviceProviderRole)->to($name);
+            Bouncer::allow($this->adminRole)->to($name);
         }
     }
 
@@ -225,5 +238,12 @@ class InitialPermissionSeeder extends Seeder
         Ability::truncate();
         DB::table('permissions')->truncate();
         DB::statement('SET foreign_key_checks = 1;');
+    }
+
+    private function ownedModels()
+    {
+        Bouncer::allow($this->homeOwnerRole)->toOwn(Advertisement::class);
+        Bouncer::allow($this->companyRole)->toOwnEverything();
+        Bouncer::allow($this->adminRole)->toOwnEverything();
     }
 }
