@@ -4,6 +4,7 @@ namespace App\Modules\Shared\Models;
 
 use App\Modules\HomeOwner\Enums\AdvertisementStatus;
 use App\Modules\HomeOwner\Enums\JobPaymentType;
+use App\Modules\HomeOwner\Enums\PaymentMethod;
 use App\Modules\ServiceProvider\Models\AdvertisementOffer;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -40,6 +41,7 @@ class Advertisement extends Model implements HasMedia
         'end_date_time' => 'datetime',
         'job_payment_type' => JobPaymentType::class,
         'status' => AdvertisementStatus::class,
+        'payment_method' => PaymentMethod::class,
     ];
 
     public function paymentRate(): Attribute

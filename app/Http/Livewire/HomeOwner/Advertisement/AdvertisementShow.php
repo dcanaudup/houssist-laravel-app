@@ -3,20 +3,25 @@
 namespace App\Http\Livewire\HomeOwner\Advertisement;
 
 use App\Http\Livewire\Traits\WithCachedRows;
+use App\Http\Livewire\Traits\WithLockedPublicPropertiesTrait;
 use App\Http\Livewire\Traits\WithPerPagination;
+use App\Modules\HomeOwner\Actions\CancelAdvertisement;
 use App\Modules\HomeOwner\DataTransferObjects\ViewAdvertisementData;
+use App\Modules\HomeOwner\Enums\AdvertisementStatus;
 use App\Modules\ServiceProvider\Models\AdvertisementOffer;
 use App\Modules\Shared\Models\Advertisement;
+use App\Modules\Shared\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 use Silber\Bouncer\BouncerFacade;
 
 class AdvertisementShow extends Component
 {
-    use WithCachedRows, WithPerPagination, AuthorizesRequests;
+    use WithCachedRows, WithPerPagination, AuthorizesRequests, WithLockedPublicPropertiesTrait;
 
     public ViewAdvertisementData $advertisementData;
 
+    /** @locked */
     public $advertisement_id;
 
     public $featured;
@@ -56,5 +61,19 @@ class AdvertisementShow extends Component
         return view('livewire.home-owner.advertisement.advertisement-show', [
             'advertisement_offers' => $this->rows,
         ]);
+    }
+
+    public function cancel(CancelAdvertisement $cancelAdvertisement)
+    {
+        $advertisement = Advertisement::findOrFail($this->advertisement_id);
+        if ($advertisement->status !== AdvertisementStatus::PENDING) {
+            $this->dispatchBrowserEvent('notify', ['message' => 'Cannot cancel this ad!']);
+            return;
+        }
+
+        $user = User::with('wallet')->where('id', auth()->id())->first();
+        $cancelAdvertisement->execute($advertisement, $user);
+
+        $this->dispatchBrowserEvent('notify', ['message' => 'Ad cancelled!']);
     }
 }

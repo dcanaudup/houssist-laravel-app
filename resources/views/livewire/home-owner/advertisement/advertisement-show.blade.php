@@ -55,6 +55,12 @@
                 <dd class="mt-1 text-sm text-gray-900">{{ $advertisementData->status }}</dd>
             </x-label.group>
 
+            @if($advertisementData->status === \App\Modules\HomeOwner\Enums\AdvertisementStatus::PENDING)
+                <x-label.group label="Actions">
+                    <x-button.danger onclick="confirm('Are you sure you want to cancel this ad?') || event.stopImmediatePropagation()" wire:click="cancel">Cancel</x-button.danger>
+                </x-label.group>
+            @endif
+
             <x-label.group label="Images">
                 <div class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
                     @foreach($featured as $featuredImage)

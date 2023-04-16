@@ -55,7 +55,6 @@
             <x-table>
                 <x-slot:head>
                     <x-table.header>Title</x-table.header>
-                    <x-table.header>Description</x-table.header>
                     <x-table.header>Address</x-table.header>
                     <x-table.header>From</x-table.header>
                     <x-table.header>To</x-table.header>
@@ -72,9 +71,6 @@
                         <x-table.row class="bg-cool-gray-200" wire:key="row-{{$advertisement->advertisement_id}}">
                             <x-table.cell>
                                 {{ $advertisement->title }}
-                            </x-table.cell>
-                            <x-table.cell>
-                                {{ $advertisement->description }}
                             </x-table.cell>
                             <x-table.cell>
                                 {{ $advertisement->address }}
@@ -113,6 +109,9 @@
                     @endforelse
                 </x-slot:body>
             </x-table>
+            <div>
+                {{ $advertisements->links() }}
+            </div>
         </div>
 
         <!-- Create Advertisment Modal -->
