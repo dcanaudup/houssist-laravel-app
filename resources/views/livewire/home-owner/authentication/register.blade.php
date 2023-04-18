@@ -10,7 +10,7 @@
     <form class="space-y-6" wire:submit.prevent="submit" method="POST">
         @csrf
         <x-input name="user.username" id="user.username" label="Username" type="text" placeHolder="Enter username" model="user.username"/>
-        <x-input name="user.email" id="user.email" label="Email" type="text" placeHolder="Enter email" model="user.email"/>
+        <x-input name="user.email" id="user.email" label="Email" type="email" placeHolder="Enter email" model="user.email"/>
         <x-input name="user.password" id="user.password" label="Password" type="password" placeHolder="Enter password" model="user.password"/>
         <div>
             <button type="submit" class="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Create Account</button>
