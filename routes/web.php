@@ -20,6 +20,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', Home::class)
     ->name('home.index');
 
+Route::get('/facebook/auth', [\App\Http\Controllers\FacebookLoginController::class, 'auth'])
+    ->name('facebook.auth');
+
+Route::get('/facebook/callback', [\App\Http\Controllers\FacebookLoginController::class, 'callback'])
+    ->name('facebook.callback');
+
+Route::get('/facebook/register', \App\Http\Livewire\Shared\Authentication\FacebookRegistration::class)
+    ->name('facebook.register');
+
 Route::group(['middleware' => ['guest']], function () {
     Route::get('/home-owner/register', HomeOwnerRegistration::class)
         ->name('home-owner.registration.create');
@@ -29,6 +38,8 @@ Route::group(['middleware' => ['guest']], function () {
         ->name('login');
     Route::get('/registration-successful', \App\Http\Livewire\Shared\Authentication\RegistrationSuccessful::class)
         ->name('registration-successful');
+    Route::get('/facebook-registration-successful', \App\Http\Livewire\Shared\Authentication\RegistrationSuccessful::class)
+        ->name('facebook.registration-successful');
 });
 
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'home-owner'], function () {

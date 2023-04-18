@@ -41,6 +41,11 @@ class UploadPage extends Component
         'user_remarks' => 'nullable|string|max:255',
     ];
 
+    public function mount()
+    {
+        $this->name = auth()->user()->name;
+    }
+
     public function render()
     {
         return view('livewire.service-provider.kyc.upload-page');

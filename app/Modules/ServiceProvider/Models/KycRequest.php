@@ -13,41 +13,6 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * App\Modules\ServiceProvider\Models\KycRequest
- *
- * @property int $id
- * @property int $user_id
- * @property string $valid_id_number
- * @property string|null $user_remarks
- * @property string|null $admin_remarks
- * @property KycStatus $status
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
- * @property-read int|null $activities_count
- * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Spatie\MediaLibrary\MediaCollections\Models\Media> $media
- * @property-read int|null $media_count
- * @property-read User $user
- * @method static \Illuminate\Database\Eloquent\Builder|KycRequest newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|KycRequest newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|KycRequest query()
- * @method static \Illuminate\Database\Eloquent\Builder|KycRequest whereAdminRemarks($value)
- * @method static \Illuminate\Database\Eloquent\Builder|KycRequest whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|KycRequest whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|KycRequest whereStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder|KycRequest whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|KycRequest whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|KycRequest whereUserRemarks($value)
- * @method static \Illuminate\Database\Eloquent\Builder|KycRequest whereValidIdNumber($value)
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
- * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Spatie\MediaLibrary\MediaCollections\Models\Media> $media
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
- * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Spatie\MediaLibrary\MediaCollections\Models\Media> $media
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
- * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Spatie\MediaLibrary\MediaCollections\Models\Media> $media
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
- * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Spatie\MediaLibrary\MediaCollections\Models\Media> $media
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
- * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Spatie\MediaLibrary\MediaCollections\Models\Media> $media
  * @mixin \Eloquent
  * @mixin IdeHelperKycRequest
  */

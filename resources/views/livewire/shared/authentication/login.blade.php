@@ -25,4 +25,22 @@
             <button type="submit" class="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Sign In</button>
         </div>
     </form>
+    <div class="mt-6">
+        <div class="relative">
+            <div class="absolute inset-0 flex items-center">
+                <div class="w-full border-t border-gray-300"></div>
+            </div>
+            <div class="relative flex justify-center text-sm">
+                <span class="bg-white px-2 text-gray-500">Or</span>
+            </div>
+        </div>
+
+        <div class="mt-6 grid grid-cols-3 gap-3">
+            <div class="col-span-3">
+                <a href="{{route('facebook.auth')}}" class="bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline inline-flex w-full justify-center rounded-md bg-white px-4 py-2 text-gray-500 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0">
+                    Login With Facebook
+                </a>
+            </div>
+        </div>
+    </div>
 </div>

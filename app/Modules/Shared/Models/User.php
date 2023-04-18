@@ -82,6 +82,8 @@ class User extends Authenticatable implements MustVerifyEmailContract
         'username',
         'name',
         'email',
+        'email_verified_at',
+        'facebook_id',
         'password',
         'address',
         'mobile_number',
