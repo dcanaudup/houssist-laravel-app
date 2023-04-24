@@ -6,11 +6,11 @@ use App\Modules\HomeOwner\Enums\AdvertisementStatus;
 use App\Modules\HomeOwner\Enums\JobPaymentType;
 use App\Modules\HomeOwner\Enums\PaymentMethod;
 use App\Modules\ServiceProvider\Models\AdvertisementOffer;
+use App\Vendor\InteractsWithHashedMedia;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Tags\HasTags;
 
@@ -19,7 +19,7 @@ use Spatie\Tags\HasTags;
  */
 class Advertisement extends Model implements HasMedia
 {
-    use HasFactory, InteractsWithMedia, HasTags;
+    use HasFactory, InteractsWithHashedMedia, HasTags;
 
     protected $primaryKey = 'advertisement_id';
 

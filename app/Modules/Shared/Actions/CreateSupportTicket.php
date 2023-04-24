@@ -14,7 +14,7 @@ class CreateSupportTicket
 
         $message = $supportTicket->messages()->create([...$data->message->toArray()]);
         foreach ($attachments as $attachment) {
-            $message->addMedia($attachment)->toMediaCollection('support_ticket_attachments');
+            $message->addMediaFromDisk($attachment)->toMediaCollection('support_ticket_attachments');
         }
     }
 }

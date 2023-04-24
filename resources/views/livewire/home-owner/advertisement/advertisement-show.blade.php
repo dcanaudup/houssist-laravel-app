@@ -64,12 +64,10 @@
             <x-label.group label="Images">
                 <div class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
                     @foreach($featured as $featuredImage)
-                        {{$featuredImage->img()->attributes(['class' => 'group object-contain h-48 w-48'])
-    ->conversion('thumb')}}
+                        {{$featuredImage->img()->attributes(['class' => 'group object-contain h-48 w-48'])}}
                     @endforeach
                     @foreach($attachments as $attachment)
-                        {{$attachment->img()->attributes(['class' => 'object-contain h-48 w-48'])
-    ->conversion('thumb')}}
+                        {{$attachment->img()->attributes(['class' => 'object-contain h-48 w-48'])}}
                     @endforeach
                 </div>
             </x-label.group>

@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
+use App\Vendor\InteractsWithHashedMedia;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
 use App\Modules\Shared\Models\User;
 
 /**
@@ -31,7 +31,7 @@ use App\Modules\Shared\Models\User;
  */
 class SupportTicketMessage extends Model implements HasMedia
 {
-    use HasFactory, InteractsWithMedia;
+    use HasFactory, InteractsWithHashedMedia;
 
     protected $primaryKey = 'support_ticket_message_id';
 

@@ -25,12 +25,12 @@ class CreateKycRequest
             ]
         );
 
-        $kycRequest->addMedia($kycRequestData->valid_id)->toMediaCollection('kyc.valid_id');
-        $kycRequest->addMedia($kycRequestData->selfie)->toMediaCollection('kyc.selfie');
-        $kycRequest->addMedia($kycRequestData->nbi_clearance)->toMediaCollection('kyc.nbi_clearance');
+        $kycRequest->addMediaFromDisk($kycRequestData->valid_id->getRealPath())->toMediaCollection('kyc.valid_id');
+        $kycRequest->addMediaFromDisk($kycRequestData->selfie->getRealPath())->toMediaCollection('kyc.selfie');
+        $kycRequest->addMediaFromDisk($kycRequestData->nbi_clearance->getRealPath())->toMediaCollection('kyc.nbi_clearance');
 
         if ($kycRequestData->supporting_documents) {
-            $kycRequest->addMedia($kycRequestData->supporting_documents)->toMediaCollection('kyc.supporting_documents');
+            $kycRequest->addMediaFromDisk($kycRequestData->supporting_documents->getRealPath())->toMediaCollection('kyc.supporting_documents');
         }
 
         Auth::user()->update([
