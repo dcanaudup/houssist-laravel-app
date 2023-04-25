@@ -30,6 +30,7 @@
         "barryvdh/laravel-debugbar": "^3.8",
         "barryvdh/laravel-ide-helper": "^2.13",
         "beyondcode/laravel-er-diagram-generator": "^2.0",
+        "binarytorch/larecipe": "^2.6",
         "deployer/deployer": "^7.1",
         "fakerphp/faker": "^1.9.1",
         "laravel/pint": "^1.0",
