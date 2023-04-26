@@ -19,6 +19,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', Home::class)
     ->name('home.index');
+Route::get('/about', \App\Http\Livewire\Shared\Public\About::class)
+    ->name('about.index');
+Route::get('/terms', \App\Http\Livewire\Shared\Public\Terms::class)
+    ->name('terms.index');
+Route::get('/privacy', \App\Http\Livewire\Shared\Public\Privacy::class)
+    ->name('privacy.index');
 
 Route::get('/facebook/auth', [\App\Http\Controllers\FacebookLoginController::class, 'auth'])
     ->name('facebook.auth');

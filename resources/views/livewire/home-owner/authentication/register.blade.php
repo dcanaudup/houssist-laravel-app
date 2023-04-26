@@ -16,7 +16,7 @@
             <button type="submit" class="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Create Account</button>
         </div>
         <div class="items-center text-sm">
-            <p class="text-gray-500">By creating an account, you agree to Houssist's <a href="#" class="font-medium text-gray-700">Terms and Conditions</a></p>
+            <p class="text-gray-500">By creating an account, you agree to Houssist's <a href="{{route('terms.index')}}" class="font-medium text-gray-700" target="_blank">Terms and Conditions</a></p>
         </div>
     </form>
 
