@@ -1,0 +1,3 @@
+- ## Home Owners
+    - [Registration](/{{route}}/{{version}}/home-owners/registration)
+- ## Service Providers
