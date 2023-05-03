@@ -44,7 +44,7 @@ Route::group(['middleware' => ['guest']], function () {
         ->name('login');
     Route::get('/registration-successful', \App\Http\Livewire\Shared\Authentication\RegistrationSuccessful::class)
         ->name('registration-successful');
-    Route::get('/facebook-registration-successful', \App\Http\Livewire\Shared\Authentication\RegistrationSuccessful::class)
+    Route::get('/facebook-registration-successful', \App\Http\Livewire\Shared\Authentication\FacebookRegistrationSuccessful::class)
         ->name('facebook.registration-successful');
 });
 
