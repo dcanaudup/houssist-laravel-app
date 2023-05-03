@@ -115,7 +115,7 @@ class DepositPage extends Component
     {
         $this->validate();
         $newUuid = Str::uuid()->toString();
-        $attachments = TempUpload::first()->addMediaFromDisk($this->attachments)->toMediaCollection('deposits');
+        $attachments = TempUpload::first()->addMedia($this->attachments)->toMediaCollection('deposits');
 
         DepositAggregateRoot::retrieve($newUuid)
             ->createDeposit(Auth::id(), $this->newDeposit, [$attachments->uuid])

@@ -33,11 +33,11 @@ class CreateAdvertisement
 
         $advertisement->attachTags(Tag::whereIn('id', $newAdvertisement->categories)->get());
 
-        $advertisement->addMediaFromDisk($newAdvertisement->featured)
+        $advertisement->addMedia($newAdvertisement->featured)
             ->toMediaCollection('advertisement-featured');
 
         foreach ($newAdvertisement->attachments as $attachment) {
-            $advertisement->addMediaFromDisk($attachment)
+            $advertisement->addMedia($attachment)
                 ->toMediaCollection('advertisement-attachments');
         }
 
