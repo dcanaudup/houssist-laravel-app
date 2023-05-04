@@ -47,6 +47,7 @@ class Task extends Model
 
     protected $casts = [
         'status' => TaskStatus::class,
+        'reviewed_at' => 'datetime',
     ];
 
     /** Relationships */

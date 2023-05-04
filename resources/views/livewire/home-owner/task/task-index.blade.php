@@ -52,6 +52,7 @@
                 <x-slot:head>
                     <x-table.header>Title</x-table.header>
                     <x-table.header>Service Provider</x-table.header>
+                    <x-table.header>Rating</x-table.header>
                     <x-table.header sortable wire:click="sortBy('advertisements.created_at')" :direction="$sorts['advertisements.created_at'] ?? null">From</x-table.header>
                     <x-table.header>To</x-table.header>
                     <x-table.header sortable wire:click="sortBy('payment_method')" :direction="$sorts['payment_method'] ?? null">Payment Method</x-table.header>
@@ -70,6 +71,62 @@
 
                             <x-table.cell>
                                 {{ $task->service_provider->username }}
+                            </x-table.cell>
+
+                            <x-table.cell>
+                            @if($task->status->value === 'paid' && $task->rating === 0)
+                                <x-button.link wire:click="rate({{$task->task_id}})">Rate</x-button.link>
+                            @elseif($task->rating > 0)
+                                <div class="flex items-center">
+                                    <svg
+                                        @class([
+                                            'h-5 w-5 flex-shrink-0',
+                                            'text-yellow-400' => $task->rating >= 1,
+                                            'text-gray-200' => $task->rating < 1,
+                                        ])
+                                        viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                                    </svg>
+                                    <svg
+                                        @class([
+                                            'h-5 w-5 flex-shrink-0',
+                                            'text-yellow-400' => $task->rating >= 2,
+                                            'text-gray-200' => $task->rating < 2,
+                                        ])
+                                        viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                                    </svg>
+                                    <svg
+                                        @class([
+                                            'h-5 w-5 flex-shrink-0',
+                                            'text-yellow-400' => $task->rating >= 3,
+                                            'text-gray-200' => $task->rating < 3,
+                                        ])
+                                        viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                                    </svg>
+                                    <svg
+                                        @class([
+                                            'h-5 w-5 flex-shrink-0',
+                                            'text-yellow-400' => $task->rating >= 4,
+                                            'text-gray-200' => $task->rating < 4,
+                                        ])
+                                        viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                                    </svg>
+                                    <svg
+                                        @class([
+                                            'h-5 w-5 flex-shrink-0',
+                                            'text-yellow-400' => $task->rating >= 5,
+                                            'text-gray-200' => $task->rating < 5,
+                                        ])
+                                        viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                            @else
+                                Not Yet Rated
+                            @endif
                             </x-table.cell>
 
                             <x-table.cell>
@@ -97,7 +154,9 @@
                             </x-table.cell>
 
                             <x-table.cell>
+                                <div class="flex items-center space-x-2">
                                 <x-button.link wire:click="view({{$task->task_id}})">View</x-button.link>
+                                </div>
                             </x-table.cell>
                         </x-table.row>
                     @empty
@@ -159,6 +218,91 @@
                         <x-button.primary onclick="confirm('Are you sure you want to submit a dispute for this task?') || event.stopImmediatePropagation()" type="submit">Submit</x-button.primary>
                     </x-slot>
                 </x-modal.dialog>
+            </form>
+
+            <!-- Rate Modal -->
+            <form wire:submit.prevent="submitRating">
+            <x-modal.dialog wire:model.defer="showDoRateModal" max-width="4xl">
+                <x-slot name="title">Rate Service Provider</x-slot>
+                <x-slot name="content">
+                    <x-input.group for="message" label="Rating" :error="$errors->first('newSupportTicketData.message.message')">
+                        <div class="flex items-center">
+                            <!-- Active: "text-yellow-400", Inactive: "text-gray-200" -->
+                            <label for="star1">
+                                <input class="hidden" type="radio" wire:model="rating" id="star1" name="rating" value="1">
+                                <svg
+                                    @class([
+                                        'hover:cursor-pointer h-5 w-5 flex-shrink-0',
+                                        'text-yellow-400' => $rating >= 1,
+                                        'text-gray-200' => $rating < 1,
+                                    ])
+                                    viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                                </svg>
+                            </label>
+                            <label for="star2">
+                                <input class="hidden" type="radio" wire:model="rating" id="star2" name="rating" value="2">
+                                <svg
+                                    @class([
+                                        'hover:cursor-pointer h-5 w-5 flex-shrink-0',
+                                        'text-yellow-400' => $rating >= 2,
+                                        'text-gray-200' => $rating < 2,
+                                    ])
+                                    viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                                </svg>
+                            </label>
+                            <label for="star3">
+                                <input class="hidden" type="radio" wire:model="rating" id="star3" name="rating" value="3">
+                                <svg
+                                    @class([
+                                        'hover:cursor-pointer h-5 w-5 flex-shrink-0',
+                                        'text-yellow-400' => $rating >= 3,
+                                        'text-gray-200' => $rating < 3,
+                                    ])
+                                    viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                                </svg>
+                            </label>
+                            <label for="star4">
+                                <input class="hidden" type="radio" wire:model="rating" id="star4" name="rating" value="4">
+                                <svg
+                                    @class([
+                                        'hover:cursor-pointer h-5 w-5 flex-shrink-0',
+                                        'text-yellow-400' => $rating >= 4,
+                                        'text-gray-200' => $rating < 4,
+                                    ])
+                                    viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                                </svg>
+                            </label>
+                            <label for="star5">
+                                <input class="hidden" type="radio" wire:model="rating" id="star5" name="rating" value="5">
+                                <svg
+                                    @class([
+                                        'hover:cursor-pointer h-5 w-5 flex-shrink-0',
+                                        'text-yellow-400' => $rating >= 5,
+                                        'text-gray-200' => $rating < 5,
+                                    ])
+                                    viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                                </svg>
+                            </label>
+                        </div>
+                    </x-input.group>
+                    <x-input.group for="review_title" label="Title" :error="$errors->first('review_title')">
+                        <x-input.text wire:model="review_title" id="review_title" placeholder="Give some title" />
+                    </x-input.group>
+                    <x-input.group for="message" label="Message" :error="$errors->first('reviewe')">
+                        <x-input.textarea wire:model="review" id="revie" placeholder="Say something about your Service Provider" />
+                    </x-input.group>
+                </x-slot>
+
+                <x-slot name="footer">
+                    <x-button.secondary wire:click="closeDoRateModal">Close</x-button.secondary>
+                    <x-button.primary onclick="confirm('Are you sure you want to submit this review?') || event.stopImmediatePropagation()" type="submit">Save</x-button.primary>
+                </x-slot>
+            </x-modal.dialog>
             </form>
         </div>
     </div>

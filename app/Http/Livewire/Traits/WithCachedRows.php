@@ -11,9 +11,13 @@ trait WithCachedRows
         $this->useCache = true;
     }
 
-    public function cache($callback)
+    public function cache($callback, $prefix = null)
     {
-        $cacheKey = $this->id;
+        if (!$prefix) {
+            $cacheKey = $this->id;
+        } else {
+            $cacheKey = $prefix . $this->id;
+        }
 
         if ($this->useCache && cache()->has($cacheKey)) {
             return cache()->get($cacheKey);

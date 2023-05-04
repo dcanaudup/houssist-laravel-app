@@ -5,6 +5,7 @@ namespace App\Http\Livewire\HomeOwner\Task;
 use App\Http\Livewire\Traits\WithCachedRows;
 use App\Http\Livewire\Traits\WithLockedPublicPropertiesTrait;
 use App\Http\Livewire\Traits\WithPerPagination;
+use App\Http\Livewire\Traits\WithRating;
 use App\Http\Livewire\Traits\WithSorting;
 use App\Modules\HomeOwner\Actions\FileDispute;
 use App\Modules\HomeOwner\Actions\ReleasePayment;
@@ -19,7 +20,7 @@ use Livewire\WithFileUploads;
 
 class TaskIndex extends Component
 {
-    use WithCachedRows, WithPerPagination, WithLockedPublicPropertiesTrait, WithFileUploads, WithSorting;
+    use WithCachedRows, WithPerPagination, WithLockedPublicPropertiesTrait, WithFileUploads, WithSorting, WithRating;
 
     public $showFilters = false;
 

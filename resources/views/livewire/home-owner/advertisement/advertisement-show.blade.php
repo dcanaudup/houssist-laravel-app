@@ -88,7 +88,8 @@
                     @forelse($advertisement_offers as $advertisement_offer)
                         <x-table.row class="bg-cool-gray-200" wire:key="row-{{$advertisement_offer->advertisement_offer_id}}">
                             <x-table.cell>
-                                {{ $advertisement_offer->service_provider->username }}
+                                {{ $advertisement_offer->service_provider->username }} - 
+                                <x-label.link href="#" wire:click="showRatingsModal({{$advertisement_offer->service_provider->id}})">View Reviews</x-label.link>
                             </x-table.cell>
 
                             <x-table.cell>
@@ -119,6 +120,101 @@
                     @endforelse
                 </x-slot:body>
             </x-table>
+
+            <x-modal.dialog wire:model.lazy.defer="showRatingsModal" max-width="4xl">
+                <x-slot name="title">{{$serviceProvider?->username}}</x-slot>
+                <x-slot name="content">
+                    <h2 class="text-lg font-medium text-gray-900 mb-5">
+                    @if($serviceProvider?->rating !== 0.0)
+                        <div class="flex items-center">
+                            {{$serviceProvider?->rating}}
+                            <svg class="text-yellow-400 h-5 w-5 flex-shrink-0 ml-2" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                    @else
+                        No ratings yet.
+                    @endif
+                    </h2>
+                    <h2 class="text-lg font-medium text-gray-900">Recent reviews</h2>
+                    <div class="mt-6 space-y-10 divide-y divide-gray-200 border-b border-t border-gray-200 pb-10">
+                        @forelse ($reviews as $review)
+                            <div class="pt-10 lg:grid lg:grid-cols-12 lg:gap-x-8">
+                                <div class="lg:col-span-8 lg:col-start-5 xl:col-span-9 xl:col-start-4 xl:grid xl:grid-cols-3 xl:items-start xl:gap-x-8">
+                                    <div class="flex items-center xl:col-span-1">
+                                        <div class="flex items-center">
+                                            <svg
+                                                @class([
+                                                    'h-5 w-5 flex-shrink-0',
+                                                    'text-yellow-400' => $review->rating >= 1,
+                                                    'text-gray-200' => $review->rating < 1,
+                                                ])
+                                                viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                                            </svg>
+                                            <svg
+                                                @class([
+                                                    'h-5 w-5 flex-shrink-0',
+                                                    'text-yellow-400' => $review->rating >= 2,
+                                                    'text-gray-200' => $review->rating < 2,
+                                                ])
+                                                viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                                            </svg>
+                                            <svg
+                                                @class([
+                                                    'h-5 w-5 flex-shrink-0',
+                                                    'text-yellow-400' => $review->rating >= 3,
+                                                    'text-gray-200' => $review->rating < 3,
+                                                ])
+                                                viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                                            </svg>
+                                            <svg
+                                                @class([
+                                                    'h-5 w-5 flex-shrink-0',
+                                                    'text-yellow-400' => $review->rating >= 4,
+                                                    'text-gray-200' => $review->rating < 4,
+                                                ])
+                                                viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                                            </svg>
+                                            <svg
+                                                @class([
+                                                    'h-5 w-5 flex-shrink-0',
+                                                    'text-yellow-400' => $review->rating >= 5,
+                                                    'text-gray-200' => $review->rating < 5,
+                                                ])
+                                                viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                        <p class="ml-3 text-sm text-gray-700">{{$review->rating}}<span class="sr-only"> out of 5 stars</span></p>
+                                    </div>
+
+                                    <div class="mt-4 lg:mt-6 xl:col-span-2 xl:mt-0">
+                                        <h3 class="text-sm font-medium text-gray-900">{{$review->review_title}}</h3>
+
+                                        <div class="mt-3 space-y-6 text-sm text-gray-500">
+                                            <p>{{$review->review}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-6 flex items-center text-sm lg:col-span-4 lg:col-start-1 lg:row-start-1 lg:mt-0 lg:flex-col lg:items-start xl:col-span-3">
+                                    <p class="font-medium text-gray-900">{{$review->home_owner->username}}</p>
+                                    <time datetime="2021-01-06" class="ml-4 border-l border-gray-200 pl-4 text-gray-500 lg:ml-0 lg:mt-2 lg:border-0 lg:pl-0">{{date_for_humans($review->reviewed_at)}}</time>
+                                </div>
+                            </div>
+                        @empty
+                            No Ratings Yet.
+                        @endforelse
+                    </div>
+                </x-slot>
+                <x-slot name="footer">
+                    <x-button.secondary wire:click="$set('showRatingsModal', false)">Close</x-button.secondary>
+                </x-slot>
+            </x-modal.dialog>
         </div>
     </div>
 </div>
