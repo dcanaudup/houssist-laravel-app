@@ -64,6 +64,9 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'home-owner'], f
     Route::get('/tasks', \App\Http\Livewire\HomeOwner\Task\TaskIndex::class)
         ->name('home-owner.tasks')
         ->middleware('permission:home-owner-tasks');
+    Route::get('/calendar', \App\Http\Livewire\HomeOwner\Calendar\CalendarIndex::class)
+        ->name('home-owner.calendar')
+        ->middleware('permission:home-owner-calendar');
 });
 
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'service-provider'], function () {

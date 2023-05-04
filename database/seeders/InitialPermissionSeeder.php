@@ -83,6 +83,12 @@ class InitialPermissionSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'name' => 'home-owner-calendar',
+                'title' => 'Home Owner Calendar',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ];
         $serviceProviderAbilities = [
             [
@@ -112,6 +118,12 @@ class InitialPermissionSeeder extends Seeder
             [
                 'name' => 'service-provider-kyc-waiting',
                 'title' => 'Service Provider KYC Waiting',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'service-provider-calendar',
+                'title' => 'Service Provider Calendar',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

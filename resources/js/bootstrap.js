@@ -54,3 +54,9 @@ Alpine.plugin(intersect);
 Alpine.start();
 
 import flatpickr from "flatpickr";
+
+import { Calendar } from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
+
+window.Calendar = Calendar;
+window.dayGridPlugin = dayGridPlugin;
