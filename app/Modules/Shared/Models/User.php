@@ -3,7 +3,9 @@
 namespace App\Modules\Shared\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Modules\ServiceProvider\Models\AdvertisementOffer;
 use App\Modules\ServiceProvider\Models\KycRequest;
+use App\Modules\ServiceProvider\Models\Task;
 use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -126,6 +128,21 @@ class User extends Authenticatable implements MustVerifyEmailContract
     public function advertisements()
     {
         return $this->hasMany(Advertisement::class);
+    }
+
+    public function advertisement_offers()
+    {
+        return $this->hasMany(AdvertisementOffer::class);
+    }
+
+    public function home_owner_tasks()
+    {
+        return $this->hasMany(Task::class, 'home_owner_id', 'id');
+    }
+
+    public function service_provider_tasks()
+    {
+        return $this->hasMany(Task::class, 'service_provider_id', 'id');
     }
 
     public function kyc_request()

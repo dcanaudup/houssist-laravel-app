@@ -91,6 +91,9 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'service-provide
     Route::get('/kyc/waiting', \App\Http\Livewire\ServiceProvider\Kyc\WaitingPage::class)
         ->name('service-provider.kyc.waiting')
         ->middleware('permission:service-provider-kyc-waiting');
+    Route::get('/calendar', \App\Http\Livewire\ServiceProvider\Calendar\CalendarIndex::class)
+        ->name('service-provider.calendar')
+        ->middleware('permission:service-provider-calendar');
 });
 
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'admin'], function () {
