@@ -80,7 +80,7 @@
                 </div>
 
                 <div class="flex-shrink-0 flex border-t border-indigo-700 p-4">
-                    <a href="/profile" class="flex-shrink-0 w-full group block">
+                    <a href="{{route('profile.show')}}" class="flex-shrink-0 w-full group block">
                         <div class="flex items-center">
                             <div>
                                 <svg class="inline-block h-9 w-9 rounded-full font-medium text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
