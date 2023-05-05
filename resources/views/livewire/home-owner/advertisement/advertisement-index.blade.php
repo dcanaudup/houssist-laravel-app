@@ -161,6 +161,7 @@
                             ref="start_date_time"
                             dateFormat="Y-m-d H:i:ss"
                             enableTime="true"
+                            minDate="{{ now()->format('Y-m-d H:i:ss') }}"
                         />
                     </x-input.group>
 
@@ -172,6 +173,7 @@
                             ref="end_date_time"
                             dateFormat="Y-m-d H:i:ss"
                             enableTime="true"
+                            minDate="{{ now()->format('Y-m-d H:i:ss') }}"
                         />
                     </x-input.group>
 
