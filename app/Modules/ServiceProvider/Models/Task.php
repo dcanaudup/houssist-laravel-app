@@ -7,6 +7,7 @@ use App\Modules\Shared\Models\Advertisement;
 use App\Modules\Shared\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * App\Modules\ServiceProvider\Models\Task
@@ -49,6 +50,12 @@ class Task extends Model
         'status' => TaskStatus::class,
         'reviewed_at' => 'datetime',
     ];
+    protected static function booted()
+    {
+        static::updated(function ($model) {
+            Cache::forget(self::CACHE_KEY.$model->task_id);
+        });
+    }
 
     /** Relationships */
     public function advertisement()

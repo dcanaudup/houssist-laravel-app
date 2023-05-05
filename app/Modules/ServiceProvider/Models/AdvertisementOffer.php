@@ -8,6 +8,7 @@ use App\Modules\Shared\Models\User;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * App\Models\AdvertisementOffer
@@ -29,6 +30,13 @@ class AdvertisementOffer extends Model
         'offer_date' => 'datetime',
         'status' => AdvertisementOfferStatus::class,
     ];
+
+    protected static function booted()
+    {
+        static::updated(function ($model) {
+            Cache::forget(self::CACHE_KEY.$model->advertisement_offer_id);
+        });
+    }
 
     /** Relationships */
     public function service_provider()

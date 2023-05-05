@@ -5,6 +5,7 @@ namespace App\Modules\Shared\Models;
 use App\Modules\ServiceProvider\Models\AdvertisementOffer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * App\Modules\Shared\Models\Chat
@@ -23,6 +24,13 @@ class Chat extends Model
     protected $guarded = [];
 
     public $timestamps = false;
+
+    protected static function booted()
+    {
+        static::updated(function ($model) {
+            Cache::forget(self::CACHE_KEY.$model->advertisement_offer_id);
+        });
+    }
 
     public function messages()
     {

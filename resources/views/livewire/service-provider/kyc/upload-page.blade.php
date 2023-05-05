@@ -39,6 +39,8 @@
                 <x-input.textarea wire:model="user_remarks" id="user_remarks" placeholder="Remarks" />
             </x-input.group>
 
+            <p class="text-gray-500">By submitting your personal details, you agree to Houssist's <a href="{{route('terms.index')}}" class="font-medium text-gray-700" target="_blank">Terms and Conditions</a> and <a href="{{route('privacy.index')}}" class="font-medium text-gray-700" target="_blank">Privacy Policy</a></p>
+
             <x-slot:footer>
                 <x-button.primary type="submit">Submit</x-button.primary>
             </x-slot:footer>

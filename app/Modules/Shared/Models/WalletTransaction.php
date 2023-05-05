@@ -5,6 +5,7 @@ namespace App\Modules\Shared\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * App\Modules\Shared\Models\WalletTransaction
@@ -42,6 +43,13 @@ class WalletTransaction extends Model
     protected $primaryKey = 'wallet_transaction_id';
 
     protected $guarded = [];
+
+    protected static function booted()
+    {
+        static::updated(function ($model) {
+            Cache::forget(self::CACHE_KEY.$model->wallet_transaction_id);
+        });
+    }
 
     public function wallet()
     {
