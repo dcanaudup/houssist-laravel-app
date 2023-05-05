@@ -7,7 +7,8 @@
             </div>
 
             <div class="space-x-2 flex items-center">
-                <x-label.button href="{{route('service-provider.advertisements')}}">Back</x-label.button>
+                <x-label.button href="{{route('service-provider.advertisement-offers')}}">Back To Offers</x-label.button>
+                <x-label.button href="{{route('service-provider.advertisements')}}">Back To Ads</x-label.button>
             </div>
         </div>
 

@@ -77,12 +77,18 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'service-provide
         Route::get('/advertisements', \App\Http\Livewire\ServiceProvider\Advertisement\AdvertisementIndex::class)
             ->name('service-provider.advertisements')
             ->middleware('permission:service-provider-advertisements');
+        Route::get('/advertisement-offers', \App\Http\Livewire\ServiceProvider\Advertisement\AdvertisementOfferIndex::class)
+            ->name('service-provider.advertisement-offers')
+            ->middleware('permission:service-provider-advertisement-offers');
         Route::get('/advertisements/{advertisement}', \App\Http\Livewire\ServiceProvider\Advertisement\AdvertisementShow::class)
             ->name('service-provider.advertisements.show')
             ->middleware('permission:service-provider-advertisements');
         Route::get('/tasks', \App\Http\Livewire\ServiceProvider\Task\TaskIndex::class)
             ->name('service-provider.tasks')
             ->middleware('permission:service-provider-tasks');
+        Route::get('/calendar', \App\Http\Livewire\ServiceProvider\Calendar\CalendarIndex::class)
+            ->name('service-provider.calendar')
+            ->middleware('permission:service-provider-calendar');
     });
 
     Route::get('/kyc', \App\Http\Livewire\ServiceProvider\Kyc\UploadPage::class)
@@ -91,9 +97,6 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'service-provide
     Route::get('/kyc/waiting', \App\Http\Livewire\ServiceProvider\Kyc\WaitingPage::class)
         ->name('service-provider.kyc.waiting')
         ->middleware('permission:service-provider-kyc-waiting');
-    Route::get('/calendar', \App\Http\Livewire\ServiceProvider\Calendar\CalendarIndex::class)
-        ->name('service-provider.calendar')
-        ->middleware('permission:service-provider-calendar');
 });
 
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'admin'], function () {

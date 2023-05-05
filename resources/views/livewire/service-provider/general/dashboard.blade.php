@@ -14,7 +14,7 @@
                 <p class="text-2xl font-semibold text-gray-900">{{$walletBalance}}</p>
                 <div class="absolute inset-x-0 bottom-0 bg-gray-50 px-4 py-4 sm:px-6">
                     <div class="text-sm">
-                        <a href="{{route('shared.wallet-transactions')}}" class="font-medium text-indigo-600 hover:text-indigo-500">Wallet transactions<span class="sr-only"> Total Subscribers stats</span></a>
+                        <a href="{{route('shared.wallet-transactions')}}" class="font-medium text-indigo-600 hover:text-indigo-500">Wallet transactions<span class="sr-only"> Wallet transactions</span></a>
                     </div>
                 </div>
             </dd>
@@ -32,7 +32,7 @@
                 <p class="text-2xl font-semibold text-gray-900">{{$openOffers}}</p>
                 <div class="absolute inset-x-0 bottom-0 bg-gray-50 px-4 py-4 sm:px-6">
                     <div class="text-sm">
-                        <a href="{{route('service-provider.advertisements')}}" class="font-medium text-indigo-600 hover:text-indigo-500">View ads<span class="sr-only"> Avg. Open Rate stats</span></a>
+                        <a href="{{route('service-provider.advertisement-offers')}}" class="font-medium text-indigo-600 hover:text-indigo-500">View offers<span class="sr-only"> View offers</span></a>
                     </div>
                 </div>
             </dd>
@@ -50,7 +50,7 @@
                 <p class="text-2xl font-semibold text-gray-900">{{$pendingTasks}}</p>
                 <div class="absolute inset-x-0 bottom-0 bg-gray-50 px-4 py-4 sm:px-6">
                     <div class="text-sm">
-                        <a href="{{route('service-provider.tasks')}}" class="font-medium text-indigo-600 hover:text-indigo-500">View tasks<span class="sr-only"> Avg. Click Rate stats</span></a>
+                        <a href="{{route('service-provider.tasks')}}" class="font-medium text-indigo-600 hover:text-indigo-500">View tasks<span class="sr-only"> View tasks</span></a>
                     </div>
                 </div>
             </dd>

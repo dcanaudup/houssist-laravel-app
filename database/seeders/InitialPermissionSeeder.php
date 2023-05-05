@@ -110,6 +110,12 @@ class InitialPermissionSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
+                'name' => 'service-provider-advertisement-offers',
+                'title' => 'Service Provider Advertisement Offers',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
                 'name' => 'service-provider-kyc-create',
                 'title' => 'Service Provider KYC Create',
                 'created_at' => now(),
