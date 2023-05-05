@@ -17,7 +17,7 @@
             </x-label.group>
 
             <x-label.group label="Rate Offered">
-                <dd class="mt-1 text-sm text-gray-900">{{ $view_advertisement_offer_data->payment_rate }}</dd>
+                <dd class="mt-1"><span class="inline-flex items-center rounded-full bg-green-500 px-3 py-0.5 text-sm font-bold text-white">{{ $view_advertisement_offer_data->payment_rate }}</span></dd>
             </x-label.group>
 
             <x-label.group label="Offer Date">

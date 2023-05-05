@@ -51,7 +51,7 @@
             </x-label.group>
 
             <x-label.group label="Payment Rate">
-                <dd class="mt-1 text-sm text-gray-900">{{ $advertisementData->payment_rate }}</dd>
+                <dd class="mt-1 text-sm text-gray-900"><span class="inline-flex items-center rounded-full bg-green-500 px-3 py-0.5 text-sm font-bold text-white">{{ $advertisementData->payment_rate }}</span></dd>
             </x-label.group>
 
             <x-label.group label="Status">
@@ -81,7 +81,7 @@
         @if($viewAdvertisementOfferData)
         <div class="bg-white py-6 px-4 sm:p-6 rounded-lg">
             <x-label.group label="My Offer">
-                <dd class="mt-1 text-sm text-gray-900">{{ $viewAdvertisementOfferData->payment_rate }}</dd>
+                <dd class="mt-1"><span class="inline-flex items-center rounded-full bg-green-500 px-3 py-0.5 text-sm font-bold text-white">{{ $viewAdvertisementOfferData->payment_rate }}</span></dd>
             </x-label.group>
 
             <x-label.group label="Offer Date">
