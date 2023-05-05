@@ -78,8 +78,8 @@
                 <x-slot:head>
                     <x-table.header>Service Provider</x-table.header>
                     <x-table.header>Offer</x-table.header>
-                    <x-table.header>Latest Offer Date</x-table.header>
-                    <x-table.header>Contact Date</x-table.header>
+                    <x-table.header class="hidden md:table-cell">Latest Offer Date</x-table.header>
+                    <x-table.header class="hidden md:table-cell">Contact Date</x-table.header>
                     <x-table.header>Status</x-table.header>
                     <x-table.header>Actions</x-table.header>
                 </x-slot:head>
@@ -88,19 +88,28 @@
                     @forelse($advertisement_offers as $advertisement_offer)
                         <x-table.row class="bg-cool-gray-200" wire:key="row-{{$advertisement_offer->advertisement_offer_id}}">
                             <x-table.cell>
-                                {{ $advertisement_offer->service_provider->username }} - 
+                                <div class="flex items-center xl:col-span-1">
+                                {{ $advertisement_offer->service_provider->rating }}
+                                <svg
+                                    class="text-yellow-400 h-5 w-5"
+                                    viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                                </svg>
+                                <p class="ml-2 text-cool-gray-900 font-medium">{{ $advertisement_offer->service_provider->username }}</p>
+                                </div>
                                 <x-label.link href="#" wire:click="showRatingsModal({{$advertisement_offer->service_provider->id}})">View Reviews</x-label.link>
+
                             </x-table.cell>
 
                             <x-table.cell>
                                 {{ $advertisement_offer->payment_rate }}
                             </x-table.cell>
 
-                            <x-table.cell>
+                            <x-table.cell class="hidden md:table-cell">
                                 {{ diff_for_humans($advertisement_offer->offer_date) }}
                             </x-table.cell>
 
-                            <x-table.cell>
+                            <x-table.cell class="hidden md:table-cell">
                                 {{ diff_for_humans($advertisement_offer->created_at) }}
                             </x-table.cell>
 

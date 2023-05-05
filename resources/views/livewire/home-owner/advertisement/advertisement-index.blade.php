@@ -55,13 +55,13 @@
             <x-table>
                 <x-slot:head>
                     <x-table.header>Title</x-table.header>
-                    <x-table.header>Address</x-table.header>
-                    <x-table.header>From</x-table.header>
-                    <x-table.header>To</x-table.header>
-                    <x-table.header sortable wire:click="sortBy('payment_method')" :direction="$sorts['payment_method'] ?? null">Payment Method</x-table.header>
-                    <x-table.header sortable wire:click="sortBy('job_payment_type')" :direction="$sorts['job_payment_type'] ?? null">Payment Type</x-table.header>
+                    <x-table.header class="hidden md:table-cell">Address</x-table.header>
+                    <x-table.header class="hidden md:table-cell">From</x-table.header>
+                    <x-table.header class="hidden md:table-cell">To</x-table.header>
+                    <x-table.header sortable wire:click="sortBy('payment_method')" :direction="$sorts['payment_method'] ?? null" class="hidden md:table-cell">Payment Method</x-table.header>
+                    <x-table.header sortable wire:click="sortBy('job_payment_type')" :direction="$sorts['job_payment_type'] ?? null" class="hidden md:table-cell">Payment Type</x-table.header>
                     <x-table.header>Rate</x-table.header>
-                    <x-table.header sortable wire:click="sortBy('created_at')" :direction="$sorts['created_at'] ?? null">Date Created</x-table.header>
+                    <x-table.header sortable wire:click="sortBy('created_at')" :direction="$sorts['created_at'] ?? null" class="hidden md:table-cell">Date Created</x-table.header>
                     <x-table.header sortable wire:click="sortBy('status')" :direction="$sorts['status'] ?? null">Status</x-table.header>
                     <x-table.header>Actions</x-table.header>
                 </x-slot:head>
@@ -72,25 +72,25 @@
                             <x-table.cell>
                                 {{ $advertisement->title }}
                             </x-table.cell>
-                            <x-table.cell>
+                            <x-table.cell class="hidden md:table-cell">
                                 {{ $advertisement->address }}
                             </x-table.cell>
-                            <x-table.cell>
+                            <x-table.cell class="hidden md:table-cell">
                                 {{ date_for_humans($advertisement->start_date_time) }}
                             </x-table.cell>
-                            <x-table.cell>
+                            <x-table.cell class="hidden md:table-cell">
                                 {{ date_for_humans($advertisement->end_date_time) }}
                             </x-table.cell>
-                            <x-table.cell>
+                            <x-table.cell class="hidden md:table-cell">
                                 {{ $advertisement->payment_method }}
                             </x-table.cell>
-                            <x-table.cell>
+                            <x-table.cell class="hidden md:table-cell">
                                 {{ $advertisement->job_payment_type }}
                             </x-table.cell>
                             <x-table.cell>
                                 {{ $advertisement->payment_rate }}
                             </x-table.cell>
-                            <x-table.cell>
+                            <x-table.cell class="hidden md:table-cell">
                                 {{ diff_for_humans($advertisement->created_at) }}
                             </x-table.cell>
                             <x-table.cell>
