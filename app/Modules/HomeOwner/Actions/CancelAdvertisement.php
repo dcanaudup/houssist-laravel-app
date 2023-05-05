@@ -3,8 +3,10 @@
 namespace App\Modules\HomeOwner\Actions;
 
 use App\Aggregates\WalletAggregateRoot;
+use App\Modules\HomeOwner\Enums\AdvertisementOfferStatus;
 use App\Modules\HomeOwner\Enums\AdvertisementStatus;
 use App\Modules\HomeOwner\Enums\PaymentMethod;
+use App\Modules\ServiceProvider\Models\AdvertisementOffer;
 use App\Modules\Shared\Enums\WalletTransactionType;
 use App\Modules\Shared\Models\Advertisement;
 use App\Modules\Shared\Models\User;
@@ -17,6 +19,12 @@ class CancelAdvertisement
         $advertisement->update([
             'status' => AdvertisementStatus::CANCELLED,
         ]);
+
+        AdvertisementOffer::where('advertisement_id', $advertisement->advertisement_id)
+            ->where('status', AdvertisementStatus::PENDING)
+            ->update([
+                'status' => AdvertisementOfferStatus::USER_CANCELLED,
+            ]);
 
         if ($advertisement->payment_method === PaymentMethod::WALLET) {
             WalletAggregateRoot::retrieve($user->wallet->uuid)
