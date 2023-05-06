@@ -1,5 +1,5 @@
 <x-slot:header>
-    <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Create a service provider account</h2>
+    <p class="mt-6 text-center text-2xl font-medium tracking-tight text-gray-900">Create a <span class="text-3xl font-bold">Service Provider</span> Account</p>
     <p class="mt-2 text-center text-sm text-gray-600">
         Or
         <a href="{{route('login')}}" class="font-medium text-indigo-600 hover:text-indigo-500">sign in</a>
