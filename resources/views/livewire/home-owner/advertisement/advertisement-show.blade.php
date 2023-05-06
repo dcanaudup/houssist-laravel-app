@@ -48,7 +48,7 @@
             </x-label.group>
 
             <x-label.group label="Payment Rate">
-                <dd class="mt-1 text-sm text-gray-900">{{ $advertisementData->payment_rate }}</dd>
+                <dd class="mt-1 text-sm text-gray-900"><span class="inline-flex items-center rounded-full bg-green-500 px-3 py-0.5 text-sm font-bold text-white">{{ $advertisementData->payment_rate }}</span></dd>
             </x-label.group>
 
             <x-label.group label="Status">
@@ -102,7 +102,7 @@
                             </x-table.cell>
 
                             <x-table.cell>
-                                {{ $advertisement_offer->payment_rate }}
+                                <span class="inline-flex items-center rounded-full bg-green-500 px-3 py-0.5 text-sm font-bold text-white">{{ $advertisement_offer->payment_rate }}</span>
                             </x-table.cell>
 
                             <x-table.cell class="hidden md:table-cell">

@@ -52,6 +52,7 @@
             </div>
         @endif
 
+        @if(auth()->user()->facebook_id === null)
         <!-- Name -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="name" value="{{ __('Name') }}" />
@@ -81,8 +82,20 @@
                 @endif
             @endif
         </div>
-    </x-slot>
+        @else
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="name" value="{{ __('Name') }}" />
+            <dd class="mt-1 text-sm text-gray-900">{{ $state['name'] }}</dd>
+        </div>
 
+        <!-- Email -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="email" value="{{ __('Email') }}" />
+            <dd class="mt-1 text-sm text-gray-900">{{ $state['email'] }}</dd>
+        </div>
+        @endif
+    </x-slot>
+    @if(auth()->user()->facebook_id === null)
     <x-slot name="actions">
         <x-jet-action-message class="mr-3" on="saved">
             {{ __('Saved.') }}
@@ -92,4 +105,5 @@
             {{ __('Save') }}
         </x-jet-button>
     </x-slot>
+    @endif
 </x-jet-form-section>

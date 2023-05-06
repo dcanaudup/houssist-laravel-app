@@ -55,9 +55,7 @@
                     <x-table.header>Rating</x-table.header>
                     <x-table.header sortable wire:click="sortBy('advertisements.created_at')" :direction="$sorts['advertisements.created_at'] ?? null">From</x-table.header>
                     <x-table.header>To</x-table.header>
-                    <x-table.header sortable wire:click="sortBy('payment_method')" :direction="$sorts['payment_method'] ?? null">Payment Method</x-table.header>
-                    <x-table.header sortable wire:click="sortBy('job_payment_type')" :direction="$sorts['job_payment_type'] ?? null">Payment Rate Type</x-table.header>
-                    <x-table.header>Rate</x-table.header>
+                    <x-table.header>Payment Details</x-table.header>
                     <x-table.header sortable wire:click="sortBy('tasks.status')" :direction="$sorts['tasks.status'] ?? null">Status</x-table.header>
                     <x-table.header>Actions</x-table.header>
                 </x-slot:head>
@@ -136,15 +134,9 @@
                             </x-table.cell>
 
                             <x-table.cell>
-                                {{ $task->payment_method }}
-                            </x-table.cell>
-
-                            <x-table.cell>
-                                {{ $task->advertisement->job_payment_type }}
-                            </x-table.cell>
-
-                            <x-table.cell>
-                                {{ $task->advertisement_offer->payment_rate }}
+                                <p><span class="font-medium">Method:</span> {{ $task->payment_method }}</p>
+                                <p><span class="font-medium">Type:</span> {{ $task->advertisement->job_payment_type }}</p>
+                                <p><span class="font-medium">Rate:</span> <span class="inline-flex items-center rounded-full bg-green-500 px-3 py-0.5 text-sm font-bold text-white">{{ $task->advertisement_offer->payment_rate }}</span></p>
                             </x-table.cell>
 
                             <x-table.cell>
