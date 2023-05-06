@@ -183,7 +183,7 @@
                     <x-button.secondary wire:click="closeView">Close</x-button.secondary>
                     @if($viewTask?->status === \App\Modules\ServiceProvider\Enums\TaskStatus::COMPLETED)
                         <x-button.primary onclick="confirm('Are you sure you want to release payment for this task?') || event.stopImmediatePropagation()" wire:click="releasePayment({{$viewTask->task_id}})">Release Payment</x-button.primary>
-                        <x-button.danger wire:click="openDispute">File Dispute</x-button.danger>
+{{--                        <x-button.danger wire:click="openDispute">File Dispute</x-button.danger>--}}
                     @endif
                 </x-slot>
             </x-modal.dialog>

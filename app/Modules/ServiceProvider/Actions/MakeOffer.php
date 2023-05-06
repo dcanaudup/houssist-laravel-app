@@ -4,7 +4,9 @@ namespace App\Modules\ServiceProvider\Actions;
 
 use App\Modules\ServiceProvider\DataTransferObjects\AdvertisementOfferData;
 use App\Modules\ServiceProvider\Models\AdvertisementOffer;
+use App\Notifications\OfferReceived;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
 
 class MakeOffer
 {
@@ -19,6 +21,7 @@ class MakeOffer
             ]);
         DB::commit();
 
+        Notification::send($offer->advertisement->home_owner, new OfferReceived());
         return $offer->refresh();
     }
 }

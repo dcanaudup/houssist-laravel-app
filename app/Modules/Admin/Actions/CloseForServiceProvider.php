@@ -9,6 +9,8 @@ use App\Modules\Shared\Enums\SupportTicketStatus;
 use App\Modules\Shared\Enums\WalletTransactionType;
 use App\Modules\Shared\Models\SupportTicket;
 use App\Modules\Shared\Models\User;
+use App\Notifications\SupportTicketClosed;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
 
 class CloseForServiceProvider
@@ -33,5 +35,8 @@ class CloseForServiceProvider
                 'Dispute payment released for Task #' . $supportTicket->task->task_id
             )
             ->persist();
+
+        Notification::send($supportTicket->task->home_owner, new SupportTicketClosed());
+        Notification::send($supportTicket->task->service_provider, new SupportTicketClosed());
     }
 }

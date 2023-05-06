@@ -8,7 +8,10 @@ use App\Modules\ServiceProvider\Enums\TaskStatus;
 use App\Modules\ServiceProvider\Models\AdvertisementOffer;
 use App\Modules\ServiceProvider\Models\Task;
 use App\Modules\Shared\Models\Advertisement;
+use App\Notifications\OfferAccepted;
+use App\Notifications\OtherOfferAccepted;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
 
 class AcceptOffer
 {
@@ -28,6 +31,8 @@ class AcceptOffer
 
         $this->rejectOtherOffers($advertisementOffer);
         DB::commit();
+
+        $this->sendNotifications($advertisementOffer);
     }
 
     private function updateAdvertisement(Advertisement $advertisement, AdvertisementOffer $advertisementOffer)
@@ -60,5 +65,18 @@ class AcceptOffer
         $task->advertisement_offer_id = $advertisementOffer->advertisement_offer_id;
         $task->status = TaskStatus::WAITING;
         $task->save();
+    }
+
+    private function sendNotifications(AdvertisementOffer $advertisementOffer): void
+    {
+        Notification::send($advertisementOffer->service_provider, new OfferAccepted());
+        $otherOffers = AdvertisementOffer::where('advertisement_id', $advertisementOffer->advertisement_id)
+            ->with('service_provider')
+            ->where('advertisement_offer_id', '!=', $advertisementOffer->advertisement_offer_id)
+            ->get();
+
+        foreach ($otherOffers as $otherOffer) {
+            Notification::send($otherOffer->service_provider, new OtherOfferAccepted());
+        }
     }
 }

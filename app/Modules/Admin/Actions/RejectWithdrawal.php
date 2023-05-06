@@ -6,6 +6,8 @@ use App\Aggregates\WalletAggregateRoot;
 use App\Aggregates\WithdrawalAggregateRoot;
 use App\Models\Withdrawal;
 use App\Modules\Shared\Enums\WalletTransactionType;
+use App\Notifications\WithdrawalRejected;
+use Illuminate\Support\Facades\Notification;
 
 class RejectWithdrawal
 {
@@ -23,5 +25,7 @@ class RejectWithdrawal
                 $admin_remarks
             )
             ->persist();
+
+        Notification::send($withdrawal->user, new WithdrawalRejected());
     }
 }

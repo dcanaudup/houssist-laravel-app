@@ -6,6 +6,8 @@ use App\Aggregates\WalletAggregateRoot;
 use App\Aggregates\WithdrawalAggregateRoot;
 use App\Models\Withdrawal;
 use App\Modules\Shared\Models\User;
+use App\Notifications\WithdrawalApproved;
+use Illuminate\Support\Facades\Notification;
 
 class ApproveWithdrawal
 {
@@ -14,5 +16,7 @@ class ApproveWithdrawal
         WithdrawalAggregateRoot::retrieve($withdrawal->uuid)
             ->approveWithdrawal($admin_remarks)
             ->persist();
+
+        Notification::send($withdrawal->user, new WithdrawalApproved());
     }
 }
