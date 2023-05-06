@@ -4,6 +4,8 @@
 
 In the advertisements page, you can see all the available ads posted by homeowners. You can click on each ad to see its details and make an offer.
 
+- [Advertisement Offers](#advertisement-offers)
+
 ## Advertisement Offers
 
 - You can view each advertisement's details like the address and payment rate and make an offer

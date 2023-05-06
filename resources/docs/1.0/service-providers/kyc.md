@@ -1,8 +1,10 @@
 # KYC
-
----
+____
 
 As a service provider, you need to complete your KYC application before you can start accepting tasks. This is to ensure that you are a legitimate service provider and that you are who you say you are.
+
+- [KYC Application](#kyc-application)
+- [KYC Status](#kyc-status)
 
 ## KYC Application
 

@@ -4,6 +4,9 @@
 
 As a homeowner, you can create advertisements for tasks that you need help with. Service providers can then contact you and make offers for these advertisements. You can chat and negotiate with different service providers and choose the best one for the job.
 
+- [Creating an advertisement](#creating-an-advertisement)
+- [Advertisement Offers](#advertisement-offers)
+
 ## Creating an advertisement
 
 - Go to the **My Ads** page to see a list of all your advertisements.

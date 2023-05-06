@@ -4,6 +4,10 @@
 
 Wallets hold funds that can be used to pay for services or receive payments for services rendered.
 
+- [Deposits](#deposits)
+- [Withdrawals](#withdrawals)
+- [Transactions](#transactions)
+
 ## Deposits
 
 You can deposit funds into your wallet by heading over to the deposit page and creating a new deposit.

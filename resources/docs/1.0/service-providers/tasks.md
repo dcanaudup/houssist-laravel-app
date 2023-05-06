@@ -4,6 +4,9 @@
 
 When a homeowner accepts an offer from a service provider in one of their ads, a task will be automatically be created to track its progress. You can view all your tasks in the **My Tasks** page.
 
+- [Task Progress](#task-progress)
+- [Task Disputes](#task-disputes)
+
 ## Task Progress
 
 - While the task date is not yet due, the task will remain in the **Waiting** status.
