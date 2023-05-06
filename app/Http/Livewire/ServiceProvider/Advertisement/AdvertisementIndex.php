@@ -39,6 +39,8 @@ class AdvertisementIndex extends Component
                 $q->whereBetween('start_date_time', date_range_filter_transformer($jobDateTime))
                     ->orWhereBetween('end_date_time', date_range_filter_transformer($jobDateTime));
             }))
+            ->select(['advertisements.*'])
+            ->distinct()
             ->with('media');
     }
 
