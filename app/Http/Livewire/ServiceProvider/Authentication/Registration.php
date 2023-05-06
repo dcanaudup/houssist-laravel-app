@@ -5,19 +5,23 @@ namespace App\Http\Livewire\ServiceProvider\Authentication;
 use App\Modules\ServiceProvider\Actions\CreateServiceProvider;
 use App\Modules\Shared\DataTransferObjects\UserData;
 use App\Modules\Shared\Models\User;
+use App\Modules\Shared\ValueObject\FacebookEnabled;
 use Livewire\Component;
 
 class Registration extends Component
 {
     public UserData $user;
 
+    public $facebookEnabled;
+
     protected $rules = [
         'user.email' => ['required', 'email', 'unique:users,email'],
         'user.password' => ['required', 'min:8'],
     ];
 
-    public function mount()
+    public function mount(FacebookEnabled $facebookEnabled)
     {
+        $this->facebookEnabled = $facebookEnabled->enabled;
         $this->user = new UserData(null, '', '', '');
     }
 

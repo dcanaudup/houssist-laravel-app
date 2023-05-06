@@ -6,6 +6,7 @@
     </p>
 </x-slot:header>
 <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+    @if($facebookEnabled ?? false)
     <div class="mb-6">
         <div class="mb-6">
             <a href="{{route('facebook.auth')}}" class="flex w-full items-center justify-center gap-3 rounded-md bg-[#1877F2] px-3 py-1.5 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1D9BF0]">
@@ -22,6 +23,7 @@
             </div>
         </div>
     </div>
+    @endif
     <form class="space-y-6" wire:submit.prevent="submit" method="POST">
         @csrf
         <x-input name="user.username" id="user.username" label="Username" type="text" placeHolder="Enter username" model="user.username"/>

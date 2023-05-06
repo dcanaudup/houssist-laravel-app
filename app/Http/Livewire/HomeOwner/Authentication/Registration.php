@@ -5,11 +5,14 @@ namespace App\Http\Livewire\HomeOwner\Authentication;
 use App\Modules\HomeOwner\Actions\CreateHomeOwner;
 use App\Modules\Shared\DataTransferObjects\UserData;
 use App\Modules\Shared\Models\User;
+use App\Modules\Shared\ValueObject\FacebookEnabled;
 use Livewire\Component;
 
 class Registration extends Component
 {
     public UserData $user;
+
+    public $facebookEnabled;
 
     protected $rules = [
         'user.username' => ['required', 'min:6', 'unique:users,username'],
@@ -17,8 +20,9 @@ class Registration extends Component
         'user.password' => ['required', 'min:8'],
     ];
 
-    public function mount()
+    public function mount(FacebookEnabled $facebookEnabled)
     {
+        $this->facebookEnabled = $facebookEnabled->enabled;
         $this->user = new UserData(null, '', '', '');
     }
 

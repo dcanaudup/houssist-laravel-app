@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Shared\Authentication;
 
+use App\Modules\Shared\ValueObject\FacebookEnabled;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -12,6 +13,13 @@ class Login extends Component
     public string $password;
 
     public bool $remember = false;
+
+    public $facebookEnabled;
+
+    public function mount(FacebookEnabled $facebookEnabled)
+    {
+        $this->facebookEnabled = $facebookEnabled->enabled;
+    }
 
     public function render()
     {

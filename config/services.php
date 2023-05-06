@@ -35,5 +35,6 @@ return [
         'client_id' => env('FACEBOOK_CLIENT_ID'),
         'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
         'redirect' => env('FACEBOOK_REDIRECT', 'https://houssist.test/facebook/callback'),
+        'enabled' => env('FACEBOOK_ENABLED', false),
     ]
 ];
