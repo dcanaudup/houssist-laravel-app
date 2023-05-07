@@ -8,7 +8,8 @@
                 @if($attributes->get('minDate'))
                 minDate: '{{ $attributes->get('minDate') }}',
                 @endif
-                mode: '{{ $attributes->get('mode') ?? 'single' }}'
+                mode: '{{ $attributes->get('mode') ?? 'single' }}',
+                disableMobile: true
             })
         }
     }"
