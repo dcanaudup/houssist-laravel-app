@@ -5,7 +5,7 @@
         {{ $title }}
     </div>
 
-    <div class="px-6 py-4 flex-1 mt-4">
+    <div class="px-6 py-4 flex-1 overflow-y-hidden md:overflow-y-scroll mt-4">
         {{ $content }}
     </div>
 
