@@ -1,4 +1,10 @@
 <div>
+    <div class="flex items-center justify-center gap-x-6 bg-indigo-800 px-6 py-2.5 sm:px-3.5 rounded-md mb-2">
+        <p class="text-sm leading-6 text-white">
+            View all <a href="{{route('service-provider.advertisements')}}" class="font-semibold underline">available ads</a> or read our <a href="{{route('larecipe.index')}}" class="font-semibold underline">documentation</a> to know how to use Houssist.
+        </p>
+    </div>
+
     <h1 class="text-4xl font-semibold text-gray-900">Welcome Back!</h1>
     <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
         <div class="relative overflow-hidden rounded-lg bg-white px-4 pb-12 pt-5 shadow sm:px-6 sm:pt-6">
