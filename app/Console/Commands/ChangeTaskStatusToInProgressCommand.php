@@ -31,7 +31,6 @@ class ChangeTaskStatusToInProgressCommand extends Command
         $recordsUpdated = Task::query()
             ->join('advertisements', 'advertisements.advertisement_id', '=', 'tasks.advertisement_id')
             ->where('tasks.status', TaskStatus::WAITING)
-            ->where('advertisements.start_date_time', '=', now()->startOf('minute'))
             ->update([
                 'tasks.status' => TaskStatus::IN_PROGRESS,
             ]);
